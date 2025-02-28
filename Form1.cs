@@ -22,28 +22,36 @@ namespace SMARTFIT
         public Form1()
         {
             InitializeComponent();
-        }
 
-        private void BtnCrearBD_Click(object sender, EventArgs e)
-        {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;");
-                q = "create database SMARTFIT";
-                comando = new SqlCommand(q, conexion);
+                //Brandon
+                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                //Alex
+                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
                 conexion.Open();
-                comando.ExecuteNonQuery();
-                conexion.Close();
 
-                mensaje = "La base de datos fue creada correctamente";
+                q = "SELECT * FROM Gimnasio";
+                comando = new SqlCommand(q, conexion);
+                Lector = comando.ExecuteReader();
+
+                // Crear un DataTable para almacenar los datos
+                DataTable dt = new DataTable();
+                dt.Load(Lector);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+                conexion.Close();
+                mensaje = "Datos Mostrados Correctamente";
+
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                mensaje = "Ocurrio un error en la creacion de la Base de Datos " + ex.Message;
+                mensaje = "Ocurrio un error al mostrar los datos " + ex.Message;
             }
             finally
             {
-                MessageBox.Show(mensaje);
             }
         }
 
@@ -51,8 +59,11 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFIT;Integrated Security=True;");
-                q = "use SMARTFIT";
+                //Brandon
+                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                //Alex
+                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                q = "use SMARTFITBD";
                 comando = new SqlCommand(q, conexion);
                 conexion.Open();
                 comando.ExecuteNonQuery();
@@ -65,6 +76,9 @@ namespace SMARTFIT
                 comando.ExecuteNonQuery();
 
                 mensaje = "Creacion de las Tablas realizada";
+
+                //nuevo
+                conexion.Close();
             }
             catch (System.Exception ex)
             {
@@ -74,44 +88,16 @@ namespace SMARTFIT
             {
                 MessageBox.Show(mensaje);
             }
-        }
-
-        private void BtnEliminar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;"))
-                {
-                    conexion.Open();
-
-                    // Cambiar a modo de usuario único y forzar cierre de conexiones
-                    q = "ALTER DATABASE SMARTFIT SET SINGLE_USER WITH ROLLBACK IMMEDIATE;";
-                    comando = new SqlCommand(q, conexion);
-                    comando.ExecuteNonQuery();
-
-                    // Eliminar la base de datos
-                    q = "DROP DATABASE SMARTFIT;";
-                    comando = new SqlCommand(q, conexion);
-                    comando.ExecuteNonQuery();
-
-                    mensaje = "La base de datos fue eliminada correctamente.";
-                }
-            }
-            catch (System.Exception ex)
-            {
-                mensaje = "Ocurrio un error en la eliminacion de la Base de Datos" + ex.Message;
-            }
-            finally
-            {
-                MessageBox.Show(mensaje);
-            }
-        }
+        }      
 
         private void BtnInsertarDatos_Click(object sender, EventArgs e)
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFIT;Integrated Security=True;");
+                //Brandon
+                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                //Alex
+                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
                 conexion.Open();
 
                 int IdGimnasio = Convert.ToInt32(SpnCve.Text);
@@ -160,8 +146,11 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFIT;Integrated Security=True;");
-                conexion.Open();
+                //Brandon
+                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                //Alex
+                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                conexion.Open(); 
 
                 q = "SELECT * FROM Gimnasio";
                 comando = new SqlCommand(q, conexion);
