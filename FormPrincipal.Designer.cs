@@ -37,6 +37,14 @@
             this.btnCrearDB = new System.Windows.Forms.Button();
             this.btnGimnasio = new System.Windows.Forms.Button();
             this.panelFondo = new System.Windows.Forms.Panel();
+            this.btnPersonal = new System.Windows.Forms.Button();
+            this.panelPersonal = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnGeneral = new System.Windows.Forms.Button();
+            this.panelGeneral = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -45,6 +53,10 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panelPersonal.SuspendLayout();
+            this.panelGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -79,6 +91,12 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Controls.Add(this.panelGeneral);
+            this.panel2.Controls.Add(this.pictureBox6);
+            this.panel2.Controls.Add(this.btnGeneral);
+            this.panel2.Controls.Add(this.panelPersonal);
+            this.panel2.Controls.Add(this.pictureBox5);
+            this.panel2.Controls.Add(this.btnPersonal);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.pictureBox4);
             this.panel2.Controls.Add(this.btnEliminarBD);
@@ -147,6 +165,7 @@
             // btnGimnasio
             // 
             this.btnGimnasio.BackColor = System.Drawing.Color.Black;
+            this.btnGimnasio.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnGimnasio.FlatAppearance.BorderColor = System.Drawing.Color.Gold;
             this.btnGimnasio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGimnasio.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -167,6 +186,94 @@
             this.panelFondo.Name = "panelFondo";
             this.panelFondo.Size = new System.Drawing.Size(894, 478);
             this.panelFondo.TabIndex = 30;
+            // 
+            // btnPersonal
+            // 
+            this.btnPersonal.BackColor = System.Drawing.Color.Black;
+            this.btnPersonal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPersonal.FlatAppearance.BorderColor = System.Drawing.Color.Gold;
+            this.btnPersonal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPersonal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPersonal.ForeColor = System.Drawing.Color.Gold;
+            this.btnPersonal.Location = new System.Drawing.Point(0, 56);
+            this.btnPersonal.Name = "btnPersonal";
+            this.btnPersonal.Size = new System.Drawing.Size(151, 56);
+            this.btnPersonal.TabIndex = 7;
+            this.btnPersonal.Text = "Personal";
+            this.btnPersonal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPersonal.UseVisualStyleBackColor = false;
+            this.btnPersonal.Click += new System.EventHandler(this.btnPersonal_Click);
+            // 
+            // panelPersonal
+            // 
+            this.panelPersonal.BackColor = System.Drawing.Color.Gold;
+            this.panelPersonal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelPersonal.Controls.Add(this.flowLayoutPanel2);
+            this.panelPersonal.Location = new System.Drawing.Point(0, 57);
+            this.panelPersonal.Name = "panelPersonal";
+            this.panelPersonal.Size = new System.Drawing.Size(10, 55);
+            this.panelPersonal.TabIndex = 31;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 56);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(151, 112);
+            this.flowLayoutPanel2.TabIndex = 30;
+            // 
+            // btnGeneral
+            // 
+            this.btnGeneral.BackColor = System.Drawing.Color.Black;
+            this.btnGeneral.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnGeneral.FlatAppearance.BorderColor = System.Drawing.Color.Gold;
+            this.btnGeneral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGeneral.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGeneral.ForeColor = System.Drawing.Color.Gold;
+            this.btnGeneral.Location = new System.Drawing.Point(0, 112);
+            this.btnGeneral.Name = "btnGeneral";
+            this.btnGeneral.Size = new System.Drawing.Size(151, 56);
+            this.btnGeneral.TabIndex = 32;
+            this.btnGeneral.Text = "General";
+            this.btnGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGeneral.UseVisualStyleBackColor = false;
+            this.btnGeneral.Click += new System.EventHandler(this.btnGeneral_Click);
+            // 
+            // panelGeneral
+            // 
+            this.panelGeneral.BackColor = System.Drawing.Color.Gold;
+            this.panelGeneral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelGeneral.Controls.Add(this.flowLayoutPanel3);
+            this.panelGeneral.Location = new System.Drawing.Point(0, 113);
+            this.panelGeneral.Name = "panelGeneral";
+            this.panelGeneral.Size = new System.Drawing.Size(10, 55);
+            this.panelGeneral.TabIndex = 32;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 56);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(151, 112);
+            this.flowLayoutPanel3.TabIndex = 30;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::SMARTFIT.Properties.Resources.user;
+            this.pictureBox6.Location = new System.Drawing.Point(26, 120);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(33, 35);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 33;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::SMARTFIT.Properties.Resources.man;
+            this.pictureBox5.Location = new System.Drawing.Point(26, 64);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(33, 35);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 8;
+            this.pictureBox5.TabStop = false;
             // 
             // pictureBox4
             // 
@@ -238,6 +345,10 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panelPersonal.ResumeLayout(false);
+            this.panelGeneral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -263,5 +374,13 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panelFondo;
+        private System.Windows.Forms.Button btnPersonal;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Panel panelPersonal;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Panel panelGeneral;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Button btnGeneral;
     }
 }

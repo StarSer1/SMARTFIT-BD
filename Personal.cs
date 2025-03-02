@@ -8,18 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Security.Cryptography;
 
 namespace SMARTFIT
 {
-    public partial class Form1 : Form
+    public partial class Personal : Form
     {
         public SqlConnection conexion;
         public SqlCommand comando;
         public SqlDataReader Lector;
         public string q;
         public string mensaje;
-        public Form1()
+
+        public Personal()
         {
             InitializeComponent();
 
@@ -31,7 +31,7 @@ namespace SMARTFIT
                 //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
                 conexion.Open();
 
-                q = "SELECT * FROM Gimnasio";
+                q = "SELECT * FROM Personal";
                 comando = new SqlCommand(q, conexion);
                 Lector = comando.ExecuteReader();
 
@@ -55,7 +55,7 @@ namespace SMARTFIT
             }
         }
 
-        private void BtnInsercion_Click(object sender, EventArgs e)
+        private void BtnCrearTabla_Click(object sender, EventArgs e)
         {
             try
             {
@@ -68,10 +68,10 @@ namespace SMARTFIT
                 conexion.Open();
                 comando.ExecuteNonQuery();
 
-                q = "Create Table Gimnasio(Id_gimnasio INT PRIMARY KEY,Nombre VARCHAR(100) NOT NULL," +
-                    "Direccion VARCHAR(255) DEFAULT 'No especificado', Telefono VARCHAR(20) UNIQUE NOT NULL," +
-                    "Horario_apertura TIME CHECK (Horario_apertura >= '05:00')," +
-                    "Horario_cierre TIME CHECK (Horario_cierre <= '23:00'));";
+                q = "CREATE TABLE Personal(" + "Id_personal INT PRIMARY KEY, " + "Nombre VARCHAR(50) NOT NULL, " + "Apellidos VARCHAR(50) NOT NULL, " +
+                "Dni VARCHAR(15) UNIQUE NOT NULL, " + "Telefono VARCHAR(20) DEFAULT '0000-000-000', " + "Direccion VARCHAR(255), " + "Salario INT CHECK (Salario >= 1800), " + "Horario VARCHAR(100), " + "Estado VARCHAR(20) CHECK " +
+                "(Estado = 'Activo' OR Estado = 'Inactivo'), " + "Id_gimnasio INT, " + "CONSTRAINT fk_gimnasio_personal FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)" +");";
+
                 comando = new SqlCommand(q, conexion);
                 comando.ExecuteNonQuery();
 
@@ -88,49 +88,57 @@ namespace SMARTFIT
             {
                 MessageBox.Show(mensaje);
             }
-        }      
+        }
 
         private void BtnInsertarDatos_Click(object sender, EventArgs e)
         {
             try
             {
-                //Brandon
+                // Conexión a la base de datos
                 conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                //Alex
-                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+
+                // Abre la conexión
                 conexion.Open();
 
-                int IdGimnasio = Convert.ToInt32(SpnCve.Text);
-                string Nombre = TxtNombre.Text;
-                string Telefono = TxtTelefono.Text;
-                string Direccion = TxtDireccion.Text;
+                // Obtención de valores desde los controles del formulario
+                int IdPersonal = Convert.ToInt32(txtIdPersonal.Text);
+                string Nombre = txtNombre.Text;
+                string Apellidos = txtApellidos.Text;
+                string Dni = txtDni.Text;
+                string Telefono = txtTelefono.Text;
+                string Direccion = txtDireccion.Text;
+                int Salario = Convert.ToInt32(txtSalario.Text);
+                string Horario = txtHorario.Text;
+                string Estado = cmbEstado.SelectedItem.ToString(); // Suponiendo que es un ComboBox
+                int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
-                // Para Horario_Apertura, usa TimeSpan directamente
-                TimeSpan Apertura = new TimeSpan(06, 00, 0);  // Asegúrate de que TxtHApertura contenga un formato adecuado como "HH:mm"
+                // Consulta SQL para la inserción de datos
+                string q = "INSERT INTO Personal (Id_personal, Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) " +
+                           "VALUES (@ID, @NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST, @ID_GIM);";
 
-                // Para Horario_Cierre, usa TimeSpan directamente
-                TimeSpan Cierre = new TimeSpan(22, 00, 0);  // Aquí puedes mantener la hora predeterminada si es fija, o también puedes usar un campo de texto
-
-                q = "INSERT INTO Gimnasio (Id_Gimnasio, Nombre,Direccion, Telefono, Horario_Apertura, Horario_Cierre) " +
-                "VALUES (@ID, @NOM,@DIR, @TEL, @HAP, @HAC)";
-
+                // Creación del comando SQL
                 comando = new SqlCommand(q, conexion);
-
                 comando.Parameters.Clear();
-                comando.Parameters.Add("@ID", SqlDbType.Int).Value = IdGimnasio;
+
+                // Asignación de parámetros
+                comando.Parameters.Add("@ID", SqlDbType.Int).Value = IdPersonal;
                 comando.Parameters.Add("@NOM", SqlDbType.NVarChar).Value = Nombre;
+                comando.Parameters.Add("@APE", SqlDbType.NVarChar).Value = Apellidos;
+                comando.Parameters.Add("@DNI", SqlDbType.NVarChar).Value = Dni;
                 comando.Parameters.Add("@TEL", SqlDbType.NVarChar).Value = Telefono;
                 comando.Parameters.Add("@DIR", SqlDbType.NVarChar).Value = Direccion;
+                comando.Parameters.Add("@SAL", SqlDbType.Int).Value = Salario;
+                comando.Parameters.Add("@HOR", SqlDbType.NVarChar).Value = Horario;
+                comando.Parameters.Add("@EST", SqlDbType.NVarChar).Value = Estado;
+                comando.Parameters.Add("@ID_GIM", SqlDbType.Int).Value = IdGimnasio;
 
-                // Asegúrate de pasar TimeSpan correctamente al parámetro @HAP
-                comando.Parameters.Add("@HAP", SqlDbType.Time).Value = Apertura;
-
-                // Asegúrate de pasar TimeSpan correctamente al parámetro @HAC
-                comando.Parameters.Add("@HAC", SqlDbType.Time).Value = Cierre;
-
+                // Ejecución del comando
                 comando.ExecuteNonQuery();
+
+                // Cierra la conexión
                 conexion.Close();
-                mensaje = "Datos Almacenados correctamente";
+
+                mensaje = "Datos almacenados correctamente";
             }
             catch (System.Exception ex)
             {
@@ -150,9 +158,9 @@ namespace SMARTFIT
                 conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
                 //Alex
                 //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open(); 
+                conexion.Open();
 
-                q = "SELECT * FROM Gimnasio";
+                q = "SELECT * FROM Personal";
                 comando = new SqlCommand(q, conexion);
                 Lector = comando.ExecuteReader();
 
@@ -177,12 +185,7 @@ namespace SMARTFIT
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DG1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Personal_Load(object sender, EventArgs e)
         {
 
         }

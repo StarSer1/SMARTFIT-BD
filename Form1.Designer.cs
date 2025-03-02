@@ -220,6 +220,7 @@
             this.DG1.Name = "DG1";
             this.DG1.Size = new System.Drawing.Size(484, 254);
             this.DG1.TabIndex = 30;
+            this.DG1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG1_CellContentClick);
             // 
             // label1
             // 

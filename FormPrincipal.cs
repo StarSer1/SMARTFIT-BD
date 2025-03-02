@@ -30,6 +30,9 @@ namespace SMARTFIT
             OpenChildForm(new FormMenu());
 
             panel3.Visible = false;
+            panelPersonal.Visible = false;
+            panelGeneral.Visible = false;
+
             this.Text = string.Empty;
             this.ControlBox = false;
         }
@@ -63,8 +66,8 @@ namespace SMARTFIT
 
         private void btnGimnasio_Click(object sender, EventArgs e)
         {
-            panel3.Visible = Visible;
-            panel3.Height = btnGimnasio.Height;
+            panel3.Visible = true;
+            panelPersonal.Visible = false;
             OpenChildForm(new Form1());
         }
 
@@ -149,6 +152,22 @@ namespace SMARTFIT
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnPersonal_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panelPersonal.Visible = true;
+            panelGeneral.Visible = false;
+            OpenChildForm(new Personal());
+        }
+
+        private void btnGeneral_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panelPersonal.Visible = false;
+            panelGeneral.Visible = true;
+            OpenChildForm(new General());
         }
     }
 }
