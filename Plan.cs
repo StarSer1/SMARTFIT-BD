@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace SMARTFIT
 {
-    public partial class General : Form
+    public partial class Plan : Form
     {
         public SqlConnection conexion;
         public SqlCommand comando;
@@ -19,7 +19,7 @@ namespace SMARTFIT
         public string q;
         public string mensaje;
 
-        public General()
+        public Plan()
         {
             InitializeComponent();
 
@@ -28,7 +28,7 @@ namespace SMARTFIT
                 conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
                 conexion.Open();
 
-                q = "SELECT * FROM General";
+                q = "SELECT * FROM Planes_Entrenamiento";
                 comando = new SqlCommand(q, conexion);
                 Lector = comando.ExecuteReader();
 
@@ -39,9 +39,9 @@ namespace SMARTFIT
                 conexion.Close();
                 mensaje = "Datos mostrados correctamente.";
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                mensaje = "Error al mostrar los datos: " + ex.Message;
+                mensaje = "Error al consultar los datos: " + ex.Message;
             }
             finally
             {
@@ -53,22 +53,23 @@ namespace SMARTFIT
             try
             {
                 conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                q = "CREATE TABLE General (" +
-                    "Cedúla VARCHAR(30) UNIQUE NOT NULL, " +
-                    "Años_de_experiencia INT CHECK (Años_de_experiencia >= 0) DEFAULT 0, " +
-                    "Id_Personal INT, " +
-                    "CONSTRAINT fk_personal_general FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal));";
+                q = "USE SMARTFITBD; CREATE TABLE Planes_Entrenamiento (" +
+                    "Id_plan INT PRIMARY KEY, " +
+                    "Nombre_plan VARCHAR(20) NOT NULL, " +
+                    "Clientes_inscritos INT, " +
+                    "Descripcion VARCHAR(255) DEFAULT 'Sin descripción', " +
+                    "Costo INT CHECK (Costo >= 0) " +
+                    ");";
 
                 comando = new SqlCommand(q, conexion);
                 conexion.Open();
                 comando.ExecuteNonQuery();
                 conexion.Close();
-
-                mensaje = "Tabla 'General' creada correctamente.";
+                mensaje = "Creación de la tabla realizada correctamente.";
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                mensaje = "Error al crear la tabla: " + ex.Message;
+                mensaje = "Error en la creación de la tabla: " + ex.Message;
             }
             finally
             {
@@ -83,24 +84,29 @@ namespace SMARTFIT
                 conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
                 conexion.Open();
 
-                string Cedula = txtCedula.Text;
-                int AniosExperiencia = Convert.ToInt32(txtAñosDeExperiencia.Text);
-                int IdPersonal = Convert.ToInt32(txtIdPersonal.Text);
+                int IdPlan = Convert.ToInt32(txtIdPlan.Text);
+                string NombrePlan = cmbNombre.SelectedItem.ToString();
+                int ClientesInscritos = Convert.ToInt32(txtClientesInscritos.Text);
+                string Descripcion = txtDescripcion.Text;
+                int Costo = Convert.ToInt32(txtCosto.Text);
 
-                q = "INSERT INTO General (Cedúla, Años_de_experiencia, Id_Personal) VALUES (@CED, @EXP, @IDP);";
+                q = "INSERT INTO Planes_Entrenamiento (Id_plan, Nombre_plan, Clientes_inscritos, Descripcion, Costo) " +
+                    "VALUES (@ID, @NOM, @CLI, @DESC, @COS);";
+
                 comando = new SqlCommand(q, conexion);
-                comando.Parameters.AddWithValue("@CED", Cedula);
-                comando.Parameters.AddWithValue("@EXP", AniosExperiencia);
-                comando.Parameters.AddWithValue("@IDP", IdPersonal);
+                comando.Parameters.AddWithValue("@ID", IdPlan);
+                comando.Parameters.AddWithValue("@NOM", NombrePlan);
+                comando.Parameters.AddWithValue("@CLI", ClientesInscritos);
+                comando.Parameters.AddWithValue("@DESC", Descripcion);
+                comando.Parameters.AddWithValue("@COS", Costo);
 
                 comando.ExecuteNonQuery();
                 conexion.Close();
-
-                mensaje = "Datos insertados correctamente en 'General'.";
+                mensaje = "Datos insertados correctamente.";
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                mensaje = "Error al insertar datos: " + ex.Message;
+                mensaje = "Error en la inserción de datos: " + ex.Message;
             }
             finally
             {
@@ -115,7 +121,7 @@ namespace SMARTFIT
                 conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
                 conexion.Open();
 
-                q = "SELECT * FROM General";
+                q = "SELECT * FROM Planes_Entrenamiento";
                 comando = new SqlCommand(q, conexion);
                 Lector = comando.ExecuteReader();
 
@@ -126,9 +132,9 @@ namespace SMARTFIT
                 conexion.Close();
                 mensaje = "Datos mostrados correctamente.";
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                mensaje = "Error al mostrar los datos: " + ex.Message;
+                mensaje = "Error al consultar los datos: " + ex.Message;
             }
             finally
             {
@@ -136,7 +142,7 @@ namespace SMARTFIT
             }
         }
 
-        private void General_Load(object sender, EventArgs e)
+        private void Plan_Load(object sender, EventArgs e)
         {
 
         }

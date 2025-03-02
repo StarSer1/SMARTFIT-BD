@@ -32,6 +32,10 @@ namespace SMARTFIT
             panel3.Visible = false;
             panelPersonal.Visible = false;
             panelGeneral.Visible = false;
+            panelAdministrativo.Visible = false;
+            panelPlan.Visible = false;
+            PanelClientes.Visible = false;
+            panelInventario.Visible = false;
 
             this.Text = string.Empty;
             this.ControlBox = false;
@@ -68,6 +72,11 @@ namespace SMARTFIT
         {
             panel3.Visible = true;
             panelPersonal.Visible = false;
+            panelAdministrativo.Visible = false;
+            panelGeneral.Visible = false;
+            panelPlan.Visible = false;
+            PanelClientes.Visible = false;
+            panelInventario.Visible = false;
             OpenChildForm(new Form1());
         }
 
@@ -138,8 +147,14 @@ namespace SMARTFIT
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            //panel3.Height = pictureBox1.Height;
-            //panel3.Top = panel1.Top;
+            panel3.Visible = true;
+            panelPersonal.Visible = false;
+            panelAdministrativo.Visible = false;
+            panelGeneral.Visible = false;
+            panelPlan.Visible = false;
+            PanelClientes.Visible = false;
+            panelInventario.Visible = false;
+
             OpenChildForm(new FormMenu());
         }
 
@@ -159,6 +174,10 @@ namespace SMARTFIT
             panel3.Visible = false;
             panelPersonal.Visible = true;
             panelGeneral.Visible = false;
+            panelAdministrativo.Visible = false;
+            panelPlan.Visible = false;
+            PanelClientes.Visible = false;
+            panelInventario.Visible = false;
             OpenChildForm(new Personal());
         }
 
@@ -166,8 +185,60 @@ namespace SMARTFIT
         {
             panel3.Visible = false;
             panelPersonal.Visible = false;
+            panelAdministrativo.Visible = false;
             panelGeneral.Visible = true;
+            panelPlan.Visible = false;
+            PanelClientes.Visible = false;
+            panelInventario.Visible = false;
             OpenChildForm(new General());
+        }
+
+        private void btnAdministrativo_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panelPersonal.Visible = false;
+            panelGeneral.Visible = false;
+            panelAdministrativo.Visible = true;
+            panelPlan.Visible = false;
+            PanelClientes.Visible = false;
+            panelInventario.Visible = false;
+            OpenChildForm(new Administrativo());
+        }
+
+        private void btnPlan_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panelPersonal.Visible = false;
+            panelGeneral.Visible = false;
+            panelAdministrativo.Visible = false;
+            panelPlan.Visible = true;
+            PanelClientes.Visible = false;
+            panelInventario.Visible = false;
+            OpenChildForm(new Plan());
+        }
+
+        private void btnClientes_Click_1(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panelPersonal.Visible = false;
+            panelGeneral.Visible = false;
+            panelAdministrativo.Visible = false;
+            panelPlan.Visible = false;
+            PanelClientes.Visible = true;
+            panelInventario.Visible = false;
+            OpenChildForm(new Clientes());
+        }
+
+        private void btnInventario_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = false;
+            panelPersonal.Visible = false;
+            panelGeneral.Visible = false;
+            panelAdministrativo.Visible = false;
+            panelPlan.Visible = false;
+            PanelClientes.Visible = false;
+            panelInventario.Visible = true;
+            OpenChildForm(new Inventario());
         }
     }
 }

@@ -57,7 +57,7 @@
             this.BtnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnConsultar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnConsultar.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnConsultar.Location = new System.Drawing.Point(389, 375);
+            this.BtnConsultar.Location = new System.Drawing.Point(388, 442);
             this.BtnConsultar.Name = "BtnConsultar";
             this.BtnConsultar.Size = new System.Drawing.Size(484, 37);
             this.BtnConsultar.TabIndex = 26;
@@ -73,7 +73,7 @@
             this.BtnInsertarDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnInsertarDatos.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnInsertarDatos.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnInsertarDatos.Location = new System.Drawing.Point(187, 375);
+            this.BtnInsertarDatos.Location = new System.Drawing.Point(186, 442);
             this.BtnInsertarDatos.Name = "BtnInsertarDatos";
             this.BtnInsertarDatos.Size = new System.Drawing.Size(162, 37);
             this.BtnInsertarDatos.TabIndex = 25;
@@ -89,7 +89,7 @@
             this.BtnInsercion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnInsercion.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnInsercion.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnInsercion.Location = new System.Drawing.Point(19, 375);
+            this.BtnInsercion.Location = new System.Drawing.Point(18, 442);
             this.BtnInsercion.Name = "BtnInsercion";
             this.BtnInsercion.Size = new System.Drawing.Size(162, 37);
             this.BtnInsercion.TabIndex = 22;
@@ -100,7 +100,7 @@
             // TxtDireccion
             // 
             this.TxtDireccion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtDireccion.Location = new System.Drawing.Point(177, 186);
+            this.TxtDireccion.Location = new System.Drawing.Point(177, 205);
             this.TxtDireccion.Name = "TxtDireccion";
             this.TxtDireccion.Size = new System.Drawing.Size(172, 23);
             this.TxtDireccion.TabIndex = 20;
@@ -108,7 +108,7 @@
             // TxtHCierre
             // 
             this.TxtHCierre.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtHCierre.Location = new System.Drawing.Point(177, 301);
+            this.TxtHCierre.Location = new System.Drawing.Point(177, 320);
             this.TxtHCierre.Name = "TxtHCierre";
             this.TxtHCierre.Size = new System.Drawing.Size(172, 23);
             this.TxtHCierre.TabIndex = 19;
@@ -116,7 +116,7 @@
             // TxtHApertura
             // 
             this.TxtHApertura.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtHApertura.Location = new System.Drawing.Point(177, 263);
+            this.TxtHApertura.Location = new System.Drawing.Point(177, 282);
             this.TxtHApertura.Name = "TxtHApertura";
             this.TxtHApertura.Size = new System.Drawing.Size(172, 23);
             this.TxtHApertura.TabIndex = 21;
@@ -124,7 +124,7 @@
             // TxtTelefono
             // 
             this.TxtTelefono.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtTelefono.Location = new System.Drawing.Point(177, 228);
+            this.TxtTelefono.Location = new System.Drawing.Point(177, 247);
             this.TxtTelefono.Name = "TxtTelefono";
             this.TxtTelefono.Size = new System.Drawing.Size(172, 23);
             this.TxtTelefono.TabIndex = 18;
@@ -132,7 +132,7 @@
             // TxtNombre
             // 
             this.TxtNombre.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtNombre.Location = new System.Drawing.Point(177, 149);
+            this.TxtNombre.Location = new System.Drawing.Point(177, 168);
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(172, 23);
             this.TxtNombre.TabIndex = 17;
@@ -140,7 +140,7 @@
             // SpnCve
             // 
             this.SpnCve.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SpnCve.Location = new System.Drawing.Point(177, 111);
+            this.SpnCve.Location = new System.Drawing.Point(177, 130);
             this.SpnCve.Name = "SpnCve";
             this.SpnCve.Size = new System.Drawing.Size(172, 23);
             this.SpnCve.TabIndex = 16;
@@ -150,7 +150,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label6.Location = new System.Drawing.Point(26, 186);
+            this.label6.Location = new System.Drawing.Point(26, 205);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 18);
             this.label6.TabIndex = 14;
@@ -161,7 +161,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label5.Location = new System.Drawing.Point(26, 306);
+            this.label5.Location = new System.Drawing.Point(26, 325);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 18);
             this.label5.TabIndex = 12;
@@ -172,7 +172,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label4.Location = new System.Drawing.Point(26, 266);
+            this.label4.Location = new System.Drawing.Point(26, 285);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(138, 18);
             this.label4.TabIndex = 13;
@@ -183,7 +183,7 @@
             this.Telefono.AutoSize = true;
             this.Telefono.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Telefono.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.Telefono.Location = new System.Drawing.Point(26, 228);
+            this.Telefono.Location = new System.Drawing.Point(26, 247);
             this.Telefono.Name = "Telefono";
             this.Telefono.Size = new System.Drawing.Size(86, 18);
             this.Telefono.TabIndex = 11;
@@ -194,7 +194,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(26, 149);
+            this.label2.Location = new System.Drawing.Point(26, 168);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 18);
             this.label2.TabIndex = 15;
@@ -205,7 +205,7 @@
             this.IdGimnasio.AutoSize = true;
             this.IdGimnasio.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IdGimnasio.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.IdGimnasio.Location = new System.Drawing.Point(26, 111);
+            this.IdGimnasio.Location = new System.Drawing.Point(26, 130);
             this.IdGimnasio.Name = "IdGimnasio";
             this.IdGimnasio.Size = new System.Drawing.Size(106, 18);
             this.IdGimnasio.TabIndex = 10;
@@ -216,7 +216,7 @@
             this.DG1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DG1.BackgroundColor = System.Drawing.Color.DarkGoldenrod;
             this.DG1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DG1.Location = new System.Drawing.Point(389, 111);
+            this.DG1.Location = new System.Drawing.Point(389, 130);
             this.DG1.Name = "DG1";
             this.DG1.Size = new System.Drawing.Size(484, 254);
             this.DG1.TabIndex = 30;
@@ -251,7 +251,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
-            this.ClientSize = new System.Drawing.Size(899, 460);
+            this.ClientSize = new System.Drawing.Size(884, 523);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnConsultar);
