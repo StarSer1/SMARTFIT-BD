@@ -174,11 +174,9 @@
             // 
             this.cmbNombre.FormattingEnabled = true;
             this.cmbNombre.Items.AddRange(new object[] {
-            "Pesas",
-            "Equipo de limpieza",
-            "Equipo de computo",
-            "Articulos de gimnasio",
-            "Maquina"});
+            "Plan Smart",
+            "Plan Fit",
+            "Plan Black"});
             this.cmbNombre.Location = new System.Drawing.Point(181, 161);
             this.cmbNombre.Name = "cmbNombre";
             this.cmbNombre.Size = new System.Drawing.Size(172, 21);

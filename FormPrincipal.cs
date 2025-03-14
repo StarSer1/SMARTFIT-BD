@@ -84,21 +84,19 @@ namespace SMARTFIT
         {
             try
             {
-                //Brandon
-                using (conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;"))
-                //Alex
-                //using (conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;"))
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
                 {
-                    conexion.Open();
+                    conexion.GetConexion();
 
                     // Cambiar a modo de usuario único y forzar cierre de conexiones
                     q = "ALTER DATABASE SMARTFIT SET SINGLE_USER WITH ROLLBACK IMMEDIATE;";
-                    comando = new SqlCommand(q, conexion);
+                    comando = new SqlCommand(q, conexion.GetConexion());
                     comando.ExecuteNonQuery();
 
                     // Eliminar la base de datos
                     q = "DROP DATABASE SMARTFITBD;";
-                    comando = new SqlCommand(q, conexion);
+                    comando = new SqlCommand(q, conexion.GetConexion());
                     comando.ExecuteNonQuery();
 
                     mensaje = "La base de datos fue eliminada correctamente.";
@@ -123,15 +121,13 @@ namespace SMARTFIT
         {
             try
             {
-                //conexion Brandon
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;");
-                //conexion Alex
-                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;");
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
                 q = "create database SMARTFITBD";
-                comando = new SqlCommand(q, conexion);
-                conexion.Open();
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
-                conexion.Close();
+                conexion.CerrarConexion();
 
                 mensaje = "La base de datos fue creada correctamente";
             }

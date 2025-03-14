@@ -297,6 +297,7 @@
             this.Controls.Add(this.IdPersonal);
             this.Name = "Clientes";
             this.Text = "Clientes";
+            this.Load += new System.EventHandler(this.Clientes_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -25,17 +25,17 @@ namespace SMARTFIT
 
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
                 q = "SELECT * FROM Administrativo";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
                 DataTable dt = new DataTable();
                 dt.Load(Lector);
                 DG1.DataSource = dt;
 
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos mostrados correctamente";
             }
             catch (Exception ex)
@@ -51,7 +51,8 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
                 q = "CREATE TABLE Administrativo(" +
                     "Cargo VARCHAR(30) CHECK (Cargo = 'Proveedor' OR Cargo = 'Intendente' OR Cargo = 'Tecnico'), " +
                     "Equipo VARCHAR(30) DEFAULT 'Sin equipo', " +
@@ -59,10 +60,10 @@ namespace SMARTFIT
                     "CONSTRAINT fk_personal_administrativo FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal)" +
                     ");";
 
-                comando = new SqlCommand(q, conexion);
-                conexion.Open();
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Tabla Administrativo creada correctamente";
             }
             catch (Exception ex)
@@ -79,22 +80,23 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
+
 
                 string Cargo = cmbCargo.SelectedItem.ToString();
                 string Equipo = cmbEquipo.SelectedItem.ToString();
                 int IdPersonal = Convert.ToInt32(txtIdPersonal.Text);
 
                 q = "INSERT INTO Administrativo (Cargo, Equipo, Id_Personal) VALUES (@CARGO, @EQUIPO, @IDPERS);";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.Clear();
                 comando.Parameters.Add("@CARGO", SqlDbType.NVarChar).Value = Cargo;
                 comando.Parameters.Add("@EQUIPO", SqlDbType.NVarChar).Value = Equipo;
                 comando.Parameters.Add("@IDPERS", SqlDbType.Int).Value = IdPersonal;
 
                 comando.ExecuteNonQuery();
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos insertados correctamente en Administrativo";
             }
             catch (Exception ex)
@@ -111,17 +113,17 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
                 q = "SELECT * FROM Administrativo";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
                 DataTable dt = new DataTable();
                 dt.Load(Lector);
                 DG1.DataSource = dt;
 
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos mostrados correctamente";
             }
             catch (Exception ex)

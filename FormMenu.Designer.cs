@@ -144,6 +144,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "FormMenu";
             this.Text = "Menu";
+            this.Load += new System.EventHandler(this.FormMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

@@ -25,14 +25,11 @@ namespace SMARTFIT
 
             try
             {
-                //Brandon
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                //Alex
-                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 q = "SELECT * FROM Clientes";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
                 // Crear un DataTable para almacenar los datos
@@ -42,7 +39,7 @@ namespace SMARTFIT
                 // Asignar el DataTable al DataGridView
                 DG1.DataSource = dt;
 
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos Mostrados Correctamente";
 
             }
@@ -59,13 +56,11 @@ namespace SMARTFIT
         {
             try
             {
-                //Brandon
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                //Alex
-                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
                 q = "use SMARTFITBD";
-                comando = new SqlCommand(q, conexion);
-                conexion.Open();
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
                 q = "CREATE TABLE Clientes(" +
@@ -80,13 +75,13 @@ namespace SMARTFIT
                     "CONSTRAINT fk_gimnasio_cliente FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)" +
                     ");";
 
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
                 mensaje = "Creacion de las Tablas realizada";
 
                 //nuevo
-                conexion.Close();
+                conexion.CerrarConexion();
             }
             catch (System.Exception ex)
             {
@@ -102,11 +97,8 @@ namespace SMARTFIT
         {
             try
             {
-                // Conexión a la base de datos
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-
-                // Abre la conexión
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 // Obtención de valores desde los controles del formulario
                 int IdCliente = Convert.ToInt32(txtIdCliente.Text);
@@ -122,7 +114,7 @@ namespace SMARTFIT
                     "VALUES (@ID, @NOM, @APE, @CORR, @EST, @PLAN, @GIM);";
 
                 // Creación del comando SQL
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.Clear();
 
                 // Asignación de parámetros
@@ -138,7 +130,7 @@ namespace SMARTFIT
                 comando.ExecuteNonQuery();
 
                 // Cierra la conexión
-                conexion.Close();
+                conexion.CerrarConexion();
 
                 mensaje = "Datos almacenados correctamente";
             }
@@ -156,14 +148,11 @@ namespace SMARTFIT
         {
             try
             {
-                //Brandon
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                //Alex
-                //conexion = new SqlConnection(@"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 q = "SELECT * FROM Clientes";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
                 // Crear un DataTable para almacenar los datos
@@ -173,7 +162,7 @@ namespace SMARTFIT
                 // Asignar el DataTable al DataGridView
                 DG1.DataSource = dt;
 
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos Mostrados Correctamente";
 
             }
@@ -188,6 +177,11 @@ namespace SMARTFIT
         }
 
         private void Clientes_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Clientes_Load_1(object sender, EventArgs e)
         {
 
         }

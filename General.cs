@@ -25,18 +25,18 @@ namespace SMARTFIT
 
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 q = "SELECT * FROM General";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
                 DataTable dt = new DataTable();
                 dt.Load(Lector);
                 DG1.DataSource = dt;
 
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos mostrados correctamente.";
             }
             catch (System.Exception ex)
@@ -52,17 +52,17 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                ConexionGeneral conexion = new ConexionGeneral();
                 q = "CREATE TABLE General (" +
                     "Cedúla VARCHAR(30) UNIQUE NOT NULL, " +
                     "Años_de_experiencia INT CHECK (Años_de_experiencia >= 0) DEFAULT 0, " +
                     "Id_Personal INT, " +
                     "CONSTRAINT fk_personal_general FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal));";
 
-                comando = new SqlCommand(q, conexion);
-                conexion.Open();
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
-                conexion.Close();
+                conexion.CerrarConexion();
 
                 mensaje = "Tabla 'General' creada correctamente.";
             }
@@ -80,21 +80,21 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 string Cedula = txtCedula.Text;
                 int AniosExperiencia = Convert.ToInt32(txtAñosDeExperiencia.Text);
                 int IdPersonal = Convert.ToInt32(txtIdPersonal.Text);
 
                 q = "INSERT INTO General (Cedúla, Años_de_experiencia, Id_Personal) VALUES (@CED, @EXP, @IDP);";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.AddWithValue("@CED", Cedula);
                 comando.Parameters.AddWithValue("@EXP", AniosExperiencia);
                 comando.Parameters.AddWithValue("@IDP", IdPersonal);
 
                 comando.ExecuteNonQuery();
-                conexion.Close();
+                conexion.CerrarConexion();
 
                 mensaje = "Datos insertados correctamente en 'General'.";
             }
@@ -112,18 +112,18 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 q = "SELECT * FROM General";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
                 DataTable dt = new DataTable();
                 dt.Load(Lector);
                 DG1.DataSource = dt;
 
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos mostrados correctamente.";
             }
             catch (System.Exception ex)

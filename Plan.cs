@@ -25,18 +25,18 @@ namespace SMARTFIT
 
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 q = "SELECT * FROM Planes_Entrenamiento";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
                 DataTable dt = new DataTable();
                 dt.Load(Lector);
                 DG1.DataSource = dt;
 
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos mostrados correctamente.";
             }
             catch (Exception ex)
@@ -52,7 +52,8 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
+                ConexionGeneral conexion = new ConexionGeneral();
+
                 q = "USE SMARTFITBD; CREATE TABLE Planes_Entrenamiento (" +
                     "Id_plan INT PRIMARY KEY, " +
                     "Nombre_plan VARCHAR(20) NOT NULL, " +
@@ -61,10 +62,10 @@ namespace SMARTFIT
                     "Costo INT CHECK (Costo >= 0) " +
                     ");";
 
-                comando = new SqlCommand(q, conexion);
-                conexion.Open();
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Creación de la tabla realizada correctamente.";
             }
             catch (Exception ex)
@@ -81,8 +82,8 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 int IdPlan = Convert.ToInt32(txtIdPlan.Text);
                 string NombrePlan = cmbNombre.SelectedItem.ToString();
@@ -93,7 +94,7 @@ namespace SMARTFIT
                 q = "INSERT INTO Planes_Entrenamiento (Id_plan, Nombre_plan, Clientes_inscritos, Descripcion, Costo) " +
                     "VALUES (@ID, @NOM, @CLI, @DESC, @COS);";
 
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.AddWithValue("@ID", IdPlan);
                 comando.Parameters.AddWithValue("@NOM", NombrePlan);
                 comando.Parameters.AddWithValue("@CLI", ClientesInscritos);
@@ -101,7 +102,7 @@ namespace SMARTFIT
                 comando.Parameters.AddWithValue("@COS", Costo);
 
                 comando.ExecuteNonQuery();
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos insertados correctamente.";
             }
             catch (Exception ex)
@@ -118,18 +119,18 @@ namespace SMARTFIT
         {
             try
             {
-                conexion = new SqlConnection(@"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;");
-                conexion.Open();
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
 
                 q = "SELECT * FROM Planes_Entrenamiento";
-                comando = new SqlCommand(q, conexion);
+                comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
                 DataTable dt = new DataTable();
                 dt.Load(Lector);
                 DG1.DataSource = dt;
 
-                conexion.Close();
+                conexion.CerrarConexion();
                 mensaje = "Datos mostrados correctamente.";
             }
             catch (Exception ex)

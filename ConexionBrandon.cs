@@ -8,6 +8,6 @@ namespace SMARTFIT
 {
     internal class ConexionBrandon
     {
-
+        //xd
     }
 }
