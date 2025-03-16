@@ -53,12 +53,12 @@ namespace SMARTFIT
             {
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
-                q = "CREATE TABLE Administrativo(" +
-                    "Cargo VARCHAR(30) CHECK (Cargo = 'Proveedor' OR Cargo = 'Intendente' OR Cargo = 'Tecnico'), " +
-                    "Equipo VARCHAR(30) DEFAULT 'Sin equipo', " +
-                    "Id_Personal INT, " +
-                    "CONSTRAINT fk_personal_administrativo FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal)" +
-                    ");";
+                q = "CREATE TABLE Administrativo (\r\n    Cargo VARCHAR(30) CHECK (Cargo = 'Proveedor' OR Cargo = " +
+                    "'Intendente' OR Cargo = 'Tecnico'),\r\n    Equipo VARCHAR(30) DEFAULT 'Sin equipo',\r\n " +
+                    "   Id_Personal INT UNIQUE, -- Evita que un mismo Id_Personal esté en otra tabla\r\n  " +
+                    "  CONSTRAINT fk_personal_administrativo FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal),\r\n  " +
+                    "  CONSTRAINT chk_administrativo_tipo CHECK (\r\n   " +
+                    "     EXISTS (SELECT 1 FROM Personal WHERE Personal.Id_Personal = Administrativo.Id_Personal AND Personal.Tipo = 'Administrativo')\r\n    )\r\n);";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();
