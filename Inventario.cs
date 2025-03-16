@@ -65,7 +65,6 @@ namespace SMARTFIT
                 conexion.AbrirConexion();
 
                 // Obtención de valores desde los controles del formulario
-                int IdInventario = Convert.ToInt32(txtIdInventario.Text);
                 string NombreProducto = txtNombre.Text;
                 string Descripcion = txtDescripcion.Text;
                 int Cantidad = Convert.ToInt32(txtCantidad.Text);
@@ -73,15 +72,14 @@ namespace SMARTFIT
                 int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
                 // Consulta SQL para la inserción de datos
-                q = "INSERT INTO Inventario (Id_inventario, Nombre_producto, Descripcion, Cantidad, Tipo, Id_Gimnasio) " +
-                    "VALUES (@ID, @NOM, @DES, @CANT, @TIPO, @ID_GIM);";
+                q = "INSERT INTO Inventario ( Nombre_producto, Descripcion, Cantidad, Tipo, Id_Gimnasio) " +
+                    "VALUES (@NOM, @DES, @CANT, @TIPO, @ID_GIM);";
 
                 // Creación del comando SQL
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.Clear();
 
                 // Asignación de parámetros
-                comando.Parameters.Add("@ID", SqlDbType.Int).Value = IdInventario;
                 comando.Parameters.Add("@NOM", SqlDbType.NVarChar).Value = NombreProducto;
                 comando.Parameters.Add("@DES", SqlDbType.NVarChar).Value = Descripcion;
                 comando.Parameters.Add("@CANT", SqlDbType.Int).Value = Cantidad;
@@ -149,7 +147,7 @@ namespace SMARTFIT
                 comando.ExecuteNonQuery();
 
                 q = "CREATE TABLE Inventario(" +
-                    "Id_inventario INT PRIMARY KEY, " +
+                    "Id_inventario INT PRIMARY KEY Identity (1,1), " +
                     "Nombre_producto VARCHAR(100) UNIQUE NOT NULL, " +
                     "Descripcion VARCHAR(255), " +
                     "Cantidad INT CHECK (cantidad >= 0) DEFAULT 0, " +

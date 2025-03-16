@@ -63,7 +63,7 @@ namespace SMARTFIT
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
-                q = "CREATE TABLE Personal(" + "Id_personal INT PRIMARY KEY, " + "Nombre VARCHAR(50) NOT NULL, " + "Apellidos VARCHAR(50) NOT NULL, " +
+                q = "CREATE TABLE Personal(" + "Id_personal INT PRIMARY KEY Identity (1,1), " + "Nombre VARCHAR(50) NOT NULL, " + "Apellidos VARCHAR(50) NOT NULL, " +
                 "Dni VARCHAR(15) UNIQUE NOT NULL, " + "Telefono VARCHAR(20) DEFAULT '0000-000-000', " + "Direccion VARCHAR(255), " + "Salario INT CHECK (Salario >= 1800), " + "Horario VARCHAR(100), " + "Estado VARCHAR(20) CHECK " +
                 "(Estado = 'Activo' OR Estado = 'Inactivo'), " + "Id_gimnasio INT, " + "CONSTRAINT fk_gimnasio_personal FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)" +");";
 
@@ -93,7 +93,6 @@ namespace SMARTFIT
                 conexion.AbrirConexion();
 
                 // Obtención de valores desde los controles del formulario
-                int IdPersonal = Convert.ToInt32(txtIdPersonal.Text);
                 string Nombre = txtNombre.Text;
                 string Apellidos = txtApellidos.Text;
                 string Dni = txtDni.Text;
@@ -105,15 +104,14 @@ namespace SMARTFIT
                 int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
                 // Consulta SQL para la inserción de datos
-                string q = "INSERT INTO Personal (Id_personal, Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) " +
-                           "VALUES (@ID, @NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST, @ID_GIM);";
+                string q = "INSERT INTO Personal ( Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) " +
+                           "VALUES (@NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST, @ID_GIM);";
 
                 // Creación del comando SQL
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.Clear();
 
                 // Asignación de parámetros
-                comando.Parameters.Add("@ID", SqlDbType.Int).Value = IdPersonal;
                 comando.Parameters.Add("@NOM", SqlDbType.NVarChar).Value = Nombre;
                 comando.Parameters.Add("@APE", SqlDbType.NVarChar).Value = Apellidos;
                 comando.Parameters.Add("@DNI", SqlDbType.NVarChar).Value = Dni;

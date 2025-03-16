@@ -62,7 +62,7 @@ namespace SMARTFIT
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
-                q = "Create Table Gimnasio(Id_gimnasio INT PRIMARY KEY,Nombre VARCHAR(100) NOT NULL," +
+                q = "Create Table Gimnasio(Id_gimnasio INT Identity (1,1) PRIMARY KEY,Nombre VARCHAR(100) NOT NULL," +
                     "Direccion VARCHAR(255) DEFAULT 'No especificado', Telefono VARCHAR(20) UNIQUE NOT NULL," +
                     "Horario_apertura TIME CHECK (Horario_apertura >= '05:00')," +
                     "Horario_cierre TIME CHECK (Horario_cierre <= '23:00'));";
@@ -91,7 +91,6 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
 
-                int IdGimnasio = Convert.ToInt32(SpnCve.Text);
                 string Nombre = TxtNombre.Text;
                 string Telefono = TxtTelefono.Text;
                 string Direccion = TxtDireccion.Text;
@@ -102,13 +101,12 @@ namespace SMARTFIT
                 // Para Horario_Cierre, usa TimeSpan directamente
                 TimeSpan Cierre = new TimeSpan(22, 00, 0);  // Aquí puedes mantener la hora predeterminada si es fija, o también puedes usar un campo de texto
 
-                q = "INSERT INTO Gimnasio (Id_Gimnasio, Nombre,Direccion, Telefono, Horario_Apertura, Horario_Cierre) " +
-                "VALUES (@ID, @NOM,@DIR, @TEL, @HAP, @HAC)";
+                q = "INSERT INTO Gimnasio (Nombre, Direccion, Telefono, Horario_apertura, Horario_cierre) " +
+                "VALUES (@NOM,@DIR, @TEL, @HAP, @HAC)";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
 
                 comando.Parameters.Clear();
-                comando.Parameters.Add("@ID", SqlDbType.Int).Value = IdGimnasio;
                 comando.Parameters.Add("@NOM", SqlDbType.NVarChar).Value = Nombre;
                 comando.Parameters.Add("@TEL", SqlDbType.NVarChar).Value = Telefono;
                 comando.Parameters.Add("@DIR", SqlDbType.NVarChar).Value = Direccion;

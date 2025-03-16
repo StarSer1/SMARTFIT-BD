@@ -64,7 +64,7 @@ namespace SMARTFIT
                 comando.ExecuteNonQuery();
 
                 q = "CREATE TABLE Clientes(" +
-                    "Id_cliente INT PRIMARY KEY, " +
+                    "Id_cliente INT PRIMARY KEY Identity (1,1), " +
                     "Nombre VARCHAR(50) NOT NULL, " +
                     "Apellidos VARCHAR(50) NOT NULL, " +
                     "Correo_electronico VARCHAR(100) UNIQUE NOT NULL, " +
@@ -101,7 +101,6 @@ namespace SMARTFIT
                 conexion.AbrirConexion();
 
                 // Obtención de valores desde los controles del formulario
-                int IdCliente = Convert.ToInt32(txtIdCliente.Text);
                 string Nombre = txtNombre.Text;
                 string Apellidos = txtApellidos.Text;
                 string CorreoElectronico = txtCorreo.Text;
@@ -110,15 +109,14 @@ namespace SMARTFIT
                 int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
                 // Consulta SQL para la inserción de datos
-                q = "INSERT INTO Clientes(Id_cliente, Nombre, Apellidos, Correo_electronico, Estado, Id_plan, Id_gimnasio) " +
-                    "VALUES (@ID, @NOM, @APE, @CORR, @EST, @PLAN, @GIM);";
+                q = "INSERT INTO Clientes(Nombre, Apellidos, Correo_electronico, Estado, Id_plan, Id_gimnasio) " +
+                    "VALUES (@NOM, @APE, @CORR, @EST, @PLAN, @GIM);";
 
                 // Creación del comando SQL
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.Clear();
 
                 // Asignación de parámetros
-                comando.Parameters.Add("@ID", SqlDbType.Int).Value = IdCliente;
                 comando.Parameters.Add("@NOM", SqlDbType.NVarChar).Value = Nombre;
                 comando.Parameters.Add("@APE", SqlDbType.NVarChar).Value = Apellidos;
                 comando.Parameters.Add("@CORR", SqlDbType.NVarChar).Value = CorreoElectronico;

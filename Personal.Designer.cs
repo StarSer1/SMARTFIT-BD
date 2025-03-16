@@ -39,13 +39,11 @@
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtIdPersonal = new System.Windows.Forms.TextBox();
             this.txt = new System.Windows.Forms.Label();
             this.txtt = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Telefono = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.IdPersonal = new System.Windows.Forms.Label();
             this.txtApellidos = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtHorario = new System.Windows.Forms.TextBox();
@@ -142,7 +140,7 @@
             // txtDni
             // 
             this.txtDni.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDni.Location = new System.Drawing.Point(181, 200);
+            this.txtDni.Location = new System.Drawing.Point(180, 171);
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(172, 23);
             this.txtDni.TabIndex = 43;
@@ -150,7 +148,7 @@
             // txtSalario
             // 
             this.txtSalario.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSalario.Location = new System.Drawing.Point(181, 285);
+            this.txtSalario.Location = new System.Drawing.Point(180, 256);
             this.txtSalario.Name = "txtSalario";
             this.txtSalario.Size = new System.Drawing.Size(172, 23);
             this.txtSalario.TabIndex = 42;
@@ -158,7 +156,7 @@
             // txtDireccion
             // 
             this.txtDireccion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDireccion.Location = new System.Drawing.Point(181, 256);
+            this.txtDireccion.Location = new System.Drawing.Point(180, 227);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(172, 23);
             this.txtDireccion.TabIndex = 44;
@@ -166,7 +164,7 @@
             // txtTelefono
             // 
             this.txtTelefono.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefono.Location = new System.Drawing.Point(181, 228);
+            this.txtTelefono.Location = new System.Drawing.Point(180, 199);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(172, 23);
             this.txtTelefono.TabIndex = 41;
@@ -174,25 +172,17 @@
             // txtNombre
             // 
             this.txtNombre.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(179, 142);
+            this.txtNombre.Location = new System.Drawing.Point(178, 113);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(172, 23);
             this.txtNombre.TabIndex = 40;
-            // 
-            // txtIdPersonal
-            // 
-            this.txtIdPersonal.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdPersonal.Location = new System.Drawing.Point(179, 113);
-            this.txtIdPersonal.Name = "txtIdPersonal";
-            this.txtIdPersonal.Size = new System.Drawing.Size(172, 23);
-            this.txtIdPersonal.TabIndex = 39;
             // 
             // txt
             // 
             this.txt.AutoSize = true;
             this.txt.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.txt.Location = new System.Drawing.Point(30, 200);
+            this.txt.Location = new System.Drawing.Point(29, 171);
             this.txt.Name = "txt";
             this.txt.Size = new System.Drawing.Size(42, 18);
             this.txt.TabIndex = 37;
@@ -203,7 +193,7 @@
             this.txtt.AutoSize = true;
             this.txtt.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtt.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.txtt.Location = new System.Drawing.Point(30, 290);
+            this.txtt.Location = new System.Drawing.Point(29, 261);
             this.txtt.Name = "txtt";
             this.txtt.Size = new System.Drawing.Size(68, 18);
             this.txtt.TabIndex = 35;
@@ -214,7 +204,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label4.Location = new System.Drawing.Point(30, 259);
+            this.label4.Location = new System.Drawing.Point(29, 230);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(88, 18);
             this.label4.TabIndex = 36;
@@ -225,7 +215,7 @@
             this.Telefono.AutoSize = true;
             this.Telefono.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Telefono.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.Telefono.Location = new System.Drawing.Point(30, 228);
+            this.Telefono.Location = new System.Drawing.Point(29, 199);
             this.Telefono.Name = "Telefono";
             this.Telefono.Size = new System.Drawing.Size(86, 18);
             this.Telefono.TabIndex = 34;
@@ -236,27 +226,16 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(28, 142);
+            this.label2.Location = new System.Drawing.Point(27, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 18);
             this.label2.TabIndex = 38;
             this.label2.Text = "Nombre";
             // 
-            // IdPersonal
-            // 
-            this.IdPersonal.AutoSize = true;
-            this.IdPersonal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IdPersonal.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.IdPersonal.Location = new System.Drawing.Point(28, 113);
-            this.IdPersonal.Name = "IdPersonal";
-            this.IdPersonal.Size = new System.Drawing.Size(104, 18);
-            this.IdPersonal.TabIndex = 33;
-            this.IdPersonal.Text = "IdPersonal";
-            // 
             // txtApellidos
             // 
             this.txtApellidos.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtApellidos.Location = new System.Drawing.Point(180, 171);
+            this.txtApellidos.Location = new System.Drawing.Point(179, 142);
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(172, 23);
             this.txtApellidos.TabIndex = 52;
@@ -266,7 +245,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label7.Location = new System.Drawing.Point(29, 171);
+            this.label7.Location = new System.Drawing.Point(28, 142);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 18);
             this.label7.TabIndex = 51;
@@ -275,7 +254,7 @@
             // txtHorario
             // 
             this.txtHorario.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHorario.Location = new System.Drawing.Point(181, 314);
+            this.txtHorario.Location = new System.Drawing.Point(180, 285);
             this.txtHorario.Name = "txtHorario";
             this.txtHorario.Size = new System.Drawing.Size(172, 23);
             this.txtHorario.TabIndex = 54;
@@ -285,7 +264,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label5.Location = new System.Drawing.Point(30, 319);
+            this.label5.Location = new System.Drawing.Point(29, 290);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 18);
             this.label5.TabIndex = 53;
@@ -296,7 +275,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label6.Location = new System.Drawing.Point(30, 349);
+            this.label6.Location = new System.Drawing.Point(29, 320);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 18);
             this.label6.TabIndex = 55;
@@ -305,7 +284,7 @@
             // txtIdGimnasio
             // 
             this.txtIdGimnasio.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdGimnasio.Location = new System.Drawing.Point(181, 373);
+            this.txtIdGimnasio.Location = new System.Drawing.Point(180, 344);
             this.txtIdGimnasio.Name = "txtIdGimnasio";
             this.txtIdGimnasio.Size = new System.Drawing.Size(172, 23);
             this.txtIdGimnasio.TabIndex = 58;
@@ -315,7 +294,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label8.Location = new System.Drawing.Point(30, 378);
+            this.label8.Location = new System.Drawing.Point(29, 349);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 18);
             this.label8.TabIndex = 57;
@@ -327,7 +306,7 @@
             this.cmbEstado.Items.AddRange(new object[] {
             "Activo",
             "Inactivo"});
-            this.cmbEstado.Location = new System.Drawing.Point(181, 346);
+            this.cmbEstado.Location = new System.Drawing.Point(180, 317);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(172, 21);
             this.cmbEstado.TabIndex = 59;
@@ -357,13 +336,11 @@
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.txtIdPersonal);
             this.Controls.Add(this.txt);
             this.Controls.Add(this.txtt);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Telefono);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.IdPersonal);
             this.Name = "Personal";
             this.Text = "Personal";
             this.Load += new System.EventHandler(this.Personal_Load);
@@ -386,13 +363,11 @@
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtIdPersonal;
         private System.Windows.Forms.Label txt;
         private System.Windows.Forms.Label txtt;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label Telefono;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label IdPersonal;
         private System.Windows.Forms.TextBox txtApellidos;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtHorario;

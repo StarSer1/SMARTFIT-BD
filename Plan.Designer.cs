@@ -37,9 +37,7 @@
             this.DG1 = new System.Windows.Forms.DataGridView();
             this.BtnCrearTabla = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.IdPersonal = new System.Windows.Forms.Label();
             this.cmbNombre = new System.Windows.Forms.ComboBox();
-            this.txtIdPlan = new System.Windows.Forms.TextBox();
             this.txtCosto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,7 +48,7 @@
             // txtClientesInscritos
             // 
             this.txtClientesInscritos.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClientesInscritos.Location = new System.Drawing.Point(208, 192);
+            this.txtClientesInscritos.Location = new System.Drawing.Point(210, 158);
             this.txtClientesInscritos.Name = "txtClientesInscritos";
             this.txtClientesInscritos.Size = new System.Drawing.Size(145, 23);
             this.txtClientesInscritos.TabIndex = 103;
@@ -60,7 +58,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label7.Location = new System.Drawing.Point(29, 192);
+            this.label7.Location = new System.Drawing.Point(31, 158);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(154, 18);
             this.label7.TabIndex = 102;
@@ -153,22 +151,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(29, 160);
+            this.label2.Location = new System.Drawing.Point(31, 126);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 18);
             this.label2.TabIndex = 95;
             this.label2.Text = "Nombre";
-            // 
-            // IdPersonal
-            // 
-            this.IdPersonal.AutoSize = true;
-            this.IdPersonal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IdPersonal.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.IdPersonal.Location = new System.Drawing.Point(29, 132);
-            this.IdPersonal.Name = "IdPersonal";
-            this.IdPersonal.Size = new System.Drawing.Size(97, 18);
-            this.IdPersonal.TabIndex = 94;
-            this.IdPersonal.Text = "Id de Plan";
             // 
             // cmbNombre
             // 
@@ -177,25 +164,17 @@
             "Plan Smart",
             "Plan Fit",
             "Plan Black"});
-            this.cmbNombre.Location = new System.Drawing.Point(181, 161);
+            this.cmbNombre.Location = new System.Drawing.Point(183, 127);
             this.cmbNombre.Name = "cmbNombre";
             this.cmbNombre.Size = new System.Drawing.Size(172, 21);
             this.cmbNombre.TabIndex = 104;
             // 
-            // txtIdPlan
-            // 
-            this.txtIdPlan.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdPlan.Location = new System.Drawing.Point(180, 127);
-            this.txtIdPlan.Name = "txtIdPlan";
-            this.txtIdPlan.Size = new System.Drawing.Size(172, 23);
-            this.txtIdPlan.TabIndex = 105;
-            // 
             // txtCosto
             // 
             this.txtCosto.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCosto.Location = new System.Drawing.Point(210, 228);
+            this.txtCosto.Location = new System.Drawing.Point(212, 194);
             this.txtCosto.Name = "txtCosto";
-            this.txtCosto.Size = new System.Drawing.Size(145, 23);
+            this.txtCosto.Size = new System.Drawing.Size(142, 23);
             this.txtCosto.TabIndex = 107;
             // 
             // label4
@@ -203,7 +182,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label4.Location = new System.Drawing.Point(31, 228);
+            this.label4.Location = new System.Drawing.Point(33, 194);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(127, 18);
             this.label4.TabIndex = 106;
@@ -214,7 +193,7 @@
             this.label5.BackColor = System.Drawing.Color.Goldenrod;
             this.label5.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(32, 273);
+            this.label5.Location = new System.Drawing.Point(25, 273);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(323, 28);
             this.label5.TabIndex = 108;
@@ -241,7 +220,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtCosto);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtIdPlan);
             this.Controls.Add(this.cmbNombre);
             this.Controls.Add(this.txtClientesInscritos);
             this.Controls.Add(this.label7);
@@ -252,7 +230,6 @@
             this.Controls.Add(this.DG1);
             this.Controls.Add(this.BtnCrearTabla);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.IdPersonal);
             this.Name = "Plan";
             this.Text = "Plan";
             this.Load += new System.EventHandler(this.Plan_Load);
@@ -272,9 +249,7 @@
         private System.Windows.Forms.DataGridView DG1;
         private System.Windows.Forms.Button BtnCrearTabla;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label IdPersonal;
         private System.Windows.Forms.ComboBox cmbNombre;
-        private System.Windows.Forms.TextBox txtIdPlan;
         private System.Windows.Forms.TextBox txtCosto;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

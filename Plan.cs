@@ -55,7 +55,7 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
 
                 q = "USE SMARTFITBD; CREATE TABLE Planes_Entrenamiento (" +
-                    "Id_plan INT PRIMARY KEY, " +
+                    "Id_plan INT PRIMARY KEY Identity (1,1), " +
                     "Nombre_plan VARCHAR(20) NOT NULL, " +
                     "Clientes_inscritos INT, " +
                     "Descripcion VARCHAR(255) DEFAULT 'Sin descripción', " +
@@ -85,17 +85,15 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
 
-                int IdPlan = Convert.ToInt32(txtIdPlan.Text);
                 string NombrePlan = cmbNombre.SelectedItem.ToString();
                 int ClientesInscritos = Convert.ToInt32(txtClientesInscritos.Text);
                 string Descripcion = txtDescripcion.Text;
                 int Costo = Convert.ToInt32(txtCosto.Text);
 
-                q = "INSERT INTO Planes_Entrenamiento (Id_plan, Nombre_plan, Clientes_inscritos, Descripcion, Costo) " +
-                    "VALUES (@ID, @NOM, @CLI, @DESC, @COS);";
+                q = "INSERT INTO Planes_Entrenamiento (Nombre_plan, Clientes_inscritos, Descripcion, Costo) " +
+                    "VALUES (@NOM, @CLI, @DESC, @COS);";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
-                comando.Parameters.AddWithValue("@ID", IdPlan);
                 comando.Parameters.AddWithValue("@NOM", NombrePlan);
                 comando.Parameters.AddWithValue("@CLI", ClientesInscritos);
                 comando.Parameters.AddWithValue("@DESC", Descripcion);

@@ -43,11 +43,9 @@
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtIdPlan = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtIdCliente = new System.Windows.Forms.TextBox();
             this.txt = new System.Windows.Forms.Label();
             this.Telefono = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.IdPersonal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +55,7 @@
             this.cmbEstado.Items.AddRange(new object[] {
             "Activo",
             "Inactivo"});
-            this.cmbEstado.Location = new System.Drawing.Point(183, 291);
+            this.cmbEstado.Location = new System.Drawing.Point(184, 250);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(172, 21);
             this.cmbEstado.TabIndex = 85;
@@ -65,7 +63,7 @@
             // txtIdGimnasio
             // 
             this.txtIdGimnasio.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdGimnasio.Location = new System.Drawing.Point(185, 372);
+            this.txtIdGimnasio.Location = new System.Drawing.Point(186, 331);
             this.txtIdGimnasio.Name = "txtIdGimnasio";
             this.txtIdGimnasio.Size = new System.Drawing.Size(172, 23);
             this.txtIdGimnasio.TabIndex = 84;
@@ -75,7 +73,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label8.Location = new System.Drawing.Point(34, 377);
+            this.label8.Location = new System.Drawing.Point(35, 336);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 18);
             this.label8.TabIndex = 83;
@@ -86,7 +84,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label6.Location = new System.Drawing.Point(32, 294);
+            this.label6.Location = new System.Drawing.Point(33, 253);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 18);
             this.label6.TabIndex = 82;
@@ -95,7 +93,7 @@
             // txtApellidos
             // 
             this.txtApellidos.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtApellidos.Location = new System.Drawing.Point(183, 206);
+            this.txtApellidos.Location = new System.Drawing.Point(184, 165);
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(172, 23);
             this.txtApellidos.TabIndex = 79;
@@ -105,7 +103,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label7.Location = new System.Drawing.Point(32, 206);
+            this.label7.Location = new System.Drawing.Point(33, 165);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 18);
             this.label7.TabIndex = 78;
@@ -196,7 +194,7 @@
             // txtCorreo
             // 
             this.txtCorreo.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCorreo.Location = new System.Drawing.Point(183, 247);
+            this.txtCorreo.Location = new System.Drawing.Point(184, 206);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(172, 23);
             this.txtCorreo.TabIndex = 70;
@@ -204,7 +202,7 @@
             // txtIdPlan
             // 
             this.txtIdPlan.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdPlan.Location = new System.Drawing.Point(184, 333);
+            this.txtIdPlan.Location = new System.Drawing.Point(185, 292);
             this.txtIdPlan.Name = "txtIdPlan";
             this.txtIdPlan.Size = new System.Drawing.Size(172, 23);
             this.txtIdPlan.TabIndex = 68;
@@ -212,25 +210,17 @@
             // txtNombre
             // 
             this.txtNombre.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(183, 162);
+            this.txtNombre.Location = new System.Drawing.Point(184, 121);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(172, 23);
             this.txtNombre.TabIndex = 67;
-            // 
-            // txtIdCliente
-            // 
-            this.txtIdCliente.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdCliente.Location = new System.Drawing.Point(183, 121);
-            this.txtIdCliente.Name = "txtIdCliente";
-            this.txtIdCliente.Size = new System.Drawing.Size(172, 23);
-            this.txtIdCliente.TabIndex = 66;
             // 
             // txt
             // 
             this.txt.AutoSize = true;
             this.txt.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.txt.Location = new System.Drawing.Point(32, 247);
+            this.txt.Location = new System.Drawing.Point(33, 206);
             this.txt.Name = "txt";
             this.txt.Size = new System.Drawing.Size(69, 18);
             this.txt.TabIndex = 64;
@@ -241,7 +231,7 @@
             this.Telefono.AutoSize = true;
             this.Telefono.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Telefono.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.Telefono.Location = new System.Drawing.Point(33, 333);
+            this.Telefono.Location = new System.Drawing.Point(34, 292);
             this.Telefono.Name = "Telefono";
             this.Telefono.Size = new System.Drawing.Size(97, 18);
             this.Telefono.TabIndex = 61;
@@ -252,22 +242,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(32, 162);
+            this.label2.Location = new System.Drawing.Point(33, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 18);
             this.label2.TabIndex = 65;
             this.label2.Text = "Nombre";
-            // 
-            // IdPersonal
-            // 
-            this.IdPersonal.AutoSize = true;
-            this.IdPersonal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IdPersonal.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.IdPersonal.Location = new System.Drawing.Point(32, 121);
-            this.IdPersonal.Name = "IdPersonal";
-            this.IdPersonal.Size = new System.Drawing.Size(119, 18);
-            this.IdPersonal.TabIndex = 60;
-            this.IdPersonal.Text = "Id de Cliente";
             // 
             // Clientes
             // 
@@ -290,11 +269,9 @@
             this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.txtIdPlan);
             this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.txtIdCliente);
             this.Controls.Add(this.txt);
             this.Controls.Add(this.Telefono);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.IdPersonal);
             this.Name = "Clientes";
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.Clientes_Load_1);
@@ -321,10 +298,8 @@
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.TextBox txtIdPlan;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtIdCliente;
         private System.Windows.Forms.Label txt;
         private System.Windows.Forms.Label Telefono;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label IdPersonal;
     }
 }

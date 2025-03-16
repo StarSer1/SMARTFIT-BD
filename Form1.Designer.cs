@@ -36,13 +36,11 @@
             this.TxtHApertura = new System.Windows.Forms.TextBox();
             this.TxtTelefono = new System.Windows.Forms.TextBox();
             this.TxtNombre = new System.Windows.Forms.TextBox();
-            this.SpnCve = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Telefono = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.IdGimnasio = new System.Windows.Forms.Label();
             this.DG1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -100,7 +98,7 @@
             // TxtDireccion
             // 
             this.TxtDireccion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtDireccion.Location = new System.Drawing.Point(177, 205);
+            this.TxtDireccion.Location = new System.Drawing.Point(177, 167);
             this.TxtDireccion.Name = "TxtDireccion";
             this.TxtDireccion.Size = new System.Drawing.Size(172, 23);
             this.TxtDireccion.TabIndex = 20;
@@ -108,7 +106,7 @@
             // TxtHCierre
             // 
             this.TxtHCierre.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtHCierre.Location = new System.Drawing.Point(177, 320);
+            this.TxtHCierre.Location = new System.Drawing.Point(177, 282);
             this.TxtHCierre.Name = "TxtHCierre";
             this.TxtHCierre.Size = new System.Drawing.Size(172, 23);
             this.TxtHCierre.TabIndex = 19;
@@ -116,7 +114,7 @@
             // TxtHApertura
             // 
             this.TxtHApertura.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtHApertura.Location = new System.Drawing.Point(177, 282);
+            this.TxtHApertura.Location = new System.Drawing.Point(177, 244);
             this.TxtHApertura.Name = "TxtHApertura";
             this.TxtHApertura.Size = new System.Drawing.Size(172, 23);
             this.TxtHApertura.TabIndex = 21;
@@ -124,7 +122,7 @@
             // TxtTelefono
             // 
             this.TxtTelefono.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtTelefono.Location = new System.Drawing.Point(177, 247);
+            this.TxtTelefono.Location = new System.Drawing.Point(177, 209);
             this.TxtTelefono.Name = "TxtTelefono";
             this.TxtTelefono.Size = new System.Drawing.Size(172, 23);
             this.TxtTelefono.TabIndex = 18;
@@ -132,25 +130,17 @@
             // TxtNombre
             // 
             this.TxtNombre.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtNombre.Location = new System.Drawing.Point(177, 168);
+            this.TxtNombre.Location = new System.Drawing.Point(177, 130);
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(172, 23);
             this.TxtNombre.TabIndex = 17;
-            // 
-            // SpnCve
-            // 
-            this.SpnCve.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SpnCve.Location = new System.Drawing.Point(177, 130);
-            this.SpnCve.Name = "SpnCve";
-            this.SpnCve.Size = new System.Drawing.Size(172, 23);
-            this.SpnCve.TabIndex = 16;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label6.Location = new System.Drawing.Point(26, 205);
+            this.label6.Location = new System.Drawing.Point(26, 167);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 18);
             this.label6.TabIndex = 14;
@@ -161,7 +151,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label5.Location = new System.Drawing.Point(26, 325);
+            this.label5.Location = new System.Drawing.Point(26, 287);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 18);
             this.label5.TabIndex = 12;
@@ -172,7 +162,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label4.Location = new System.Drawing.Point(26, 285);
+            this.label4.Location = new System.Drawing.Point(26, 247);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(138, 18);
             this.label4.TabIndex = 13;
@@ -183,7 +173,7 @@
             this.Telefono.AutoSize = true;
             this.Telefono.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Telefono.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.Telefono.Location = new System.Drawing.Point(26, 247);
+            this.Telefono.Location = new System.Drawing.Point(26, 209);
             this.Telefono.Name = "Telefono";
             this.Telefono.Size = new System.Drawing.Size(86, 18);
             this.Telefono.TabIndex = 11;
@@ -194,22 +184,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(26, 168);
+            this.label2.Location = new System.Drawing.Point(26, 130);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 18);
             this.label2.TabIndex = 15;
             this.label2.Text = "Nombre";
-            // 
-            // IdGimnasio
-            // 
-            this.IdGimnasio.AutoSize = true;
-            this.IdGimnasio.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IdGimnasio.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.IdGimnasio.Location = new System.Drawing.Point(26, 130);
-            this.IdGimnasio.Name = "IdGimnasio";
-            this.IdGimnasio.Size = new System.Drawing.Size(106, 18);
-            this.IdGimnasio.TabIndex = 10;
-            this.IdGimnasio.Text = "IdGimnasio";
             // 
             // DG1
             // 
@@ -263,13 +242,11 @@
             this.Controls.Add(this.TxtHApertura);
             this.Controls.Add(this.TxtTelefono);
             this.Controls.Add(this.TxtNombre);
-            this.Controls.Add(this.SpnCve);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Telefono);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.IdGimnasio);
             this.Name = "Form1";
             this.Text = "Gimnasio";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -289,13 +266,11 @@
         private System.Windows.Forms.TextBox TxtHApertura;
         private System.Windows.Forms.TextBox TxtTelefono;
         private System.Windows.Forms.TextBox TxtNombre;
-        private System.Windows.Forms.TextBox SpnCve;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label Telefono;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label IdGimnasio;
         private System.Windows.Forms.DataGridView DG1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
