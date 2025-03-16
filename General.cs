@@ -53,11 +53,12 @@ namespace SMARTFIT
             try
             {
                 ConexionGeneral conexion = new ConexionGeneral();
-                q = "CREATE TABLE General (" +
-                    "Cedúla VARCHAR(30) UNIQUE NOT NULL, " +
-                    "Años_de_experiencia INT CHECK (Años_de_experiencia >= 0) DEFAULT 0, " +
-                    "Id_Personal INT, " +
-                    "CONSTRAINT fk_personal_general FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal));";
+                q = "CREATE TABLE General (\r\n    Cedúla VARCHAR(30) UNIQUE NOT NULL,\r\n   " +
+                    " Años_de_experiencia INT CHECK (Años_de_experiencia >= 0) DEFAULT 0,\r\n  " +
+                    "  Id_Personal INT UNIQUE, -- Evita que un mismo Id_Personal esté en otra tabla\r\n  " +
+                    "  CONSTRAINT fk_personal_general FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal),\r\n  " +
+                    "  CONSTRAINT chk_general_tipo CHECK (\r\n    " +
+                    "    EXISTS (SELECT 1 FROM Personal WHERE Personal.Id_Personal = General.Id_Personal AND Personal.Tipo = 'General')\r\n    )\r\n);";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();

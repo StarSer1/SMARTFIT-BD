@@ -63,9 +63,12 @@ namespace SMARTFIT
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
-                q = "CREATE TABLE Personal(" + "Id_personal INT PRIMARY KEY Identity (1,1), " + "Nombre VARCHAR(50) NOT NULL, " + "Apellidos VARCHAR(50) NOT NULL, " +
-                "Dni VARCHAR(15) UNIQUE NOT NULL, " + "Telefono VARCHAR(20) DEFAULT '0000-000-000', " + "Direccion VARCHAR(255), " + "Salario INT CHECK (Salario >= 1800), " + "Horario VARCHAR(100), " + "Estado VARCHAR(20) CHECK " +
-                "(Estado = 'Activo' OR Estado = 'Inactivo'), " + "Id_gimnasio INT, " + "CONSTRAINT fk_gimnasio_personal FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)" +");";
+                q = "CREATE TABLE Personal (\r\n    Id_personal INT PRIMARY KEY Identity (1,1),\r\n    Nombre VARCHAR(50) NOT NULL,\r\n  " +
+                    "  Apellidos VARCHAR(50) NOT NULL,\r\n    Dni VARCHAR(15) UNIQUE NOT NULL,\r\n    Telefono VARCHAR(20)" +
+                    " DEFAULT '0000-000-000',\r\n    Direccion VARCHAR(255),\r\n    Salario INT CHECK (Salario >= 1800),\r\n " +
+                    "   Horario VARCHAR(100),\r\n    Estado VARCHAR(20) CHECK (Estado = 'Activo' OR Estado = 'Inactivo'),\r\n" +
+                    "    Tipo VARCHAR(15) CHECK (Tipo = 'General' OR Tipo = 'Administrativo'), -- Nuevo campo\r\n   " +
+                    " Id_gimnasio INT,\r\n    CONSTRAINT fk_gimnasio_personal FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)\r\n);";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
@@ -100,12 +103,16 @@ namespace SMARTFIT
                 string Direccion = txtDireccion.Text;
                 int Salario = Convert.ToInt32(txtSalario.Text);
                 string Horario = txtHorario.Text;
+                string Tipo = CmbTipo.SelectedItem.ToString();
                 string Estado = cmbEstado.SelectedItem.ToString(); // Suponiendo que es un ComboBox
                 int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
                 // Consulta SQL para la inserción de datos
-                string q = "INSERT INTO Personal ( Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) " +
-                           "VALUES (@NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST, @ID_GIM);";
+                string q = "INSERT INTO Personal ( Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Tipo, Estado, Id_gimnasio) " +
+                           "VALUES (@NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @TIP, @EST, @ID_GIM);";
+
+                //string q = "INSERT INTO Personal ( Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) " +
+                //"VALUES (@NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST, @ID_GIM);";
 
                 // Creación del comando SQL
                 comando = new SqlCommand(q, conexion.GetConexion());
@@ -119,6 +126,7 @@ namespace SMARTFIT
                 comando.Parameters.Add("@DIR", SqlDbType.NVarChar).Value = Direccion;
                 comando.Parameters.Add("@SAL", SqlDbType.Int).Value = Salario;
                 comando.Parameters.Add("@HOR", SqlDbType.NVarChar).Value = Horario;
+                comando.Parameters.Add("@TIP", SqlDbType.NVarChar).Value = Tipo;
                 comando.Parameters.Add("@EST", SqlDbType.NVarChar).Value = Estado;
                 comando.Parameters.Add("@ID_GIM", SqlDbType.Int).Value = IdGimnasio;
 
@@ -147,6 +155,7 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
 
+                switch(estado)
                 q = "SELECT * FROM Personal";
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
