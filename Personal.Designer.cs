@@ -355,7 +355,9 @@
             "Consulta General",
             "Salario superior a 2000",
             "Personal Activo",
-            "Salario Promedio"});
+            "Salario Promedio",
+            "Personal con salario mayor al promedio",
+            "Personal que trabaja en gimnasios que cierran más tarde que el promedio"});
             this.cmbConsulta.Location = new System.Drawing.Point(700, 77);
             this.cmbConsulta.Name = "cmbConsulta";
             this.cmbConsulta.Size = new System.Drawing.Size(172, 21);
