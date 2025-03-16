@@ -88,12 +88,12 @@ namespace SMARTFIT
                 string Equipo = cmbEquipo.SelectedItem.ToString();
                 int IdPersonal = Convert.ToInt32(txtIdPersonal.Text);
 
-                q = "INSERT INTO Administrativo (Cargo, Equipo, Id_Personal) VALUES (@CARGO, @EQUIPO, @IDPERS);";
+                q = "EXEC AgregarAdministrativo @Cargo, @Equipo, @Id_Personal;";
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.Clear();
-                comando.Parameters.Add("@CARGO", SqlDbType.NVarChar).Value = Cargo;
-                comando.Parameters.Add("@EQUIPO", SqlDbType.NVarChar).Value = Equipo;
-                comando.Parameters.Add("@IDPERS", SqlDbType.Int).Value = IdPersonal;
+                comando.Parameters.Add("@Cargo", SqlDbType.VarChar, 30).Value = Cargo;
+                comando.Parameters.Add("@Equipo", SqlDbType.VarChar, 30).Value = Equipo;
+                comando.Parameters.Add("@Id_Personal", SqlDbType.Int).Value = IdPersonal;
 
                 comando.ExecuteNonQuery();
                 conexion.CerrarConexion();

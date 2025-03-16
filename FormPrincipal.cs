@@ -137,17 +137,32 @@ namespace SMARTFIT
                 //Brandon Procedimientos almacenados
                 //Agregar administrativo
                 conexion = new SqlConnection(cadenaConexion2);
-                q = "CREATE PROCEDURE AgregarAdministrativo\r\n\t@Cargo  VARCHAR(30),\r\n\t@Equipo VARCHAR(30),\r\n\t@Id_Personal INT\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Administrativo\r\n\t(Cargo, Equipo, Id_Personal)\r\n\tVALUES\r\n\t(@Cargo, @Equipo, @Id_Personal)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\nGO";
+                q = "CREATE PROCEDURE AgregarAdministrativo\r\n\t@Cargo  VARCHAR(30),\r\n\t@Equipo VARCHAR(30),\r\n\t@Id_Personal INT\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Administrativo\r\n\t(Cargo, Equipo, Id_Personal)\r\n\tVALUES\r\n\t(@Cargo, @Equipo, @Id_Personal)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
                 comando = new SqlCommand(q, conexion);
                 conexion.Open();
                 comando.ExecuteNonQuery();
 
                 //Agregar Plan de entrenamiento
+                conexion = new SqlConnection(cadenaConexion2);
+                q = "CREATE PROCEDURE AgregarPlanEntrenamiento\r\n\t@Nombre_plan VARCHAR(20),\r\n\t@Clientes_inscritos INT,\r\n    @Descripcion VARCHAR,\r\n    @Costo INT\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Planes_Entrenamiento\r\n\t(Nombre_plan, Clientes_inscritos, Descripcion, Costo)\r\n\tVALUES\r\n\t(@Nombre_plan, @Clientes_inscritos, @Descripcion, @Costo)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
+                comando = new SqlCommand(q, conexion);
+                conexion.Open();
+                comando.ExecuteNonQuery();
 
                 //Agregar Clientes
+                conexion = new SqlConnection(cadenaConexion2);
+                q = "CREATE PROCEDURE AgregarClientes\r\n    @Nombre VARCHAR(50),\r\n    @Apellidos VARCHAR(50),\r\n    @Correo_electronico VARCHAR(100),\r\n    @Estado VARCHAR(20),\r\n    @Id_plan INT,\r\n    @Id_gimnasio INT\r\nAS\r\nBEGIN TRY\r\n    INSERT INTO Clientes\r\n    (Nombre, Apellidos, Correo_electronico, Estado, Id_plan, Id_gimnasio)\r\n    VALUES\r\n    (@Nombre, @Apellidos, @Correo_electronico, @Estado, @Id_plan, @Id_gimnasio)\r\nEND TRY\r\nBEGIN CATCH\r\n    SELECT ERROR_NUMBER(), ERROR_MESSAGE()\r\nEND CATCH";
+                comando = new SqlCommand(q, conexion);
+                conexion.Open();
+                comando.ExecuteNonQuery();
 
                 //Agregar Inventario
-
+                conexion = new SqlConnection(cadenaConexion2);
+                q = "CREATE PROCEDURE AgregarInventario\r\n    @Nombre_producto VARCHAR(100),\r\n    @Descripcion VARCHAR(255), \r\n    @Cantidad INT,\r\n\t@Tipo VARCHAR(100),\r\n\t@Id_Gimnasio INT\r\nAS\r\nBEGIN TRY\r\nINSERT INTO Inventario\r\n\t(Nombre_producto, Descripcion, Cantidad, Tipo, Id_Gimnasio)\r\n\tVALUES\r\n\t(@Nombre_producto, @Descripcion, @Cantidad, @Tipo, @Id_Gimnasio)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
+                comando = new SqlCommand(q, conexion);
+                conexion.Open();
+                comando.ExecuteNonQuery();
+                
                 conexion = new SqlConnection(cadenaConexion2);
                 q = "CREATE PROCEDURE AgregarGimnasio\r\n@Nombre varchar(100),\r\n@Direccion varchar(100),\r\n@Telefono varchar(20),\r\n@Horario_apertura TIME,\r\n@Horario_cierre TIME\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Gimnasio\r\n\t(Nombre,Direccion,Telefono,Horario_apertura,Horario_cierre)\r\n\tVALUES\r\n\t(@Nombre,@Direccion,@Telefono,@Horario_apertura,@Horario_cierre)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
                 comando = new SqlCommand(q, conexion);

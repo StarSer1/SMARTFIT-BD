@@ -72,8 +72,7 @@ namespace SMARTFIT
                 int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
                 // Consulta SQL para la inserción de datos
-                q = "INSERT INTO Inventario ( Nombre_producto, Descripcion, Cantidad, Tipo, Id_Gimnasio) " +
-                    "VALUES (@NOM, @DES, @CANT, @TIPO, @ID_GIM);";
+                q = "EXEC AgregarInventario @NOM, @DES, @CANT, @TIPO, @ID_GIM;";
 
                 // Creación del comando SQL
                 comando = new SqlCommand(q, conexion.GetConexion());

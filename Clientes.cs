@@ -109,20 +109,20 @@ namespace SMARTFIT
                 int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
                 // Consulta SQL para la inserción de datos
-                q = "INSERT INTO Clientes(Nombre, Apellidos, Correo_electronico, Estado, Id_plan, Id_gimnasio) " +
-                    "VALUES (@NOM, @APE, @CORR, @EST, @PLAN, @GIM);";
+                q = "EXEC AgregarClientes @Nombre, @Apellidos, @Correo_electronico, @Estado, @Id_plan, @Id_gimnasio;";
 
                 // Creación del comando SQL
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.Clear();
 
                 // Asignación de parámetros
-                comando.Parameters.Add("@NOM", SqlDbType.NVarChar).Value = Nombre;
-                comando.Parameters.Add("@APE", SqlDbType.NVarChar).Value = Apellidos;
-                comando.Parameters.Add("@CORR", SqlDbType.NVarChar).Value = CorreoElectronico;
-                comando.Parameters.Add("@EST", SqlDbType.NVarChar).Value = Estado;
-                comando.Parameters.Add("@PLAN", SqlDbType.Int).Value = IdPlan;
-                comando.Parameters.Add("@GIM", SqlDbType.Int).Value = IdGimnasio;
+                comando.Parameters.Add("@Nombre", SqlDbType.NVarChar).Value = Nombre;
+                comando.Parameters.Add("@Apellidos", SqlDbType.NVarChar).Value = Apellidos;
+                comando.Parameters.Add("@Correo_electronico", SqlDbType.NVarChar).Value = CorreoElectronico;
+                comando.Parameters.Add("@Estado", SqlDbType.NVarChar).Value = Estado;
+                comando.Parameters.Add("@Id_plan", SqlDbType.Int).Value = IdPlan;
+                comando.Parameters.Add("@Id_gimnasio", SqlDbType.Int).Value = IdGimnasio;
+
 
                 // Ejecución del comando
                 comando.ExecuteNonQuery();

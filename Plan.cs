@@ -90,9 +90,7 @@ namespace SMARTFIT
                 string Descripcion = txtDescripcion.Text;
                 int Costo = Convert.ToInt32(txtCosto.Text);
 
-                q = "INSERT INTO Planes_Entrenamiento (Nombre_plan, Clientes_inscritos, Descripcion, Costo) " +
-                    "VALUES (@NOM, @CLI, @DESC, @COS);";
-
+                q = "EXEC AgregarPlanEntrenamiento @NOM, @CLI, @DESC, @COS;";
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.AddWithValue("@NOM", NombrePlan);
                 comando.Parameters.AddWithValue("@CLI", ClientesInscritos);
