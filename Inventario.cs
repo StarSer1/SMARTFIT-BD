@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SMARTFIT
 {
@@ -110,7 +111,25 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
 
-                q = "SELECT * FROM Inventario";
+                string opcion = cmbConsulta.SelectedItem.ToString();
+                switch (opcion)
+                {
+                    case "Consulta General":
+                        q = "SELECT * FROM Inventario";
+                        break;
+                    case "Mayor base su cantidad":
+                        q = "SELECT * \r\nFROM Inventario\r\nWHERE Cantidad > (SELECT AVG(Cantidad) FROM Inventario)\r\nORDER BY Cantidad DESC;";
+                        break;
+                    case "Mostrar inventario y nombre del gimnasio":
+                        q = "SELECT I.Nombre_producto, I.Cantidad, G.Nombre\r\nFROM Inventario I\r\nINNER JOIN Gimnasio G ON I.Id_Gimnasio = G.Id_Gimnasio;";
+                        break;
+                    case "Mostrar inventario con gimnasios con id entre 3 y 10":
+                        q = "SELECT I.Nombre_producto, I.Cantidad, G.Nombre\r\nFROM Inventario I\r\nINNER JOIN Gimnasio G ON I.Id_Gimnasio = G.Id_Gimnasio\r\nwhere G.Id_Gimnasio BETWEEN '3' AND '10';";
+                        break;
+                    case "Mostrar el gimnasio donde su inventario hay pesas":
+                        q = "SELECT DISTINCT G.Nombre\r\nFROM Gimnasio G\r\nINNER JOIN Inventario I ON G.Id_Gimnasio = I.Id_Gimnasio\r\nWhere Tipo = 'Pesas';";
+                        break;
+                }
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 

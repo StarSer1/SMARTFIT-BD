@@ -149,10 +149,38 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
 
-                q = "SELECT * FROM Clientes";
+                string opcion = cmbConsulta.SelectedItem.ToString();
+                switch (opcion)
+                {
+                    case "Consulta General":
+                        q = "SELECT * FROM Clientes";
+                        break;
+                    case "Mostrar clientes con correo gmail":
+                        q = "SELECT * \r\nFROM Clientes \r\nwhere Estado = 'Activo' AND Correo_electronico Like '%@gmail.com'";
+                        break;
+                    case "Mostrar los Clientes inactivos de todos los gimnasios":
+                        q = "SELECT C.Id_cliente, C.Nombre, C.Apellidos, C.Correo_electronico, C.Estado, G.Nombre AS Gimnasio " +
+                            "FROM Clientes C " +
+                            "INNER JOIN Gimnasio G ON C.Id_gimnasio = G.Id_gimnasio " +
+                            "WHERE C.Estado = 'Inactivo';";
+                        break;
+                    case "Mostrar Clientes que estan en el Smarfit de Santa Fe":
+                        q = "SELECT C.Id_cliente, C.Nombre, C.Apellidos, C.Correo_electronico, C.Estado " +
+                            "FROM Clientes C " +
+                            "INNER JOIN Gimnasio G ON C.Id_gimnasio = G.Id_gimnasio " +
+                            "WHERE G.Nombre LIKE '%Santa Fe';";
+                        break;
+                    case "Mostrar los clientes con el plan Black":
+                        q = "SELECT C.Id_cliente, C.Nombre, C.Apellidos, C.Correo_electronico, C.Estado " +
+                            "FROM Clientes C " +
+                            "INNER JOIN Planes_Entrenamiento P ON C.Id_plan = P.Id_plan " +
+                            "WHERE P.Nombre_plan = 'Plan Black';";
+                        break;
+
+                }
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
-
+                
                 // Crear un DataTable para almacenar los datos
                 DataTable dt = new DataTable();
                 dt.Load(Lector);

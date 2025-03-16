@@ -42,6 +42,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.cmbConsulta = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -210,12 +212,38 @@
             this.txtDescripcion.Size = new System.Drawing.Size(324, 93);
             this.txtDescripcion.TabIndex = 109;
             // 
+            // cmbConsulta
+            // 
+            this.cmbConsulta.FormattingEnabled = true;
+            this.cmbConsulta.Items.AddRange(new object[] {
+            "Consulta General",
+            "Planes de entrenamiento en orden ascendente",
+            "Planes con clientes inscritos en gimnasio Santa Fe",
+            "Mostrar el plan con mas clientes inscritos"});
+            this.cmbConsulta.Location = new System.Drawing.Point(700, 100);
+            this.cmbConsulta.Name = "cmbConsulta";
+            this.cmbConsulta.Size = new System.Drawing.Size(172, 21);
+            this.cmbConsulta.TabIndex = 111;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label10.Location = new System.Drawing.Point(611, 103);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 18);
+            this.label10.TabIndex = 110;
+            this.label10.Text = "Consulta";
+            // 
             // Plan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
             this.ClientSize = new System.Drawing.Size(884, 523);
+            this.Controls.Add(this.cmbConsulta);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtCosto);
@@ -254,5 +282,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.ComboBox cmbConsulta;
+        private System.Windows.Forms.Label label10;
     }
 }

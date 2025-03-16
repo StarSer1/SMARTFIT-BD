@@ -118,7 +118,27 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
 
-                q = "SELECT * FROM Planes_Entrenamiento";
+                string opcion = cmbConsulta.SelectedItem.ToString();
+                switch (opcion)
+                {
+                    case "Consulta General":
+                        q = "SELECT * FROM Planes_Entrenamiento";
+                        break;
+                    case "Planes de entrenamiento en orden ascendente":
+                        q = "SELECT * \r\nFROM Planes_Entrenamiento \r\nORDER BY Clientes_inscritos";
+                        break;
+                    case "Planes con clientes inscritos en gimnasio Santa Fe":
+                        q = "SELECT \r\n    P.Id_plan, \r\n    P.Nombre_plan, \r\n    P.Descripcion, \r\n    P.Costo, \r\n    COUNT(C.Id_cliente) AS Clientes_Inscritos\r\nFROM \r\n    Planes_Entrenamiento P\r\nINNER JOIN \r\n    Clientes C ON P.Id_plan = C.Id_plan\r\nINNER JOIN \r\n    Gimnasio G ON C.Id_gimnasio = G.Id_gimnasio\r\nWHERE \r\n    G.Nombre LIKE '%Santa Fe%'  -- Filtro por el nombre del gimnasio\r\nGROUP BY \r\n    P.Id_plan, \r\n    P.Nombre_plan, \r\n    P.Descripcion, \r\n    P.Costo\r\nORDER BY \r\n    P.Costo DESC;  -- Ordenar por costo de manera descendente";
+                        break;
+                    case "Mostrar el plan con mas clientes inscritos":
+                        q = "SELECT P.Id_plan, P.Nombre_plan, P.Descripcion, P.Costo, P.Clientes_inscritos " +
+                            "FROM Planes_Entrenamiento P " +
+                            "WHERE P.Clientes_inscritos = (SELECT MAX(Clientes_inscritos) FROM Planes_Entrenamiento);";
+                        break;
+
+
+
+                }
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
