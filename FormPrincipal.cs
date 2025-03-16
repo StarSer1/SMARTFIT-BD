@@ -85,7 +85,7 @@ namespace SMARTFIT
             try
             {
                 //@"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;"
-                string cadenaConexion = @"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;";
+                string cadenaConexion = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;";
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
 
                 conexion.Open();
@@ -125,8 +125,8 @@ namespace SMARTFIT
             try
             {
                 //@"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;"
-                string cadenaConexion = @"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;";
-                string cadenaConexion2 = @"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;";
+                string cadenaConexion = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;";
+                string cadenaConexion2 = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;";
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
 
                 q = "create database SMARTFITBD";
@@ -137,7 +137,7 @@ namespace SMARTFIT
                 //Brandon Procedimientos almacenados
                 //Agregar administrativo
                 conexion = new SqlConnection(cadenaConexion2);
-                q = "CREATE PROCEDURE AgregarAdministrativo\r\n\t@Cargo  VARCHAR(30),\r\n\t@Equipo VARCHAR(30),\r\n\t@Id_Personal INT\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Administrativo\r\n\t(Cargo, Equipo, Id_Personal)\r\n\tVALUES\r\n\t(@Cargo, @Equipo, @Id_Personal)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\nGO";
+                q = "CREATE PROCEDURE AgregarAdministrativo\r\n\t@Cargo  VARCHAR(30),\r\n\t@Equipo VARCHAR(30),\r\n\t@Id_Personal INT\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Administrativo\r\n\t(Cargo, Equipo, Id_Personal)\r\n\tVALUES\r\n\t(@Cargo, @Equipo, @Id_Personal)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
                 comando = new SqlCommand(q, conexion);
                 conexion.Open();
                 comando.ExecuteNonQuery();

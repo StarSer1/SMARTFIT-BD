@@ -154,9 +154,24 @@ namespace SMARTFIT
             {
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
+                string opcion = cmbConsulta.SelectedItem.ToString();
+                switch (opcion)
+                {
+                    case "Consulta General":
+                        q = "SELECT * FROM Personal";
+                        break;
+                    case "Salario superior a 2000":
+                        q = "SELECT Id_personal, Nombre,Salario,Id_gimnasio\r\nFROM Personal\r\nWHERE Salario >= 2000\r\n";
+                        break;
+                    case "Personal Activo":
+                        q = "SELECT Id_personal, Nombre,Estado,Id_gimnasio\r\nFROM Personal\r\nWHERE Estado = 'Activo'";
+                        break;
+                    case "Salario Promedio":
+                        q = "SELECT AVG(Salario) AS Prom_Salario\r\nFROM Personal";
+                        break;
 
+                }
                 
-                q = "SELECT * FROM Personal";
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
