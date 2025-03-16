@@ -101,8 +101,7 @@ namespace SMARTFIT
                 // Para Horario_Cierre, usa TimeSpan directamente
                 TimeSpan Cierre = new TimeSpan(22, 00, 0);  // Aquí puedes mantener la hora predeterminada si es fija, o también puedes usar un campo de texto
 
-                q = "INSERT INTO Gimnasio (Nombre, Direccion, Telefono, Horario_apertura, Horario_cierre) " +
-                "VALUES (@NOM,@DIR, @TEL, @HAP, @HAC)";
+                q = "EXEC AgregarGimnasio @NOM,@DIR, @TEL, @HAP, @HAC";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
 

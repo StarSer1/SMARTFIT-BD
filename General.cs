@@ -87,7 +87,7 @@ namespace SMARTFIT
                 int AniosExperiencia = Convert.ToInt32(txtAñosDeExperiencia.Text);
                 int IdPersonal = Convert.ToInt32(txtIdPersonal.Text);
 
-                q = "INSERT INTO General (Cedúla, Años_de_experiencia, Id_Personal) VALUES (@CED, @EXP, @IDP);";
+                q = "EXEC AgregarGeneral @CED, @EXP, @IDP;";
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.Parameters.AddWithValue("@CED", Cedula);
                 comando.Parameters.AddWithValue("@EXP", AniosExperiencia);
