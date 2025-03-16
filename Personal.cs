@@ -108,11 +108,9 @@ namespace SMARTFIT
                 int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
                 // Consulta SQL para la inserción de datos
-                string q = "INSERT INTO Personal ( Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Tipo, Estado, Id_gimnasio) " +
-                           "VALUES (@NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @TIP, @EST, @ID_GIM);";
 
-                //string q = "INSERT INTO Personal ( Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) " +
-                //"VALUES (@NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST, @ID_GIM);";
+
+                string q = " EXEC AgregarPersonal @NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST,@TIP, @ID_GIM;";
 
                 // Creación del comando SQL
                 comando = new SqlCommand(q, conexion.GetConexion());
