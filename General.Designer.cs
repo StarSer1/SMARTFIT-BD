@@ -40,6 +40,8 @@
             this.txtCedula = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.IdPersonal = new System.Windows.Forms.Label();
+            this.cmbConsulta = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,12 +184,36 @@
             this.IdPersonal.TabIndex = 60;
             this.IdPersonal.Text = "Cédula";
             // 
+            // cmbConsulta
+            // 
+            this.cmbConsulta.FormattingEnabled = true;
+            this.cmbConsulta.Items.AddRange(new object[] {
+            "Consulta General",
+            "Personal entre 4 y 7 años de exp"});
+            this.cmbConsulta.Location = new System.Drawing.Point(704, 119);
+            this.cmbConsulta.Name = "cmbConsulta";
+            this.cmbConsulta.Size = new System.Drawing.Size(172, 21);
+            this.cmbConsulta.TabIndex = 81;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label10.Location = new System.Drawing.Point(615, 122);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 18);
+            this.label10.TabIndex = 80;
+            this.label10.Text = "Consulta";
+            // 
             // General
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
             this.ClientSize = new System.Drawing.Size(884, 523);
+            this.Controls.Add(this.cmbConsulta);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.txtIdPersonal);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
@@ -223,5 +249,7 @@
         private System.Windows.Forms.TextBox txtCedula;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label IdPersonal;
+        private System.Windows.Forms.ComboBox cmbConsulta;
+        private System.Windows.Forms.Label label10;
     }
 }

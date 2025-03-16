@@ -137,7 +137,22 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
 
-                q = "SELECT * FROM Gimnasio";
+                string opcion = cmbConsulta.SelectedItem.ToString();
+                switch (opcion)
+                {
+                    case "Consulta General":
+                        q = "SELECT * FROM Gimnasio";
+                        break;                   
+                    case "Apertura de 06:00 para adelante":
+                        q = "SELECT Id_gimnasio, Nombre,Horario_apertura\r\nFROM Gimnasio\r\nWHERE Horario_apertura >= '06:00:00'\r\n";
+                        break;
+                    case "Gimnasio en Avenida ":
+                        q = "SELECT Id_gimnasio, Nombre,Direccion, Horario_cierre\r\nFROM Gimnasio\r\nWHERE Direccion LIKE 'Av.%';\r\n";
+                        break;
+
+
+                }
+                
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
