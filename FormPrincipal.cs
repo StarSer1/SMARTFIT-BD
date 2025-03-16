@@ -85,7 +85,7 @@ namespace SMARTFIT
             try
             {
                 //@"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;"
-                string cadenaConexion = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;";
+                string cadenaConexion = @"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;";
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
 
                 conexion.Open();
@@ -125,8 +125,8 @@ namespace SMARTFIT
             try
             {
                 //@"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;"
-                string cadenaConexion = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;";
-                string cadenaConexion2 = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;";
+                string cadenaConexion = @"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;";
+                string cadenaConexion2 = @"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;";
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
 
                 q = "create database SMARTFITBD";
@@ -134,7 +134,19 @@ namespace SMARTFIT
                 conexion.Open();
                 comando.ExecuteNonQuery();
 
+                //Brandon Procedimientos almacenados
+                //Agregar administrativo
+                conexion = new SqlConnection(cadenaConexion2);
+                q = "CREATE PROCEDURE AgregarAdministrativo\r\n\t@Cargo  VARCHAR(30),\r\n\t@Equipo VARCHAR(30),\r\n\t@Id_Personal INT\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Administrativo\r\n\t(Cargo, Equipo, Id_Personal)\r\n\tVALUES\r\n\t(@Cargo, @Equipo, @Id_Personal)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\nGO";
+                comando = new SqlCommand(q, conexion);
+                conexion.Open();
+                comando.ExecuteNonQuery();
 
+                //Agregar Plan de entrenamiento
+
+                //Agregar Clientes
+
+                //Agregar Inventario
 
                 conexion = new SqlConnection(cadenaConexion2);
                 q = "CREATE PROCEDURE AgregarGimnasio\r\n@Nombre varchar(100),\r\n@Direccion varchar(100),\r\n@Telefono varchar(20),\r\n@Horario_apertura TIME,\r\n@Horario_cierre TIME\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Gimnasio\r\n\t(Nombre,Direccion,Telefono,Horario_apertura,Horario_cierre)\r\n\tVALUES\r\n\t(@Nombre,@Direccion,@Telefono,@Horario_apertura,@Horario_cierre)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
