@@ -96,11 +96,27 @@ namespace SMARTFIT
                 string Direccion = TxtDireccion.Text;
 
                 // Para Horario_Apertura, usa TimeSpan directamente
-                TimeSpan Apertura = new TimeSpan(06, 00, 0);  // Asegúrate de que TxtHApertura contenga un formato adecuado como "HH:mm"
-
+                TimeSpan Apertura = new TimeSpan();  // Asegúrate de que TxtHApertura contenga un formato adecuado como "HH:mm"
+                if (int.TryParse(TxtHApertura.Text, out int numero))
+                {
+                    // Convertimos el número a un TimeSpan (interpretándolo como minutos)
+                    Apertura = TimeSpan.FromHours(numero);
+                }
+                else
+                {
+                   MessageBox.Show("Ingrese un número válido.");
+                }
                 // Para Horario_Cierre, usa TimeSpan directamente
-                TimeSpan Cierre = new TimeSpan(22, 00, 0);  // Aquí puedes mantener la hora predeterminada si es fija, o también puedes usar un campo de texto
-
+                TimeSpan Cierre = new TimeSpan();  // Aquí puedes mantener la hora predeterminada si es fija, o también puedes usar un campo de texto
+                if (int.TryParse(TxtHCierre.Text, out int numero2))
+                {
+                    // Convertimos el número a un TimeSpan (interpretándolo como minutos)
+                    Cierre = TimeSpan.FromHours(numero2);
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese un número válido.");
+                }
                 q = "EXEC AgregarGimnasio @NOM,@DIR, @TEL, @HAP, @HAC";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
@@ -149,6 +165,22 @@ namespace SMARTFIT
                     case "Gimnasio en Avenida ":
                         q = "SELECT Id_gimnasio, Nombre,Direccion, Horario_cierre\r\nFROM Gimnasio\r\nWHERE Direccion LIKE 'Av.%';\r\n";
                         break;
+                    case "Gimnasio en CDMX o Personal con 7 años de exp":
+                        q = "SELECT Id_Gimnasio,Gimnasio.Nombre AS Nombre_Gimnasio, Direccion,\r\n       General.Años_de_experiencia\r\nFROM Gimnasio\r\nINNER JOIN General\r\nON Gimnasio.Id_gimnasio = General.Id_Personal\r\nWHERE General.Años_de_experiencia >= 7 OR Direccion LIKE '%CDMX'\r\n";
+                        break;
+                    case "Personal con 6 años o mas de experiencia":
+                        q = "SELECT Gimnasio.Id_gimnasio,Gimnasio.Nombre,\r\n\t   Personal.Id_personal,\r\n\t   General.Id_Personal AS Id_General, General.Años_de_experiencia\r\nFROM Gimnasio\r\nINNER JOIN Personal\r\nON Gimnasio.Id_gimnasio = Personal.Id_gimnasio\r\nINNER JOIN General\r\nON Personal.Id_gimnasio = General.Id_Personal\r\nWHERE General.Años_de_experiencia >=6\r\n";
+                        break;
+                    case "Gimnasios que abren antes de las 6":
+                        q = "SELECT g.Nombre AS Nombre_Gimnasio, g.Horario_apertura, p.Nombre AS Nombre_Personal, p.Salario\r\nFROM Gimnasio g\r\nINNER JOIN Personal p ON g.Id_gimnasio = p.Id_gimnasio\r\nWHERE CONVERT(TIME, g.Horario_apertura) < '06:00' AND p.Salario > 2500\r\nORDER BY p.Salario DESC;";
+                        break;
+                    case "Gimnasios donde trabajan empleados con el salario más bajo":
+                        q = "SELECT Nombre\r\nFROM Gimnasio\r\nWHERE Id_gimnasio IN (\r\n    SELECT DISTINCT Id_gimnasio \r\n    FROM Personal \r\n    WHERE Salario = (SELECT MIN(Salario) FROM Personal)\r\n);";
+                        break;
+                    case "Gimnasios con personal activo que tenga más experiencia que el promedio de todos los empleados":
+                        q = "SELECT g.Nombre AS Nombre_Gimnasio, p.Nombre AS Nombre_Personal, gnl.Años_de_experiencia\r\nFROM Gimnasio g\r\nINNER JOIN Personal p ON g.Id_gimnasio = p.Id_gimnasio\r\nINNER JOIN General gnl ON p.Id_personal = gnl.Id_Personal\r\nWHERE p.Estado = 'Activo' \r\nAND gnl.Años_de_experiencia > (SELECT AVG(Años_de_experiencia) FROM General);";
+                        break;
+
 
 
                 }

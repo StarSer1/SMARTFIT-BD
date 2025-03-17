@@ -233,7 +233,13 @@
             this.cmbConsulta.Items.AddRange(new object[] {
             "Consulta General",
             "Apertura de 06:00 para adelante",
-            "Gimnasio en Avenida "});
+            "Gimnasio en Avenida ",
+            "Gimnasio en CDMX o Personal con 7 años de exp",
+            "Personal con 6 años o mas de experiencia",
+            "Gimnasios que abren antes de las 6",
+            "Gimnasios donde trabajan empleados con el salario más bajo",
+            "Gimnasios con personal activo que tenga más experiencia que el promedio de todos " +
+                "los empleados"});
             this.cmbConsulta.Location = new System.Drawing.Point(702, 97);
             this.cmbConsulta.Name = "cmbConsulta";
             this.cmbConsulta.Size = new System.Drawing.Size(172, 21);

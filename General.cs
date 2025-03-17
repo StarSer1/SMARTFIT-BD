@@ -120,7 +120,10 @@ namespace SMARTFIT
                     case "Personal entre 4 y 7 años de exp":
                         q = "SELECT Id_Personal,Cedúla, Años_de_experiencia\r\nFROM General\r\nWHERE Años_de_experiencia BETWEEN 4 AND 7\r\n";
                         break;
-                    
+                    case "Personal que trabaja en gimnasios que cierran más tarde que el promedio":
+                        q = "SELECT p.Nombre, g.Nombre AS Nombre_Gimnasio, g.Horario_cierre\r\nFROM Personal p\r\nINNER JOIN Gimnasio g ON p.Id_gimnasio = g.Id_gimnasio\r\nWHERE DATEDIFF(SECOND, '00:00:00', g.Horario_cierre) > (\r\n    SELECT AVG(DATEDIFF(SECOND, '00:00:00', Horario_cierre)) FROM Gimnasio\r\n);";
+                        break;
+
 
                 }
 

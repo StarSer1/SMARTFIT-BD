@@ -163,18 +163,21 @@ namespace SMARTFIT
                 conexion.Open();
                 comando.ExecuteNonQuery();
                 
+                //Agregar Gimnasio
                 conexion = new SqlConnection(cadenaConexion2);
                 q = "CREATE PROCEDURE AgregarGimnasio\r\n@Nombre varchar(100),\r\n@Direccion varchar(100),\r\n@Telefono varchar(20),\r\n@Horario_apertura TIME,\r\n@Horario_cierre TIME\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Gimnasio\r\n\t(Nombre,Direccion,Telefono,Horario_apertura,Horario_cierre)\r\n\tVALUES\r\n\t(@Nombre,@Direccion,@Telefono,@Horario_apertura,@Horario_cierre)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
                 comando = new SqlCommand(q, conexion);
                 conexion.Open();
                 comando.ExecuteNonQuery();
 
-                //conexion = new SqlConnection(cadenaConexion2);
-                //q = "CREATE PROCEDURE AgregarPersonal\r\n@Nombre varchar(50),\r\n@Apellidos varchar(50),\r\n@Dni varchar(15),\r\n@Telefono varchar(20),\r\n@Direccion varchar(225),\r\n@Salario INT,\r\n@Horario VARCHAR(100),\r\n@Estado VARCHAR (100),\r\n@Tipo VARCHAR(50),\r\n@Id_gimnasio INT\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Personal\r\n\t(Nombre,Apellidos,Dni,Telefono,Direccion,Salario,Horario,Estado,Tipo,Id_gimnasio)\r\n\tVALUES\r\n\t(@Nombre,@Apellidos,@Dni,@Telefono,@Direccion,@Salario,\r\n\t@Horario,@Estado, @Tipo, @Id_gimnasio)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH";
-                //comando = new SqlCommand(q, conexion);
-                //conexion.Open();
-                //comando.ExecuteNonQuery();
+                //Agregar Personal
+                conexion = new SqlConnection(cadenaConexion2);
+                q = "CREATE PROCEDURE AgregarPersonal\r\n@Nombre varchar(50),\r\n@Apellidos varchar(50),\r\n@Dni varchar(15),\r\n@Telefono varchar(20),\r\n@Direccion varchar(225),\r\n@Salario INT,\r\n@Horario VARCHAR(100),\r\n@Estado VARCHAR (100),\r\n@Tipo VARCHAR(50),\r\n@Id_gimnasio INT\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Personal\r\n\t(Nombre,Apellidos,Dni,Telefono,Direccion,Salario,Horario,Estado,Tipo,Id_gimnasio)\r\n\tVALUES\r\n\t(@Nombre,@Apellidos,@Dni,@Telefono,@Direccion,@Salario,\r\n\t@Horario,@Estado, @Tipo, @Id_gimnasio)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
+                comando = new SqlCommand(q, conexion);
+                conexion.Open();
+                comando.ExecuteNonQuery();
 
+                //Agregar PGeneral
                 conexion = new SqlConnection(cadenaConexion2);
                 q = "CREATE PROCEDURE AgregarGeneral\r\n@Cedula VARCHAR(30),\r\n@Años_Exp INT,\r\n@Id_Personal INT\r\nAS\r\nBEGIN\r\n    BEGIN TRY\r\n        INSERT INTO General\r\n        ([Cedúla], Años_de_experiencia, Id_Personal)\r\n        VALUES\r\n        (@Cedula, @Años_Exp, @Id_Personal);\r\n\r\n    END TRY\r\n    BEGIN CATCH\r\n        SELECT ERROR_NUMBER() AS Error_Numero, ERROR_MESSAGE() AS Error_Mensaje;\r\n    END CATCH\r\nEND;\r\n";
                 comando = new SqlCommand(q, conexion);

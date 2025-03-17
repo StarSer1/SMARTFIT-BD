@@ -108,11 +108,9 @@ namespace SMARTFIT
                 int IdGimnasio = Convert.ToInt32(txtIdGimnasio.Text);
 
                 // Consulta SQL para la inserción de datos
-                string q = "INSERT INTO Personal ( Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Tipo, Estado, Id_gimnasio) " +
-                           "VALUES (@NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @TIP, @EST, @ID_GIM);";
 
-                //string q = "INSERT INTO Personal ( Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) " +
-                //"VALUES (@NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST, @ID_GIM);";
+
+                string q = " EXEC AgregarPersonal @NOM, @APE, @DNI, @TEL, @DIR, @SAL, @HOR, @EST,@TIP, @ID_GIM;";
 
                 // Creación del comando SQL
                 comando = new SqlCommand(q, conexion.GetConexion());
@@ -169,7 +167,14 @@ namespace SMARTFIT
                     case "Salario Promedio":
                         q = "SELECT AVG(Salario) AS Prom_Salario\r\nFROM Personal";
                         break;
+                    case "Personal con salario mayor al promedio":
+                        q = "SELECT Nombre, Salario\r\nFROM Personal\r\nWHERE Salario > (SELECT AVG(Salario) FROM Personal);\r\n";
+                        break;
+                    case "Personal que trabaja en gimnasios que cierran más tarde que el promedio":
+                        q = "SELECT p.Nombre, g.Nombre AS Nombre_Gimnasio, g.Horario_cierre\r\nFROM Personal p\r\nINNER JOIN Gimnasio g ON p.Id_gimnasio = g.Id_gimnasio\r\nWHERE DATEDIFF(SECOND, '00:00:00', g.Horario_cierre) > (\r\n    SELECT AVG(DATEDIFF(SECOND, '00:00:00', Horario_cierre)) FROM Gimnasio\r\n);";
+                        break;
 
+                        
                 }
                 
                 comando = new SqlCommand(q, conexion.GetConexion());

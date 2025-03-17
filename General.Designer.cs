@@ -189,7 +189,8 @@
             this.cmbConsulta.FormattingEnabled = true;
             this.cmbConsulta.Items.AddRange(new object[] {
             "Consulta General",
-            "Personal entre 4 y 7 años de exp"});
+            "Personal entre 4 y 7 años de exp",
+            "Personal que trabaja en gimnasios que cierran más tarde que el promedio"});
             this.cmbConsulta.Location = new System.Drawing.Point(704, 119);
             this.cmbConsulta.Name = "cmbConsulta";
             this.cmbConsulta.Size = new System.Drawing.Size(172, 21);
