@@ -159,11 +159,12 @@ namespace SMARTFIT
             try
             {
                 ConexionGeneral conexion = new ConexionGeneral();
-                q = "use SMARTFITBD";
+                q = "USE SMARTFITBD";
                 comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
+                // Crear la tabla Inventario
                 q = "CREATE TABLE Inventario(" +
                     "Id_inventario INT PRIMARY KEY Identity (1,1), " +
                     "Nombre_producto VARCHAR(100) UNIQUE NOT NULL, " +
@@ -173,22 +174,64 @@ namespace SMARTFIT
                     "Id_Gimnasio INT, " +
                     "CONSTRAINT fk_gimnasio_inventario FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)" +
                     ");";
-
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
-                mensaje = "Creacion de las Tablas realizada";
+                // Crear la vista VistaInventarioStockBajo
+                q = "CREATE VIEW VistaInventarioStockBajo AS " +
+                    "SELECT " +
+                    "    Id_inventario, " +
+                    "    Nombre_producto, " +
+                    "    Cantidad, " +
+                    "    Tipo " +
+                    "FROM " +
+                    "    Inventario " +
+                    "WHERE " +
+                    "    Cantidad < 5;";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                comando.ExecuteNonQuery();
+
+                mensaje = "Creación de la tabla y la vista realizada con éxito";
 
                 conexion.CerrarConexion();
             }
             catch (System.Exception ex)
             {
-                mensaje = "Ocurrio un error en la creacion de las tablas " + ex.Message;
+                mensaje = "Ocurrió un error en la creación de las tablas y la vista: " + ex.Message;
             }
             finally
             {
                 MessageBox.Show(mensaje);
             }
         }
+
+        private void btnVista_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
+
+                // Asegúrate de usar la base de datos correcta
+                string q = "USE SMARTFITBD; SELECT * FROM VistaInventarioStockBajo";
+
+                SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+                conexion.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la vista: " + ex.Message);
+            }
+        }
+
     }
 }

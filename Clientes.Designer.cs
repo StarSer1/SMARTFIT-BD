@@ -48,6 +48,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbConsulta = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnVista = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -275,12 +276,29 @@
             this.label10.TabIndex = 96;
             this.label10.Text = "Consulta";
             // 
+            // btnVista
+            // 
+            this.btnVista.BackColor = System.Drawing.Color.Gold;
+            this.btnVista.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnVista.FlatAppearance.BorderSize = 5;
+            this.btnVista.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVista.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVista.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnVista.Location = new System.Drawing.Point(22, 419);
+            this.btnVista.Name = "btnVista";
+            this.btnVista.Size = new System.Drawing.Size(330, 37);
+            this.btnVista.TabIndex = 113;
+            this.btnVista.Text = "Activar Vista";
+            this.btnVista.UseVisualStyleBackColor = false;
+            this.btnVista.Click += new System.EventHandler(this.btnVista_Click);
+            // 
             // Clientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
             this.ClientSize = new System.Drawing.Size(884, 523);
+            this.Controls.Add(this.btnVista);
             this.Controls.Add(this.cmbConsulta);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cmbEstado);
@@ -332,5 +350,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbConsulta;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnVista;
     }
 }

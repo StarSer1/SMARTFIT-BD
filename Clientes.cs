@@ -58,11 +58,13 @@ namespace SMARTFIT
             {
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
-                q = "use SMARTFITBD";
+
+                // Cambiar a la base de datos SMARTFITBD
+                q = "USE SMARTFITBD";
                 comando = new SqlCommand(q, conexion.GetConexion());
-                conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
+                // Crear la tabla Clientes
                 q = "CREATE TABLE Clientes(" +
                     "Id_cliente INT PRIMARY KEY Identity (1,1), " +
                     "Nombre VARCHAR(50) NOT NULL, " +
@@ -74,18 +76,36 @@ namespace SMARTFIT
                     "CONSTRAINT fk_plan FOREIGN KEY (Id_plan) REFERENCES Planes_Entrenamiento(Id_plan), " +
                     "CONSTRAINT fk_gimnasio_cliente FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)" +
                     ");";
-
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
-                mensaje = "Creacion de las Tablas realizada";
+                // Crear la vista VistaClientesActivosConPlanYGimnasio
+                q = "CREATE VIEW VistaClientesActivosConPlanYGimnasio AS " +
+                    "SELECT " +
+                    "c.Id_cliente, " +
+                    "c.Nombre AS Nombre_Cliente, " +
+                    "c.Apellidos, " +
+                    "c.Correo_electronico, " +
+                    "p.Nombre_plan, " +
+                    "g.Nombre AS Nombre_Gimnasio " +
+                    "FROM " +
+                    "Clientes c " +
+                    "LEFT JOIN " +
+                    "Planes_Entrenamiento p ON c.Id_plan = p.Id_plan " +
+                    "LEFT JOIN " +
+                    "Gimnasio g ON c.Id_gimnasio = g.Id_gimnasio " +
+                    "WHERE " +
+                    "c.Estado = 'Activo';";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                comando.ExecuteNonQuery();
 
-                //nuevo
+                mensaje = "Creación de la tabla y vista realizada correctamente.";
+
                 conexion.CerrarConexion();
             }
             catch (System.Exception ex)
             {
-                mensaje = "Ocurrio un error en la creacion de las tablas " + ex.Message;
+                mensaje = "Ocurrió un error en la creación de las tablas o vista: " + ex.Message;
             }
             finally
             {
@@ -211,5 +231,34 @@ namespace SMARTFIT
         {
 
         }
+
+        private void btnVista_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
+
+                // Asegúrate de usar la base de datos correcta
+                string q = "USE SMARTFITBD; SELECT * FROM VistaClientesActivosConPlanYGimnasio";
+
+                SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+                conexion.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la vista: " + ex.Message);
+            }
+        }
+
     }
 }

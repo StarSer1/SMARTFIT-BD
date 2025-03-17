@@ -44,6 +44,7 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.cmbConsulta = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnVista = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,7 +99,7 @@
             this.BtnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnConsultar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnConsultar.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnConsultar.Location = new System.Drawing.Point(394, 459);
+            this.BtnConsultar.Location = new System.Drawing.Point(393, 465);
             this.BtnConsultar.Name = "BtnConsultar";
             this.BtnConsultar.Size = new System.Drawing.Size(484, 37);
             this.BtnConsultar.TabIndex = 98;
@@ -114,9 +115,9 @@
             this.BtnInsertarDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnInsertarDatos.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnInsertarDatos.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnInsertarDatos.Location = new System.Drawing.Point(192, 459);
+            this.BtnInsertarDatos.Location = new System.Drawing.Point(191, 465);
             this.BtnInsertarDatos.Name = "BtnInsertarDatos";
-            this.BtnInsertarDatos.Size = new System.Drawing.Size(162, 37);
+            this.BtnInsertarDatos.Size = new System.Drawing.Size(163, 37);
             this.BtnInsertarDatos.TabIndex = 97;
             this.BtnInsertarDatos.Text = "Insertar Datos";
             this.BtnInsertarDatos.UseVisualStyleBackColor = false;
@@ -140,9 +141,9 @@
             this.BtnCrearTabla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCrearTabla.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCrearTabla.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnCrearTabla.Location = new System.Drawing.Point(24, 459);
+            this.BtnCrearTabla.Location = new System.Drawing.Point(30, 465);
             this.BtnCrearTabla.Name = "BtnCrearTabla";
-            this.BtnCrearTabla.Size = new System.Drawing.Size(162, 37);
+            this.BtnCrearTabla.Size = new System.Drawing.Size(155, 37);
             this.BtnCrearTabla.TabIndex = 96;
             this.BtnCrearTabla.Text = "Crear Tabla";
             this.BtnCrearTabla.UseVisualStyleBackColor = false;
@@ -236,12 +237,29 @@
             this.label10.TabIndex = 110;
             this.label10.Text = "Consulta";
             // 
+            // btnVista
+            // 
+            this.btnVista.BackColor = System.Drawing.Color.Gold;
+            this.btnVista.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnVista.FlatAppearance.BorderSize = 5;
+            this.btnVista.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVista.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVista.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnVista.Location = new System.Drawing.Point(30, 422);
+            this.btnVista.Name = "btnVista";
+            this.btnVista.Size = new System.Drawing.Size(324, 37);
+            this.btnVista.TabIndex = 112;
+            this.btnVista.Text = "Activar Vista";
+            this.btnVista.UseVisualStyleBackColor = false;
+            this.btnVista.Click += new System.EventHandler(this.btnVista_Click);
+            // 
             // Plan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
             this.ClientSize = new System.Drawing.Size(884, 523);
+            this.Controls.Add(this.btnVista);
             this.Controls.Add(this.cmbConsulta);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtDescripcion);
@@ -284,5 +302,6 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.ComboBox cmbConsulta;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnVista;
     }
 }
