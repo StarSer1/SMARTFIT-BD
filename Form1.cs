@@ -69,10 +69,7 @@ namespace SMARTFIT
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
-                q = "CREATE VIEW VistaSalariosPorGimnasio AS\r\nSELECT \r\n    g.Nombre AS Nombre_Gimnasio,\r\n    COUNT(p.Id_personal) AS Total_Empleados,\r\n    AVG(p.Salario) AS Salario_Promedio,\r\n    MIN(p.Salario) AS Salario_Minimo,\r\n    MAX(p.Salario) AS Salario_Maximo\r\nFROM \r\n    Gimnasio g\r\nJOIN \r\n    Personal p ON g.Id_gimnasio = p.Id_gimnasio\r\nGROUP BY \r\n    g.Nombre;";
-                comando = new SqlCommand(q, conexion.GetConexion());
-                conexion.AbrirConexion();
-                comando.ExecuteNonQuery();
+               
                 mensaje = "Creacion de las Tablas realizada";
 
                 //nuevo
@@ -221,6 +218,44 @@ namespace SMARTFIT
         private void DG1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void BtnVista_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
+
+                q = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaSalariosPorGimnasio')\r\nBEGIN\r\n    EXEC('\r\n        CREATE VIEW VistaSalariosPorGimnasio AS\r\n        SELECT \r\n            g.Nombre AS Nombre_Gimnasio,\r\n            COUNT(p.Id_personal) AS Total_Empleados,\r\n            AVG(p.Salario) AS Salario_Promedio,\r\n            MIN(p.Salario) AS Salario_Minimo,\r\n            MAX(p.Salario) AS Salario_Maximo\r\n        FROM \r\n            Gimnasio g\r\n        JOIN \r\n            Personal p ON g.Id_gimnasio = p.Id_gimnasio\r\n        GROUP BY \r\n            g.Nombre\r\n    ')\r\n    PRINT 'Vista \"VistaSalariosPorGimnasio\" creada exitosamente.'\r\nEND\r\nELSE\r\nBEGIN\r\n    PRINT 'La vista \"VistaSalariosPorGimnasio\" ya existe.'\r\nEND";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
+
+                q = "SELECT * FROM VistaSalariosPorGimnasio";
+
+                comando = new SqlCommand(q, conexion.GetConexion());
+                Lector = comando.ExecuteReader();
+
+                // Crear un DataTable para almacenar los datos
+                DataTable dt = new DataTable();
+                dt.Load(Lector);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+                conexion.CerrarConexion();
+                //nuevo
+
+            }
+            catch (System.Exception ex)
+            {
+                mensaje = "Ocurrio un error al mostrar la vista " + ex.Message;
+            }
+            finally
+            {
+                MessageBox.Show(mensaje);
+            }
         }
     }
 }

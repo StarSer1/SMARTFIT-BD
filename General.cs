@@ -65,14 +65,9 @@ namespace SMARTFIT
                 comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
-
-                q = "CREATE VIEW VistaPersonalInactivo AS\r\nSELECT \r\n    Id_personal,\r\n    Nombre,\r\n    Apellidos,\r\n    Tipo,\r\n    Estado\r\nFROM \r\n    Personal\r\nWHERE \r\n    Estado = 'Inactivo';";
-
-                comando = new SqlCommand(q, conexion.GetConexion());
-                conexion.AbrirConexion();
-                comando.ExecuteNonQuery();
-
+                
                 conexion.CerrarConexion();
+
 
                 mensaje = "Tabla 'General' creada correctamente.";
             }
@@ -164,6 +159,47 @@ namespace SMARTFIT
         private void General_Load(object sender, EventArgs e)
         {
 
+        }
+
+
+        
+        private void BtnVista_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
+
+                q = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaPersonalInactivo')\r\nBEGIN\r\n    EXEC('\r\n        CREATE VIEW VistaPersonalInactivo AS\r\n        SELECT \r\n            Id_personal,\r\n            Nombre,\r\n            Apellidos,\r\n            Tipo,\r\n            Estado\r\n        FROM \r\n            Personal\r\n        WHERE \r\n            Estado = ''Inactivo''\r\n    ')\r\n    PRINT 'Vista \"VistaPersonalInactivo\" creada exitosamente.'\r\nEND\r\nELSE\r\nBEGIN\r\n    PRINT 'La vista \"VistaPersonalInactivo\" ya existe.'\r\nEND\r\n";
+
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
+
+                q = "SELECT * FROM VistaPersonalInactivo";
+
+                comando = new SqlCommand(q, conexion.GetConexion());
+                Lector = comando.ExecuteReader();
+
+                // Crear un DataTable para almacenar los datos
+                DataTable dt = new DataTable();
+                dt.Load(Lector);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+                conexion.CerrarConexion();
+                //nuevo
+
+            }
+            catch (System.Exception ex)
+            {
+                mensaje = "Ocurrio un error al mostrar la vista " + ex.Message;
+            }
+            finally
+            {
+                MessageBox.Show(mensaje);
+            }
         }
     }
 }

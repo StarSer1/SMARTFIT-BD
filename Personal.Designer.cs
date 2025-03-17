@@ -56,6 +56,7 @@
             this.CmbTipo = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cmbConsulta = new System.Windows.Forms.ComboBox();
+            this.BtnVista = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -363,6 +364,22 @@
             this.cmbConsulta.Size = new System.Drawing.Size(172, 21);
             this.cmbConsulta.TabIndex = 59;
             // 
+            // BtnVista
+            // 
+            this.BtnVista.BackColor = System.Drawing.Color.Gold;
+            this.BtnVista.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.BtnVista.FlatAppearance.BorderSize = 5;
+            this.BtnVista.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnVista.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnVista.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.BtnVista.Location = new System.Drawing.Point(18, 417);
+            this.BtnVista.Name = "BtnVista";
+            this.BtnVista.Size = new System.Drawing.Size(330, 37);
+            this.BtnVista.TabIndex = 47;
+            this.BtnVista.Text = "Activar Vista";
+            this.BtnVista.UseVisualStyleBackColor = false;
+            this.BtnVista.Click += new System.EventHandler(this.BtnVista_Click);
+            // 
             // Personal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,6 +400,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.BtnVista);
             this.Controls.Add(this.BtnConsultar);
             this.Controls.Add(this.BtnInsertarDatos);
             this.Controls.Add(this.DG1);
@@ -436,5 +454,6 @@
         private System.Windows.Forms.ComboBox CmbTipo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cmbConsulta;
+        private System.Windows.Forms.Button BtnVista;
     }
 }
