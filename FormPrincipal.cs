@@ -184,6 +184,124 @@ namespace SMARTFIT
                 conexion.Open();
                 comando.ExecuteNonQuery();
 
+                // Trigger IngresarPersonal
+                        q = @"
+                CREATE TRIGGER IngresarPersonal
+                ON Personal
+                AFTER INSERT
+                AS
+                BEGIN
+                    SET NOCOUNT ON;
+                    INSERT INTO General (Id_Personal)
+                    SELECT Id_Personal
+                    FROM inserted
+                    WHERE Tipo = 'General';
+
+                    INSERT INTO Administrativo(Id_Personal)
+                    SELECT Id_Personal
+                    FROM inserted
+                    WHERE Tipo = 'Administrativo';
+                END;";
+                comando = new SqlCommand(q, conexion);
+                conexion.Open();
+                comando.ExecuteNonQuery();
+
+                // Trigger AlertaStockBajo
+                q = @"
+                CREATE TRIGGER AlertaStockBajo
+                ON Inventario
+                AFTER INSERT, UPDATE
+                AS
+                BEGIN
+                    IF EXISTS (
+                        SELECT 1 
+                        FROM inserted 
+                        WHERE Cantidad < 5
+                    )
+                    BEGIN
+                        PRINT 'Advertencia: Hay productos con stock bajo (menos de 5 unidades).';
+                    END;
+                END;";
+                comando = new SqlCommand(q, conexion);
+                comando.ExecuteNonQuery();
+
+                // Trigger ActivarCliente
+                q = @"
+                CREATE TRIGGER ActivarCliente
+                ON Clientes
+                AFTER INSERT, UPDATE
+                AS
+                BEGIN
+                    UPDATE Clientes
+                    SET Estado = 'Activo'
+                    FROM Clientes c
+                    INNER JOIN inserted i ON c.Id_cliente = i.Id_cliente
+                    WHERE i.Id_plan IS NOT NULL;
+
+                    PRINT 'Cliente activado automáticamente al asignarle un plan.';
+                END;";
+                comando = new SqlCommand(q, conexion);
+                comando.ExecuteNonQuery();
+
+                // Trigger ValidarCorreoCliente
+                q = @"
+                CREATE TRIGGER ValidarCorreoCliente
+                ON Clientes
+                AFTER INSERT, UPDATE
+                AS
+                BEGIN
+                    IF EXISTS (
+                        SELECT 1
+                        FROM inserted
+                        WHERE Correo_electronico NOT LIKE '_%@_%._%' 
+                    )
+                    BEGIN
+                        RAISERROR('El formato del correo electrónico es inválido.', 16, 1);
+                        ROLLBACK TRANSACTION;
+                    END;
+                END;";
+                comando = new SqlCommand(q, conexion);
+                comando.ExecuteNonQuery();
+
+                // Trigger VerificarGimnasio
+                q = @"
+                CREATE TRIGGER VerificarGimnasio
+                ON Personal
+                AFTER INSERT, UPDATE
+                AS
+                BEGIN
+                    IF EXISTS (
+                        SELECT 1
+                        FROM inserted i
+                        LEFT JOIN Gimnasio g ON i.Id_gimnasio = g.Id_gimnasio
+                        WHERE g.Id_gimnasio IS NULL AND i.Id_gimnasio IS NOT NULL
+                    )
+                    BEGIN
+                        RAISERROR('El gimnasio asignado no existe.', 16, 1);
+                        ROLLBACK TRANSACTION;
+                    END;
+                END;";
+                comando = new SqlCommand(q, conexion);
+                comando.ExecuteNonQuery();
+
+                // Trigger ReactivarCliente
+                q = @"
+                CREATE TRIGGER ReactivarCliente
+                ON Clientes
+                AFTER UPDATE
+                AS
+                BEGIN
+                    UPDATE Clientes
+                    SET Estado = 'Activo'
+                    FROM Clientes c
+                    INNER JOIN inserted i ON c.Id_cliente = i.Id_cliente
+                    WHERE i.Id_plan IS NOT NULL AND i.Estado = 'Inactivo';
+
+                    PRINT 'Cliente reactivado automáticamente al reinscribirse.';
+                END;";
+                comando = new SqlCommand(q, conexion);
+                comando.ExecuteNonQuery();
+
                 conexion.Close();
 
                 mensaje = "La base de datos fue creada correctamente";
