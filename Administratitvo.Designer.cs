@@ -40,6 +40,8 @@
             this.IdPersonal = new System.Windows.Forms.Label();
             this.cmbEquipo = new System.Windows.Forms.ComboBox();
             this.cmbCargo = new System.Windows.Forms.ComboBox();
+            this.cmbConsulta = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,12 +194,38 @@
             this.cmbCargo.Size = new System.Drawing.Size(172, 21);
             this.cmbCargo.TabIndex = 93;
             // 
+            // cmbConsulta
+            // 
+            this.cmbConsulta.FormattingEnabled = true;
+            this.cmbConsulta.Items.AddRange(new object[] {
+            "Consulta General",
+            "Mostrar los id´s y el cargo de los intendentes",
+            "Mostrar personal que son del area del administrativo",
+            "Mostrar los datos de los tecnicos del area Administrativo"});
+            this.cmbConsulta.Location = new System.Drawing.Point(700, 90);
+            this.cmbConsulta.Name = "cmbConsulta";
+            this.cmbConsulta.Size = new System.Drawing.Size(172, 21);
+            this.cmbConsulta.TabIndex = 95;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label10.Location = new System.Drawing.Point(611, 93);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 18);
+            this.label10.TabIndex = 94;
+            this.label10.Text = "Consulta";
+            // 
             // Administrativo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
             this.ClientSize = new System.Drawing.Size(884, 523);
+            this.Controls.Add(this.cmbConsulta);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.cmbCargo);
             this.Controls.Add(this.cmbEquipo);
             this.Controls.Add(this.txtIdPersonal);
@@ -233,5 +261,7 @@
         private System.Windows.Forms.Label IdPersonal;
         private System.Windows.Forms.ComboBox cmbEquipo;
         private System.Windows.Forms.ComboBox cmbCargo;
+        private System.Windows.Forms.ComboBox cmbConsulta;
+        private System.Windows.Forms.Label label10;
     }
 }

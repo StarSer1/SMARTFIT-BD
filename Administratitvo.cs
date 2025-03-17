@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -53,12 +54,13 @@ namespace SMARTFIT
             {
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
-                q = "CREATE TABLE Administrativo (\r\n    Cargo VARCHAR(30) CHECK (Cargo = 'Proveedor' OR Cargo = " +
-                    "'Intendente' OR Cargo = 'Tecnico'),\r\n    Equipo VARCHAR(30) DEFAULT 'Sin equipo',\r\n " +
-                    "   Id_Personal INT UNIQUE, -- Evita que un mismo Id_Personal esté en otra tabla\r\n  " +
-                    "  CONSTRAINT fk_personal_administrativo FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal),\r\n  " +
-                    "  CONSTRAINT chk_administrativo_tipo CHECK (\r\n   " +
-                    "     EXISTS (SELECT 1 FROM Personal WHERE Personal.Id_Personal = Administrativo.Id_Personal AND Personal.Tipo = 'Administrativo')\r\n    )\r\n);";
+                q = "CREATE TABLE Administrativo (" +
+                "Cargo VARCHAR(30) CHECK (Cargo = 'Proveedor' OR Cargo = 'Intendente' OR Cargo = 'Tecnico'), " +
+                "Equipo VARCHAR(30) DEFAULT 'Sin equipo', " +
+                "Id_Personal INT, " +
+                "CONSTRAINT fk_personal_administrativo FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal)" +
+                ");";
+
 
                 comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();
@@ -115,10 +117,30 @@ namespace SMARTFIT
             {
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
-                q = "SELECT * FROM Administrativo";
+
+                string opcion = cmbConsulta.SelectedItem.ToString();
+                switch (opcion)
+                {
+                    case "Consulta General":
+                        q = "SELECT * FROM Administrativo";
+                        break;
+                    case "Mostrar los id´s y el cargo de los intendentes":
+                        q = "SELECT Id_Personal, Cargo FROM Administrativo WHERE Equipo = 'Equipo de limpieza'";
+                        break;
+                    case "Mostrar personal que son del area del administrativo":
+                        q = "SELECT DISTINCT P.Nombre\r\nFROM Personal P\r\nINNER JOIN Administrativo A ON A.Id_Personal = P.Id_personal";
+                        break;
+                    case "Mostrar los datos de los tecnicos del area Administrativo":
+                        q = "SELECT A.Id_Personal, A.Cargo, A.Equipo, P.Nombre, P.Apellidos " +
+                            "FROM Administrativo A " +
+                            "INNER JOIN Personal P ON P.Id_personal = A.Id_Personal " +
+                            "WHERE A.Cargo = 'Tecnico';";
+                        break;
+
+                }
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
-
+                
                 DataTable dt = new DataTable();
                 dt.Load(Lector);
                 DG1.DataSource = dt;

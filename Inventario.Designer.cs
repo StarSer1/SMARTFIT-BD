@@ -44,6 +44,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtIdGimnasio = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.cmbConsulta = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnVista = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,7 +156,7 @@
             this.BtnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnConsultar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnConsultar.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnConsultar.Location = new System.Drawing.Point(385, 452);
+            this.BtnConsultar.Location = new System.Drawing.Point(379, 458);
             this.BtnConsultar.Name = "BtnConsultar";
             this.BtnConsultar.Size = new System.Drawing.Size(484, 37);
             this.BtnConsultar.TabIndex = 114;
@@ -169,7 +172,7 @@
             this.BtnInsertarDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnInsertarDatos.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnInsertarDatos.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnInsertarDatos.Location = new System.Drawing.Point(183, 452);
+            this.BtnInsertarDatos.Location = new System.Drawing.Point(187, 459);
             this.BtnInsertarDatos.Name = "BtnInsertarDatos";
             this.BtnInsertarDatos.Size = new System.Drawing.Size(162, 37);
             this.BtnInsertarDatos.TabIndex = 113;
@@ -195,7 +198,7 @@
             this.BtnCrearTabla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCrearTabla.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCrearTabla.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.BtnCrearTabla.Location = new System.Drawing.Point(15, 452);
+            this.BtnCrearTabla.Location = new System.Drawing.Point(19, 459);
             this.BtnCrearTabla.Name = "BtnCrearTabla";
             this.BtnCrearTabla.Size = new System.Drawing.Size(162, 37);
             this.BtnCrearTabla.TabIndex = 112;
@@ -233,12 +236,56 @@
             this.label6.TabIndex = 126;
             this.label6.Text = "Id Gimnasio";
             // 
+            // cmbConsulta
+            // 
+            this.cmbConsulta.FormattingEnabled = true;
+            this.cmbConsulta.Items.AddRange(new object[] {
+            "Consulta General",
+            "Mayor base su cantidad",
+            "Mostrar inventario y nombre del gimnasio",
+            "Mostrar inventario con gimnasios con id entre 3 y 10",
+            "Mostrar el gimnasio donde su inventario hay pesas"});
+            this.cmbConsulta.Location = new System.Drawing.Point(691, 93);
+            this.cmbConsulta.Name = "cmbConsulta";
+            this.cmbConsulta.Size = new System.Drawing.Size(172, 21);
+            this.cmbConsulta.TabIndex = 129;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label10.Location = new System.Drawing.Point(602, 96);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 18);
+            this.label10.TabIndex = 128;
+            this.label10.Text = "Consulta";
+            // 
+            // btnVista
+            // 
+            this.btnVista.BackColor = System.Drawing.Color.Gold;
+            this.btnVista.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnVista.FlatAppearance.BorderSize = 5;
+            this.btnVista.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVista.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVista.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnVista.Location = new System.Drawing.Point(19, 416);
+            this.btnVista.Name = "btnVista";
+            this.btnVista.Size = new System.Drawing.Size(330, 37);
+            this.btnVista.TabIndex = 130;
+            this.btnVista.Text = "Activar Vista";
+            this.btnVista.UseVisualStyleBackColor = false;
+            this.btnVista.Click += new System.EventHandler(this.btnVista_Click);
+            // 
             // Inventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
             this.ClientSize = new System.Drawing.Size(884, 523);
+            this.Controls.Add(this.btnVista);
+            this.Controls.Add(this.cmbConsulta);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.txtIdGimnasio);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtDescripcion);
@@ -282,5 +329,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtIdGimnasio;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbConsulta;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnVista;
     }
 }

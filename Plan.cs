@@ -54,7 +54,9 @@ namespace SMARTFIT
             {
                 ConexionGeneral conexion = new ConexionGeneral();
 
-                q = "USE SMARTFITBD; CREATE TABLE Planes_Entrenamiento (" +
+                // Crear la tabla Planes_Entrenamiento
+                q = "USE SMARTFITBD; " +
+                    "CREATE TABLE Planes_Entrenamiento (" +
                     "Id_plan INT PRIMARY KEY Identity (1,1), " +
                     "Nombre_plan VARCHAR(20) NOT NULL, " +
                     "Clientes_inscritos INT, " +
@@ -65,18 +67,37 @@ namespace SMARTFIT
                 comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
+
+                // Crear la vista VistaPlanesConClientes
+                q = "CREATE VIEW VistaPlanesConClientes AS " +
+                    "SELECT " +
+                    "    p.Id_plan, " +
+                    "    p.Nombre_plan, " +
+                    "    p.Descripcion, " +
+                    "    COUNT(c.Id_cliente) AS Total_Clientes " +
+                    "FROM " +
+                    "    Planes_Entrenamiento p " +
+                    "LEFT JOIN " +
+                    "    Clientes c ON p.Id_plan = c.Id_plan " +
+                    "GROUP BY " +
+                    "    p.Id_plan, p.Nombre_plan, p.Descripcion;";
+
+                comando = new SqlCommand(q, conexion.GetConexion());
+                comando.ExecuteNonQuery();
                 conexion.CerrarConexion();
-                mensaje = "Creación de la tabla realizada correctamente.";
+
+                mensaje = "Creación de la tabla y la vista realizada correctamente.";
             }
             catch (Exception ex)
             {
-                mensaje = "Error en la creación de la tabla: " + ex.Message;
+                mensaje = "Error en la creación de la tabla y la vista: " + ex.Message;
             }
             finally
             {
                 MessageBox.Show(mensaje);
             }
         }
+
 
         private void BtnInsertarDatos_Click(object sender, EventArgs e)
         {
@@ -118,7 +139,27 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
 
-                q = "SELECT * FROM Planes_Entrenamiento";
+                string opcion = cmbConsulta.SelectedItem.ToString();
+                switch (opcion)
+                {
+                    case "Consulta General":
+                        q = "SELECT * FROM Planes_Entrenamiento";
+                        break;
+                    case "Planes de entrenamiento en orden ascendente":
+                        q = "SELECT * \r\nFROM Planes_Entrenamiento \r\nORDER BY Clientes_inscritos";
+                        break;
+                    case "Planes con clientes inscritos en gimnasio Santa Fe":
+                        q = "SELECT \r\n    P.Id_plan, \r\n    P.Nombre_plan, \r\n    P.Descripcion, \r\n    P.Costo, \r\n    COUNT(C.Id_cliente) AS Clientes_Inscritos\r\nFROM \r\n    Planes_Entrenamiento P\r\nINNER JOIN \r\n    Clientes C ON P.Id_plan = C.Id_plan\r\nINNER JOIN \r\n    Gimnasio G ON C.Id_gimnasio = G.Id_gimnasio\r\nWHERE \r\n    G.Nombre LIKE '%Santa Fe%'  -- Filtro por el nombre del gimnasio\r\nGROUP BY \r\n    P.Id_plan, \r\n    P.Nombre_plan, \r\n    P.Descripcion, \r\n    P.Costo\r\nORDER BY \r\n    P.Costo DESC;  -- Ordenar por costo de manera descendente";
+                        break;
+                    case "Mostrar el plan con mas clientes inscritos":
+                        q = "SELECT P.Id_plan, P.Nombre_plan, P.Descripcion, P.Costo, P.Clientes_inscritos " +
+                            "FROM Planes_Entrenamiento P " +
+                            "WHERE P.Clientes_inscritos = (SELECT MAX(Clientes_inscritos) FROM Planes_Entrenamiento);";
+                        break;
+
+
+
+                }
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
 
@@ -142,6 +183,33 @@ namespace SMARTFIT
         private void Plan_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnVista_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
+
+                // Asegúrate de usar la base de datos correcta
+                string q = "USE SMARTFITBD; SELECT * FROM VistaPlanesConClientes";
+
+                SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                DG1.DataSource = dt;
+
+                conexion.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la vista: " + ex.Message);
+            }
         }
     }
 }
