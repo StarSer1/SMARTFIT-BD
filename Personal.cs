@@ -73,6 +73,11 @@ namespace SMARTFIT
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
+                q = "CREATE VIEW VistaPersonalConTipo AS\r\nSELECT \r\n    p.Id_personal,\r\n    p.Nombre,\r\n    p.Apellidos,\r\n    p.Tipo,\r\n    ISNULL(g.Cedúla, 'N/A') AS Cedula_General,\r\n    ISNULL(a.Cargo, 'N/A') AS Cargo_Administrativo\r\nFROM \r\n    Personal p\r\nLEFT JOIN \r\n    General g ON p.Id_personal = g.Id_Personal\r\nLEFT JOIN \r\n    Administrativo a ON p.Id_personal = a.Id_Personal;";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
+
                 mensaje = "Creacion de las Tablas realizada";
 
                 //nuevo

@@ -69,6 +69,10 @@ namespace SMARTFIT
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
+                q = "CREATE VIEW VistaSalariosPorGimnasio AS\r\nSELECT \r\n    g.Nombre AS Nombre_Gimnasio,\r\n    COUNT(p.Id_personal) AS Total_Empleados,\r\n    AVG(p.Salario) AS Salario_Promedio,\r\n    MIN(p.Salario) AS Salario_Minimo,\r\n    MAX(p.Salario) AS Salario_Maximo\r\nFROM \r\n    Gimnasio g\r\nJOIN \r\n    Personal p ON g.Id_gimnasio = p.Id_gimnasio\r\nGROUP BY \r\n    g.Nombre;";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
                 mensaje = "Creacion de las Tablas realizada";
 
                 //nuevo

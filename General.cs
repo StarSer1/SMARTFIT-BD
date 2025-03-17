@@ -53,11 +53,25 @@ namespace SMARTFIT
             try
             {
                 ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
+                q = "use SMARTFITBD";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
+
+
                 q = "CREATE TABLE General (\r\n    Cedúla VARCHAR(30) UNIQUE NOT NULL,\r\n    Años_de_experiencia INT CHECK (Años_de_experiencia >= 0) DEFAULT 0,\r\n    Id_Personal INT UNIQUE, -- Evita que un mismo Id_Personal esté en otra tabla\r\n    CONSTRAINT fk_personal_general FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal)\r\n);";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
+
+                q = "CREATE VIEW VistaPersonalInactivo AS\r\nSELECT \r\n    Id_personal,\r\n    Nombre,\r\n    Apellidos,\r\n    Tipo,\r\n    Estado\r\nFROM \r\n    Personal\r\nWHERE \r\n    Estado = 'Inactivo';";
+
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
+
                 conexion.CerrarConexion();
 
                 mensaje = "Tabla 'General' creada correctamente.";
