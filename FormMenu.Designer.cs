@@ -33,9 +33,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnVistas = new System.Windows.Forms.Button();
-            this.btnTriggers = new System.Windows.Forms.Button();
-            this.btnProcedimientosAlmacenados = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -88,57 +85,12 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(151, 112);
             this.flowLayoutPanel2.TabIndex = 30;
             // 
-            // btnVistas
-            // 
-            this.btnVistas.BackColor = System.Drawing.Color.Black;
-            this.btnVistas.FlatAppearance.BorderColor = System.Drawing.Color.Gold;
-            this.btnVistas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVistas.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVistas.ForeColor = System.Drawing.Color.Gold;
-            this.btnVistas.Location = new System.Drawing.Point(146, 438);
-            this.btnVistas.Name = "btnVistas";
-            this.btnVistas.Size = new System.Drawing.Size(163, 56);
-            this.btnVistas.TabIndex = 38;
-            this.btnVistas.Text = "Vistas";
-            this.btnVistas.UseVisualStyleBackColor = false;
-            // 
-            // btnTriggers
-            // 
-            this.btnTriggers.BackColor = System.Drawing.Color.Black;
-            this.btnTriggers.FlatAppearance.BorderColor = System.Drawing.Color.Gold;
-            this.btnTriggers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTriggers.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTriggers.ForeColor = System.Drawing.Color.Gold;
-            this.btnTriggers.Location = new System.Drawing.Point(354, 438);
-            this.btnTriggers.Name = "btnTriggers";
-            this.btnTriggers.Size = new System.Drawing.Size(163, 56);
-            this.btnTriggers.TabIndex = 39;
-            this.btnTriggers.Text = "Triggers";
-            this.btnTriggers.UseVisualStyleBackColor = false;
-            // 
-            // btnProcedimientosAlmacenados
-            // 
-            this.btnProcedimientosAlmacenados.BackColor = System.Drawing.Color.Black;
-            this.btnProcedimientosAlmacenados.FlatAppearance.BorderColor = System.Drawing.Color.Gold;
-            this.btnProcedimientosAlmacenados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProcedimientosAlmacenados.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProcedimientosAlmacenados.ForeColor = System.Drawing.Color.Gold;
-            this.btnProcedimientosAlmacenados.Location = new System.Drawing.Point(558, 438);
-            this.btnProcedimientosAlmacenados.Name = "btnProcedimientosAlmacenados";
-            this.btnProcedimientosAlmacenados.Size = new System.Drawing.Size(163, 56);
-            this.btnProcedimientosAlmacenados.TabIndex = 40;
-            this.btnProcedimientosAlmacenados.Text = "Procedimientos almacenados";
-            this.btnProcedimientosAlmacenados.UseVisualStyleBackColor = false;
-            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(884, 534);
-            this.Controls.Add(this.btnProcedimientosAlmacenados);
-            this.Controls.Add(this.btnTriggers);
-            this.Controls.Add(this.btnVistas);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pictureBox1);
@@ -159,8 +111,5 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Button btnVistas;
-        private System.Windows.Forms.Button btnTriggers;
-        private System.Windows.Forms.Button btnProcedimientosAlmacenados;
     }
 }
