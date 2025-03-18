@@ -68,22 +68,22 @@ namespace SMARTFIT
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
-                // Crear la vista VistaPlanesConClientes
-                q = "CREATE VIEW VistaPlanesConClientes AS " +
-                    "SELECT " +
-                    "    p.Id_plan, " +
-                    "    p.Nombre_plan, " +
-                    "    p.Descripcion, " +
-                    "    COUNT(c.Id_cliente) AS Total_Clientes " +
-                    "FROM " +
-                    "    Planes_Entrenamiento p " +
-                    "LEFT JOIN " +
-                    "    Clientes c ON p.Id_plan = c.Id_plan " +
-                    "GROUP BY " +
-                    "    p.Id_plan, p.Nombre_plan, p.Descripcion;";
+                //// Crear la vista VistaPlanesConClientes
+                //q = "CREATE VIEW VistaPlanesConClientes AS " +
+                //    "SELECT " +
+                //    "    p.Id_plan, " +
+                //    "    p.Nombre_plan, " +
+                //    "    p.Descripcion, " +
+                //    "    COUNT(c.Id_cliente) AS Total_Clientes " +
+                //    "FROM " +
+                //    "    Planes_Entrenamiento p " +
+                //    "LEFT JOIN " +
+                //    "    Clientes c ON p.Id_plan = c.Id_plan " +
+                //    "GROUP BY " +
+                //    "    p.Id_plan, p.Nombre_plan, p.Descripcion;";
 
-                comando = new SqlCommand(q, conexion.GetConexion());
-                comando.ExecuteNonQuery();
+                //comando = new SqlCommand(q, conexion.GetConexion());
+                //comando.ExecuteNonQuery();
                 conexion.CerrarConexion();
 
                 mensaje = "Creación de la tabla y la vista realizada correctamente.";
@@ -190,18 +190,43 @@ namespace SMARTFIT
             try
             {
                 ConexionGeneral conexion = new ConexionGeneral();
-                conexion.AbrirConexion();
 
-                // Asegúrate de usar la base de datos correcta
-                string q = "USE SMARTFITBD; SELECT * FROM VistaPlanesConClientes";
+                // Verifica si la vista ya existe
+                string q = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaPlanesConClientes')\r\n" +
+                           "BEGIN\r\n" +
+                           "    EXEC('\r\n" +
+                           "        CREATE VIEW VistaPlanesConClientes AS\r\n" +
+                           "        SELECT \r\n" +
+                           "            p.Id_plan, \r\n" +
+                           "            p.Nombre_plan, \r\n" +
+                           "            p.Descripcion, \r\n" +
+                           "            COUNT(c.Id_cliente) AS Total_Clientes \r\n" +
+                           "        FROM \r\n" +
+                           "            Planes_Entrenamiento p \r\n" +
+                           "        LEFT JOIN \r\n" +
+                           "            Clientes c ON p.Id_plan = c.Id_plan \r\n" +
+                           "        GROUP BY \r\n" +
+                           "            p.Id_plan, p.Nombre_plan, p.Descripcion;\r\n" +
+                           "    ')\r\n" +
+                           "    PRINT 'Vista \"VistaPlanesConClientes\" creada exitosamente.'\r\n" +
+                           "END\r\n" +
+                           "ELSE\r\n" +
+                           "BEGIN\r\n" +
+                           "    PRINT 'La vista \"VistaPlanesConClientes\" ya existe.'\r\n" +
+                           "END\r\n";
 
                 SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
 
+                // Ahora consulta los datos de la vista
+                q = "SELECT * FROM VistaPlanesConClientes";
+                comando = new SqlCommand(q, conexion.GetConexion());
                 SqlDataAdapter adaptador = new SqlDataAdapter(comando);
-
                 DataTable dt = new DataTable();
                 adaptador.Fill(dt);
 
+                // Asignar el DataTable al DataGridView
                 DG1.DataSource = dt;
 
                 conexion.CerrarConexion();
@@ -211,5 +236,6 @@ namespace SMARTFIT
                 MessageBox.Show("Error al cargar la vista: " + ex.Message);
             }
         }
+
     }
 }

@@ -72,7 +72,29 @@ namespace SMARTFIT
 
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
-                
+
+
+                // Trigger VerificarGimnasio
+                q = @"
+                CREATE TRIGGER VerificarGimnasio
+                ON Personal
+                AFTER INSERT, UPDATE
+                AS
+                BEGIN
+                    IF EXISTS (
+                        SELECT 1
+                        FROM inserted i
+                        LEFT JOIN Gimnasio g ON i.Id_gimnasio = g.Id_gimnasio
+                        WHERE g.Id_gimnasio IS NULL AND i.Id_gimnasio IS NOT NULL
+                    )
+                    BEGIN
+                        RAISERROR('El gimnasio asignado no existe.', 16, 1);
+                        ROLLBACK TRANSACTION;
+                    END;
+                END;";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
 
                 mensaje = "Creacion de las Tablas realizada";
 

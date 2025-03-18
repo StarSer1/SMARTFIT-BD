@@ -177,18 +177,38 @@ namespace SMARTFIT
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
-                // Crear la vista VistaInventarioStockBajo
-                q = "CREATE VIEW VistaInventarioStockBajo AS " +
-                    "SELECT " +
-                    "    Id_inventario, " +
-                    "    Nombre_producto, " +
-                    "    Cantidad, " +
-                    "    Tipo " +
-                    "FROM " +
-                    "    Inventario " +
-                    "WHERE " +
-                    "    Cantidad < 5;";
+                //// Crear la vista VistaInventarioStockBajo
+                //q = "CREATE VIEW VistaInventarioStockBajo AS " +
+                //    "SELECT " +
+                //    "    Id_inventario, " +
+                //    "    Nombre_producto, " +
+                //    "    Cantidad, " +
+                //    "    Tipo " +
+                //    "FROM " +
+                //    "    Inventario " +
+                //    "WHERE " +
+                //    "    Cantidad < 5;";
+                //comando = new SqlCommand(q, conexion.GetConexion());
+                //comando.ExecuteNonQuery();
+
+                // Trigger AlertaStockBajo
+                q = @"
+                CREATE TRIGGER AlertaStockBajo
+                ON Inventario
+                AFTER INSERT, UPDATE
+                AS
+                BEGIN
+                    IF EXISTS (
+                        SELECT 1 
+                        FROM inserted 
+                        WHERE Cantidad < 5
+                    )
+                    BEGIN
+                        PRINT 'Advertencia: Hay productos con stock bajo (menos de 5 unidades).';
+                    END;
+                END;";
                 comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
                 mensaje = "Creación de la tabla y la vista realizada con éxito";
@@ -210,15 +230,37 @@ namespace SMARTFIT
             try
             {
                 ConexionGeneral conexion = new ConexionGeneral();
-                conexion.AbrirConexion();
 
-                // Asegúrate de usar la base de datos correcta
-                string q = "USE SMARTFITBD; SELECT * FROM VistaInventarioStockBajo";
+                // Verifica si la vista ya existe
+                string q = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaInventarioStockBajo')\r\n" +
+                           "BEGIN\r\n" +
+                           "    EXEC('\r\n" +
+                           "        CREATE VIEW VistaInventarioStockBajo AS\r\n" +
+                           "        SELECT \r\n" +
+                           "            Id_inventario, \r\n" +
+                           "            Nombre_producto, \r\n" +
+                           "            Cantidad, \r\n" +
+                           "            Tipo \r\n" +
+                           "        FROM \r\n" +
+                           "            Inventario \r\n" +
+                           "        WHERE \r\n" +
+                           "            Cantidad < 5;\r\n" +
+                           "    ')\r\n" +
+                           "    PRINT 'Vista \"VistaInventarioStockBajo\" creada exitosamente.'\r\n" +
+                           "END\r\n" +
+                           "ELSE\r\n" +
+                           "BEGIN\r\n" +
+                           "    PRINT 'La vista \"VistaInventarioStockBajo\" ya existe.'\r\n" +
+                           "END\r\n";
 
                 SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
 
+                // Ahora consulta los datos de la vista
+                q = "SELECT * FROM VistaInventarioStockBajo";
+                comando = new SqlCommand(q, conexion.GetConexion());
                 SqlDataAdapter adaptador = new SqlDataAdapter(comando);
-
                 DataTable dt = new DataTable();
                 adaptador.Fill(dt);
 

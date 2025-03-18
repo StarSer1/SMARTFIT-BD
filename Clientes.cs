@@ -66,37 +66,79 @@ namespace SMARTFIT
 
                 // Crear la tabla Clientes
                 q = "CREATE TABLE Clientes(" +
-                    "Id_cliente INT PRIMARY KEY Identity (1,1), " +
-                    "Nombre VARCHAR(50) NOT NULL, " +
-                    "Apellidos VARCHAR(50) NOT NULL, " +
-                    "Correo_electronico VARCHAR(100) UNIQUE NOT NULL, " +
-                    "Estado VARCHAR(20) CHECK (estado = 'Activo' OR estado = 'Inactivo') DEFAULT 'Inactivo', " +
-                    "Id_plan INT, " +
-                    "Id_gimnasio INT, " +
-                    "CONSTRAINT fk_plan FOREIGN KEY (Id_plan) REFERENCES Planes_Entrenamiento(Id_plan), " +
-                    "CONSTRAINT fk_gimnasio_cliente FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)" +
-                    ");";
+                 "Id_cliente INT PRIMARY KEY Identity (1,1), " +
+                 "Nombre VARCHAR(50) NOT NULL, " +
+                 "Apellidos VARCHAR(50) NOT NULL, " +
+                 "Correo_electronico VARCHAR(100) UNIQUE NOT NULL, " +
+                 "Estado VARCHAR(20) CHECK (Estado IN ('Activo', 'Inactivo')) DEFAULT 'Inactivo', " +
+                 "Id_plan INT, " +
+                 "Id_gimnasio INT, " +
+                 "CONSTRAINT fk_plan FOREIGN KEY (Id_plan) REFERENCES Planes_Entrenamiento(Id_plan), " +
+                 "CONSTRAINT fk_gimnasio_cliente FOREIGN KEY (Id_gimnasio) REFERENCES Gimnasio(Id_gimnasio)" +
+                 ");";
+
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
-                // Crear la vista VistaClientesActivosConPlanYGimnasio
-                q = "CREATE VIEW VistaClientesActivosConPlanYGimnasio AS " +
-                    "SELECT " +
-                    "c.Id_cliente, " +
-                    "c.Nombre AS Nombre_Cliente, " +
-                    "c.Apellidos, " +
-                    "c.Correo_electronico, " +
-                    "p.Nombre_plan, " +
-                    "g.Nombre AS Nombre_Gimnasio " +
-                    "FROM " +
-                    "Clientes c " +
-                    "LEFT JOIN " +
-                    "Planes_Entrenamiento p ON c.Id_plan = p.Id_plan " +
-                    "LEFT JOIN " +
-                    "Gimnasio g ON c.Id_gimnasio = g.Id_gimnasio " +
-                    "WHERE " +
-                    "c.Estado = 'Activo';";
+                //// Crear la vista VistaClientesActivosConPlanYGimnasio
+                //q = "CREATE VIEW VistaClientesActivosConPlanYGimnasio AS " +
+                //    "SELECT " +
+                //    "c.Id_cliente, " +
+                //    "c.Nombre AS Nombre_Cliente, " +
+                //    "c.Apellidos, " +
+                //    "c.Correo_electronico, " +
+                //    "p.Nombre_plan, " +
+                //    "g.Nombre AS Nombre_Gimnasio " +
+                //    "FROM " +
+                //    "Clientes c " +
+                //    "LEFT JOIN " +
+                //    "Planes_Entrenamiento p ON c.Id_plan = p.Id_plan " +
+                //    "LEFT JOIN " +
+                //    "Gimnasio g ON c.Id_gimnasio = g.Id_gimnasio " +
+                //    "WHERE " +
+                //    "c.Estado = 'Activo';";
+                //comando = new SqlCommand(q, conexion.GetConexion());
+                //comando.ExecuteNonQuery();
+
+
+                /*// Trigger ValidarCorreoCliente
+                q = @"
+                CREATE TRIGGER ValidarCorreoCliente
+                ON Clientes
+                AFTER INSERT, UPDATE
+                AS
+                BEGIN
+                    IF EXISTS (
+                        SELECT 1
+                        FROM inserted
+                        WHERE Correo_electronico NOT LIKE '_%@_%._%' 
+                    )
+                    BEGIN
+                        RAISERROR('El formato del correo electrónico es inválido.', 16, 1);
+                        ROLLBACK TRANSACTION;
+                    END;
+                END;";
                 comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();*/
+
+                // Trigger ReactivarCliente
+                q = @"
+                CREATE TRIGGER ReactivarCliente
+                ON Clientes
+                AFTER UPDATE
+                AS
+                BEGIN
+                    UPDATE Clientes
+                    SET Estado = 'Activo'
+                    FROM Clientes c
+                    INNER JOIN inserted i ON c.Id_cliente = i.Id_cliente
+                    WHERE i.Id_plan IS NOT NULL AND i.Estado = 'Inactivo';
+
+                    PRINT 'Cliente reactivado automáticamente al reinscribirse.';
+                END;";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
                 mensaje = "Creación de la tabla y vista realizada correctamente.";
@@ -237,15 +279,41 @@ namespace SMARTFIT
             try
             {
                 ConexionGeneral conexion = new ConexionGeneral();
-                conexion.AbrirConexion();
 
-                // Asegúrate de usar la base de datos correcta
-                string q = "USE SMARTFITBD; SELECT * FROM VistaClientesActivosConPlanYGimnasio";
+                // Verifica si la vista ya existe
+                string q = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaClientesActivosConPlanYGimnasio')\r\n" +
+                           "BEGIN\r\n" +
+                           "    EXEC('\r\n" +
+                           "        CREATE VIEW VistaClientesActivosConPlanYGimnasio AS\r\n" +
+                           "        SELECT \r\n" +
+                           "            c.Id_cliente, \r\n" +
+                           "            c.Nombre AS Nombre_Cliente, \r\n" +
+                           "            c.Apellidos, \r\n" +
+                           "            c.Correo_electronico, \r\n" +
+                           "            p.Nombre_plan, \r\n" +
+                           "            g.Nombre AS Nombre_Gimnasio \r\n" +
+                           "        FROM \r\n" +
+                           "            Clientes c \r\n" +
+                           "        LEFT JOIN \r\n" +
+                           "            Planes_Entrenamiento p ON c.Id_plan = p.Id_plan \r\n" +
+                           "        LEFT JOIN \r\n" +
+                           "            Gimnasio g ON c.Id_gimnasio = g.Id_gimnasio \r\n" +
+                           "    ')\r\n" +
+                           "    PRINT 'Vista \"VistaClientesActivosConPlanYGimnasio\" creada exitosamente.'\r\n" +
+                           "END\r\n" +
+                           "ELSE\r\n" +
+                           "BEGIN\r\n" +
+                           "    PRINT 'La vista \"VistaClientesActivosConPlanYGimnasio\" ya existe.'\r\n" +
+                           "END\r\n";
 
                 SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
 
+                // Ahora consulta los datos de la vista
+                q = "SELECT * FROM VistaClientesActivosConPlanYGimnasio";
+                comando = new SqlCommand(q, conexion.GetConexion());
                 SqlDataAdapter adaptador = new SqlDataAdapter(comando);
-
                 DataTable dt = new DataTable();
                 adaptador.Fill(dt);
 
@@ -259,6 +327,5 @@ namespace SMARTFIT
                 MessageBox.Show("Error al cargar la vista: " + ex.Message);
             }
         }
-
     }
 }
