@@ -453,19 +453,21 @@ namespace SMARTFIT
                 cmdGimnasio.ExecuteNonQuery();
 
                 // Insertar datos en la tabla Personal
-                string queryPersonal = "INSERT INTO Personal (Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) VALUES" +
-                    "('Juan', 'Perez', '12345678A', '555-1000', 'Av. Principal 123', 2500, '9:00-18:00', 'Activo', 1)," +
-                    "('Ana', 'Lopez', '23456789B', '555-2000', 'Calle 45 #567', 2200, '10:00-19:00', 'Activo', 2)," +
-                    "('Carlos', 'Martinez', '34567890C', '555-3000', 'Calle 78 #910', 2300, '9:30-18:30', 'Activo', 3)," +
-                    "('Maria', 'Garcia', '45678901D', '555-4000', 'Av. 12 #321', 2400, '8:00-17:00', 'Activo', 4)," +
-                    "('Luis', 'Fernandez', '56789012E', '555-5000', 'Calle 22 #112', 2600, '9:00-18:00', 'Activo', 5)," +
-                    "('Laura', 'Sanchez', '67890123F', '555-6000', 'Calle 14 #555', 2700, '7:30-16:30', 'Activo', 6)," +
-                    "('Pablo', 'Martinez', '78901234G', '555-7000', 'Calle 15 #123', 2800, '10:00-19:00', 'Activo', 7)," +
-                    "('Isabel', 'Gomez', '89012345H', '555-8000', 'Calle 16 #432', 2900, '8:30-17:30', 'Activo', 8)," +
-                    "('Raul', 'Fernandez', '90123456I', '555-9000', 'Calle 17 #789', 3000, '9:00-18:00', 'Activo', 9)," +
-                    "('Sofia', 'Ramirez', '01234567J', '555-1001', 'Calle 18 #101', 3100, '10:30-19:30', 'Activo', 10);";
+                string queryPersonalInsert = @"
+                INSERT INTO Personal (Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Tipo, Id_gimnasio) VALUES
+                ('Juan', 'Perez', '12345678A', '555-1000', 'Av. Principal 123', 2500, '9:00-18:00', 'Activo', 'General', 1),
+                ('Ana', 'Lopez', '23456789B', '555-2000', 'Calle 45 #567', 2200, '10:00-19:00', 'Activo', 'General', 2),
+                ('Carlos', 'Martinez', '34567890C', '555-3000', 'Calle 78 #910', 2300, '9:30-18:30', 'Activo', 'General', 3),
+                ('Maria', 'Garcia', '45678901D', '555-4000', 'Av. 12 #321', 2400, '8:00-17:00', 'Activo', 'General', 4),
+                ('Luis', 'Fernandez', '56789012E', '555-5000', 'Calle 22 #112', 2600, '9:00-18:00', 'Activo', 'Administrativo', 5),
+                ('Laura', 'Sanchez', '67890123F', '555-6000', 'Calle 14 #555', 2700, '7:30-16:30', 'Activo', 'Administrativo', 6),
+                ('Pablo', 'Martinez', '78901234G', '555-7000', 'Calle 15 #123', 2800, '10:00-19:00', 'Activo', 'Administrativo', 7),
+                ('Isabel', 'Gomez', '89012345H', '555-8000', 'Calle 16 #432', 2900, '8:30-17:30', 'Activo', 'General', 8),
+                ('Raul', 'Fernandez', '90123456I', '555-9000', 'Calle 17 #789', 3000, '9:00-18:00', 'Activo', 'General', 9),
+                ('Sofia', 'Ramirez', '01234567J', '555-1001', 'Calle 18 #101', 3100, '10:30-19:30', 'Activo', 'Administrativo', 10);
+                ";
 
-                SqlCommand cmdPersonal = new SqlCommand(queryPersonal, conexion.GetConexion());
+                SqlCommand cmdPersonal = new SqlCommand(queryPersonalInsert, conexion.GetConexion());
                 cmdPersonal.ExecuteNonQuery();
 
                 // Insertar datos en la tabla General

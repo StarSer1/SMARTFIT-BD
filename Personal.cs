@@ -236,17 +236,20 @@ namespace SMARTFIT
                 ConexionGeneral conexion = new ConexionGeneral();
 
                 q = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaPersonalConTipo')\r\nBEGIN\r\n    EXEC('\r\n        CREATE VIEW VistaPersonalConTipo AS\r\n        SELECT \r\n            p.Id_personal,\r\n            p.Nombre,\r\n            p.Apellidos,\r\n            p.Tipo,\r\n            ISNULL(g.Cedúla, ''N/A'') AS Cedula_General,\r\n            ISNULL(a.Cargo, ''N/A'') AS Cargo_Administrativo\r\n        FROM \r\n            Personal p\r\n        LEFT JOIN \r\n            General g ON p.Id_personal = g.Id_Personal\r\n        LEFT JOIN \r\n            Administrativo a ON p.Id_personal = a.Id_Personal\r\n    ')\r\n    PRINT 'Vista \"VistaPersonalConTipo\" creada exitosamente.'\r\nEND\r\nELSE\r\nBEGIN\r\n    PRINT 'La vista \"VistaPersonalConTipo\" ya existe.'\r\nEND\r\n";
-                comando = new SqlCommand(q, conexion.GetConexion());
+                
+                SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
                 q = "SELECT * FROM VistaPersonalConTipo";
                 comando = new SqlCommand(q, conexion.GetConexion());
-                conexion.AbrirConexion();
-                comando.ExecuteNonQuery();
+                SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
 
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
 
-                //nuevo
                 conexion.CerrarConexion();
             }
             catch (System.Exception ex)

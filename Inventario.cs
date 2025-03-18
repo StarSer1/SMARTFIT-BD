@@ -231,47 +231,57 @@ namespace SMARTFIT
             {
                 ConexionGeneral conexion = new ConexionGeneral();
 
-                // Verifica si la vista ya existe
-                string q = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaInventarioStockBajo')\r\n" +
-                           "BEGIN\r\n" +
-                           "    EXEC('\r\n" +
-                           "        CREATE VIEW VistaInventarioStockBajo AS\r\n" +
-                           "        SELECT \r\n" +
-                           "            Id_inventario, \r\n" +
-                           "            Nombre_producto, \r\n" +
-                           "            Cantidad, \r\n" +
-                           "            Tipo \r\n" +
-                           "        FROM \r\n" +
-                           "            Inventario \r\n" +
-                           "        WHERE \r\n" +
-                           "            Cantidad < 5;\r\n" +
-                           "    ')\r\n" +
-                           "    PRINT 'Vista \"VistaInventarioStockBajo\" creada exitosamente.'\r\n" +
-                           "END\r\n" +
-                           "ELSE\r\n" +
-                           "BEGIN\r\n" +
-                           "    PRINT 'La vista \"VistaInventarioStockBajo\" ya existe.'\r\n" +
-                           "END\r\n";
+                // Verifica si la vista ya existe y, si no, la crea
+                q = @"
+                IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaInventarioStockBajo')
+                BEGIN
+                    EXEC('
+                        CREATE VIEW VistaInventarioStockBajo AS
+                        SELECT 
+                            Id_inventario, 
+                            Nombre_producto, 
+                            Cantidad, 
+                            Tipo
+                        FROM 
+                            Inventario
+                        WHERE 
+                            Cantidad < 100;
+                    ')
+                    PRINT 'Vista VistaInventarioStockBajo creada exitosamente.'
+                END
+                ELSE
+                BEGIN
+                    PRINT 'La vista VistaInventarioStockBajo ya existe.'
+                END
+                ";
 
-                SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
+
+                // Ejecuta el comando de creación o validación de la vista
+                comando = new SqlCommand(q, conexion.GetConexion());
                 conexion.AbrirConexion();
                 comando.ExecuteNonQuery();
 
-                // Ahora consulta los datos de la vista
+                // Consulta los datos de la vista para mostrarlos en el DataGridView
                 q = "SELECT * FROM VistaInventarioStockBajo";
                 comando = new SqlCommand(q, conexion.GetConexion());
                 SqlDataAdapter adaptador = new SqlDataAdapter(comando);
                 DataTable dt = new DataTable();
                 adaptador.Fill(dt);
 
-                // Asignar el DataTable al DataGridView
+                // Asigna los datos al DataGridView
                 DG1.DataSource = dt;
 
+                // Cierra la conexión
                 conexion.CerrarConexion();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                MessageBox.Show("Error al cargar la vista: " + ex.Message);
+                mensaje = "Ocurrio un error al mostrar la vista: " + ex.Message;
+            }
+            finally
+            {
+                // Muestra el mensaje de resultado
+                MessageBox.Show(mensaje);
             }
         }
 
