@@ -54,29 +54,31 @@ namespace SMARTFIT
             {
                 ConexionGeneral conexion = new ConexionGeneral();
                 conexion.AbrirConexion();
-                q = "CREATE TABLE Administrativo (" +
-                "Cargo VARCHAR(30) CHECK (Cargo = 'Proveedor' OR Cargo = 'Intendente' OR Cargo = 'Tecnico'), " +
-                "Equipo VARCHAR(30) DEFAULT 'Sin equipo', " +
-                "Id_Personal INT, " +
-                "CONSTRAINT fk_personal_administrativo FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal)" +
-                ");";
 
+                // Crear la tabla Administrativo
+                q = "CREATE TABLE Administrativo (" +
+                    "Cargo VARCHAR(30) CHECK (Cargo = 'Proveedor' OR Cargo = 'Intendente' OR Cargo = 'Tecnico'), " +
+                    "Equipo VARCHAR(30) DEFAULT 'Sin equipo', " +
+                    "Id_Personal INT, " +
+                    "CONSTRAINT fk_personal_administrativo FOREIGN KEY (Id_Personal) REFERENCES Personal(Id_Personal)" +
+                    ");";
 
                 comando = new SqlCommand(q, conexion.GetConexion());
-                conexion.AbrirConexion();
-                comando.ExecuteNonQuery();
+                comando.ExecuteNonQuery();  // Ejecutar la creación de la tabla
+
                 conexion.CerrarConexion();
-                mensaje = "Tabla Administrativo creada correctamente";
+                mensaje = "Tabla Administrativo creada e insertados los datos correctamente.";
             }
             catch (Exception ex)
             {
-                mensaje = "Error al crear la tabla: " + ex.Message;
+                mensaje = "Error al crear la tabla o insertar los datos: " + ex.Message;
             }
             finally
             {
-                MessageBox.Show(mensaje);
+                MessageBox.Show(mensaje);  // Mostrar mensaje final
             }
         }
+
 
         private void BtnInsertarDatos_Click(object sender, EventArgs e)
         {
@@ -140,7 +142,7 @@ namespace SMARTFIT
                 }
                 comando = new SqlCommand(q, conexion.GetConexion());
                 Lector = comando.ExecuteReader();
-                
+
                 DataTable dt = new DataTable();
                 dt.Load(Lector);
                 DG1.DataSource = dt;
@@ -161,6 +163,55 @@ namespace SMARTFIT
         private void Administrativo_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnVista_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConexionGeneral conexion = new ConexionGeneral();
+
+                // Verifica si la vista ya existe
+                string q = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_NAME = 'VistaAdministrativo')\r\n" +
+                           "BEGIN\r\n" +
+                           "    EXEC('\r\n" +
+                           "        CREATE VIEW VistaAdministrativo AS\r\n" +
+                           "        SELECT \r\n" +
+                           "            P.Nombre, \r\n" +
+                           "            P.Apellidos, \r\n" +
+                           "            A.Cargo, \r\n" +
+                           "            A.Equipo \r\n" +
+                           "        FROM \r\n" +
+                           "            Administrativo A \r\n" +
+                           "        INNER JOIN Personal P ON A.Id_Personal = P.Id_personal;\r\n" +
+                           "    ')\r\n" +
+                           "    PRINT 'Vista \"VistaAdministrativo\" creada exitosamente.'\r\n" +
+                           "END\r\n" +
+                           "ELSE\r\n" +
+                           "BEGIN\r\n" +
+                           "    PRINT 'La vista \"VistaAdministrativo\" ya existe.'\r\n" +
+                           "END\r\n";
+
+                SqlCommand comando = new SqlCommand(q, conexion.GetConexion());
+                conexion.AbrirConexion();
+                comando.ExecuteNonQuery();
+
+                // Ahora consulta los datos de la vista
+                q = "SELECT * FROM VistaAdministrativo";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+                conexion.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la vista: " + ex.Message);
+            }
         }
     }
 }

@@ -69,7 +69,10 @@ namespace SMARTFIT
                 comando = new SqlCommand(q, conexion.GetConexion());
                 comando.ExecuteNonQuery();
 
-               
+                q = "CREATE TRIGGER tr_VerificarHorarioGimnasio\r\nON Gimnasio\r\nAFTER INSERT, UPDATE\r\nAS\r\nBEGIN\r\n    IF EXISTS (\r\n        SELECT 1\r\n        FROM inserted\r\n        WHERE Horario_cierre <= Horario_apertura\r\n    )\r\n    BEGIN\r\n        THROW 50001, 'El horario de cierre debe ser mayor al horario de apertura.', 1;\r\n    END;\r\nEND;";
+                comando = new SqlCommand(q, conexion.GetConexion());
+                comando.ExecuteNonQuery();
+
                 mensaje = "Creacion de las Tablas realizada";
 
                 //nuevo

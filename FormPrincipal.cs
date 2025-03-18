@@ -427,5 +427,102 @@ namespace SMARTFIT
             panelInventario.Visible = true;
             OpenChildForm(new Inventario());
         }
+
+        private void btnInsertarDatos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Crear la conexión general
+                ConexionGeneral conexion = new ConexionGeneral();
+                conexion.AbrirConexion();
+
+                // Insertar datos en la tabla Gimnasio
+                string queryGimnasio = "INSERT INTO Gimnasio (Id_gimnasio, Nombre, Direccion, Telefono, Horario_apertura, Horario_cierre) VALUES" +
+                    "(1, 'Gimnasio Central', 'Av. Principal 123', '555-1234', '05:30:00', '23:00:00')," +
+                    "(2, 'Gimnasio Sur', 'Calle 45 #567', '555-2345', '06:00:00', '22:00:00')," +
+                    "(3, 'Gimnasio Norte', 'Calle 78 #910', '555-3456', '06:30:00', '22:30:00')," +
+                    "(4, 'Gimnasio Este', 'Av. 12 #321', '555-4567', '05:00:00', '23:30:00')," +
+                    "(5, 'Gimnasio Oeste', 'Calle 22 #112', '555-5678', '07:00:00', '21:00:00');";
+
+                SqlCommand cmdGimnasio = new SqlCommand(queryGimnasio, conexion.GetConexion());
+                cmdGimnasio.ExecuteNonQuery();
+
+                // Insertar datos en la tabla Personal
+                string queryPersonal = "INSERT INTO Personal (Id_personal, Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) VALUES" +
+                    "(1, 'Juan', 'Perez', '12345678A', '555-1000', 'Av. Principal 123', 2500, '9:00-18:00', 'Activo', 1)," +
+                    "(2, 'Ana', 'Lopez', '23456789B', '555-2000', 'Calle 45 #567', 2200, '10:00-19:00', 'Activo', 2)," +
+                    "(3, 'Carlos', 'Martinez', '34567890C', '555-3000', 'Calle 78 #910', 2300, '9:30-18:30', 'Activo', 3)," +
+                    "(4, 'Maria', 'Garcia', '45678901D', '555-4000', 'Av. 12 #321', 2400, '8:00-17:00', 'Activo', 4)," +
+                    "(5, 'Luis', 'Fernandez', '56789012E', '555-5000', 'Calle 22 #112', 2600, '9:00-18:00', 'Activo', 5);";
+
+                SqlCommand cmdPersonal = new SqlCommand(queryPersonal, conexion.GetConexion());
+                cmdPersonal.ExecuteNonQuery();
+
+                // Insertar datos en la tabla General
+                string queryGeneral = "INSERT INTO General (Cedúla, Años_de_experiencia, Id_Personal) VALUES" +
+                    "('12345678', 5, 1)," +
+                    "('23456789', 3, 2)," +
+                    "('34567890', 4, 3)," +
+                    "('45678901', 6, 4)," +
+                    "('56789012', 2, 5);";
+
+                SqlCommand cmdGeneral = new SqlCommand(queryGeneral, conexion.GetConexion());
+                cmdGeneral.ExecuteNonQuery();
+
+                // Insertar datos en la tabla Administrativo
+                string queryAdministrativo = "INSERT INTO Administrativo (Cargo, Equipo, Id_Personal) VALUES" +
+                    "('Proveedor', 'Pesas', 1)," +
+                    "('Intendente', 'Equipo de limpieza', 2)," +
+                    "('Tecnico', 'Equipo de computo', 3)," +
+                    "('Proveedor', 'Maquinas', 4)," +
+                    "('Intendente', 'Equipo de limpieza', 5);";
+
+                SqlCommand cmdAdministrativo = new SqlCommand(queryAdministrativo, conexion.GetConexion());
+                cmdAdministrativo.ExecuteNonQuery();
+
+                // Insertar datos en la tabla Planes de Entrenamiento
+                string queryPlanesEntrenamiento = "INSERT INTO Planes_Entrenamiento (Id_plan, Nombre_plan, Clientes_inscritos, Descripcion, Costo) VALUES" +
+                    "(1, 'Plan Básico', 15, 'Plan para principiantes', 50)," +
+                    "(2, 'Plan Intermedio', 20, 'Plan para nivel intermedio', 75)," +
+                    "(3, 'Plan Avanzado', 25, 'Plan para nivel avanzado', 100)," +
+                    "(4, 'Plan Flex', 30, 'Plan flexible con horarios', 60)," +
+                    "(5, 'Plan Full', 10, 'Plan completo con todos los servicios', 120);";
+
+                SqlCommand cmdPlanesEntrenamiento = new SqlCommand(queryPlanesEntrenamiento, conexion.GetConexion());
+                cmdPlanesEntrenamiento.ExecuteNonQuery();
+
+                // Insertar datos en la tabla Clientes
+                string queryClientes = "INSERT INTO Clientes (Id_cliente, Nombre, Apellidos, Correo_electronico, Estado, Id_plan, Id_gimnasio) VALUES" +
+                    "(1, 'Sofia', 'Ramirez', 'sofia.ramirez@email.com', 'Activo', 1, 1)," +
+                    "(2, 'Pedro', 'Alvarez', 'pedro.alvarez@email.com', 'Inactivo', 2, 2)," +
+                    "(3, 'Lucia', 'Mendez', 'lucia.mendez@email.com', 'Activo', 3, 3)," +
+                    "(4, 'Carlos', 'Hernandez', 'carlos.hernandez@email.com', 'Activo', 4, 4)," +
+                    "(5, 'Ana', 'Lopez', 'ana.lopez@email.com', 'Inactivo', 5, 5);";
+
+                SqlCommand cmdClientes = new SqlCommand(queryClientes, conexion.GetConexion());
+                cmdClientes.ExecuteNonQuery();
+
+                // Insertar datos en la tabla Inventario
+                string queryInventario = "INSERT INTO Inventario (Id_inventario, Nombre_producto, Descripcion, Cantidad, Tipo, Id_Gimnasio) VALUES" +
+                    "(1, 'Pesas', 'Pesas de diferentes tamaños', 20, 'Equipamiento', 1)," +
+                    "(2, 'Máquinas de Cardio', 'Máquinas para ejercicios cardiovasculares', 15, 'Equipamiento', 2)," +
+                    "(3, 'Bicicletas Estáticas', 'Bicicletas para ejercicio', 10, 'Equipamiento', 3)," +
+                    "(4, 'Mancuernas', 'Mancuernas de diversos pesos', 25, 'Equipamiento', 4)," +
+                    "(5, 'Máquina de Fuerza', 'Máquina para entrenamiento de fuerza', 5, 'Equipamiento', 5);";
+
+                SqlCommand cmdInventario = new SqlCommand(queryInventario, conexion.GetConexion());
+                cmdInventario.ExecuteNonQuery();
+
+                // Cerrar la conexión
+                conexion.CerrarConexion();
+
+                MessageBox.Show("Datos insertados correctamente");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar datos: " + ex.Message);
+            }
+        }
+
     }
 }
