@@ -54,7 +54,7 @@ namespace SMARTFIT
             }
             activateForm = childForm;
             childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None; 
+            childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
             this.panelFondo.Controls.Add(childForm);
             childForm.BringToFront();
@@ -162,7 +162,7 @@ namespace SMARTFIT
                 comando = new SqlCommand(q, conexion);
                 conexion.Open();
                 comando.ExecuteNonQuery();
-                
+
                 //Agregar Gimnasio
                 conexion = new SqlConnection(cadenaConexion2);
                 q = "CREATE PROCEDURE AgregarGimnasio\r\n@Nombre varchar(100),\r\n@Direccion varchar(100),\r\n@Telefono varchar(20),\r\n@Horario_apertura TIME,\r\n@Horario_cierre TIME\r\nAS\r\nBEGIN TRY\r\n\tINSERT INTO Gimnasio\r\n\t(Nombre,Direccion,Telefono,Horario_apertura,Horario_cierre)\r\n\tVALUES\r\n\t(@Nombre,@Direccion,@Telefono,@Horario_apertura,@Horario_cierre)\r\nEND TRY\r\nBEGIN CATCH\r\nSELECT ERROR_NUMBER(),ERROR_MESSAGE()\r\nEND CATCH\r\n";
@@ -437,90 +437,123 @@ namespace SMARTFIT
                 conexion.AbrirConexion();
 
                 // Insertar datos en la tabla Gimnasio
-                string queryGimnasio = "INSERT INTO Gimnasio (Id_gimnasio, Nombre, Direccion, Telefono, Horario_apertura, Horario_cierre) VALUES" +
-                    "(1, 'Gimnasio Central', 'Av. Principal 123', '555-1234', '05:30:00', '23:00:00')," +
-                    "(2, 'Gimnasio Sur', 'Calle 45 #567', '555-2345', '06:00:00', '22:00:00')," +
-                    "(3, 'Gimnasio Norte', 'Calle 78 #910', '555-3456', '06:30:00', '22:30:00')," +
-                    "(4, 'Gimnasio Este', 'Av. 12 #321', '555-4567', '05:00:00', '23:30:00')," +
-                    "(5, 'Gimnasio Oeste', 'Calle 22 #112', '555-5678', '07:00:00', '21:00:00');";
+                string queryGimnasio = "INSERT INTO Gimnasio (Nombre, Direccion, Telefono, Horario_apertura, Horario_cierre) VALUES" +
+                    "('Gimnasio Central', 'Av. Principal 123', '555-1234', '05:30:00', '23:00:00')," +
+                    "('Gimnasio Sur', 'Calle 45 #567', '555-2345', '06:00:00', '22:00:00')," +
+                    "('Gimnasio Norte', 'Calle 78 #910', '555-3456', '06:30:00', '22:00:00')," +
+                    "('Gimnasio Este', 'Av. 12 #321', '555-4567', '05:00:00', '23:00:00')," +
+                    "('Gimnasio Oeste', 'Calle 22 #112', '555-5678', '07:00:00', '21:00:00')," +
+                    "('Gimnasio Centro', 'Calle 13 #45', '555-6789', '06:00:00', '22:00:00')," +
+                    "('Gimnasio Playa', 'Av. Costa #101', '555-7890', '05:30:00', '23:00:00')," +
+                    "('Gimnasio Montaña', 'Calle Montaña #77', '555-8901', '07:00:00', '20:00:00')," +
+                    "('Gimnasio Barrio', 'Calle 5 #212', '555-9012', '06:30:00', '22:00:00')," +
+                    "('Gimnasio Los Andes', 'Av. Andes #332', '555-0123', '08:00:00', '20:30:00');";
 
                 SqlCommand cmdGimnasio = new SqlCommand(queryGimnasio, conexion.GetConexion());
                 cmdGimnasio.ExecuteNonQuery();
 
                 // Insertar datos en la tabla Personal
-                string queryPersonal = "INSERT INTO Personal (Id_personal, Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) VALUES" +
-                    "(1, 'Juan', 'Perez', '12345678A', '555-1000', 'Av. Principal 123', 2500, '9:00-18:00', 'Activo', 1)," +
-                    "(2, 'Ana', 'Lopez', '23456789B', '555-2000', 'Calle 45 #567', 2200, '10:00-19:00', 'Activo', 2)," +
-                    "(3, 'Carlos', 'Martinez', '34567890C', '555-3000', 'Calle 78 #910', 2300, '9:30-18:30', 'Activo', 3)," +
-                    "(4, 'Maria', 'Garcia', '45678901D', '555-4000', 'Av. 12 #321', 2400, '8:00-17:00', 'Activo', 4)," +
-                    "(5, 'Luis', 'Fernandez', '56789012E', '555-5000', 'Calle 22 #112', 2600, '9:00-18:00', 'Activo', 5);";
+                string queryPersonal = "INSERT INTO Personal (Nombre, Apellidos, Dni, Telefono, Direccion, Salario, Horario, Estado, Id_gimnasio) VALUES" +
+                    "('Juan', 'Perez', '12345678A', '555-1000', 'Av. Principal 123', 2500, '9:00-18:00', 'Activo', 1)," +
+                    "('Ana', 'Lopez', '23456789B', '555-2000', 'Calle 45 #567', 2200, '10:00-19:00', 'Activo', 2)," +
+                    "('Carlos', 'Martinez', '34567890C', '555-3000', 'Calle 78 #910', 2300, '9:30-18:30', 'Activo', 3)," +
+                    "('Maria', 'Garcia', '45678901D', '555-4000', 'Av. 12 #321', 2400, '8:00-17:00', 'Activo', 4)," +
+                    "('Luis', 'Fernandez', '56789012E', '555-5000', 'Calle 22 #112', 2600, '9:00-18:00', 'Activo', 5)," +
+                    "('Laura', 'Sanchez', '67890123F', '555-6000', 'Calle 14 #555', 2700, '7:30-16:30', 'Activo', 6)," +
+                    "('Pablo', 'Martinez', '78901234G', '555-7000', 'Calle 15 #123', 2800, '10:00-19:00', 'Activo', 7)," +
+                    "('Isabel', 'Gomez', '89012345H', '555-8000', 'Calle 16 #432', 2900, '8:30-17:30', 'Activo', 8)," +
+                    "('Raul', 'Fernandez', '90123456I', '555-9000', 'Calle 17 #789', 3000, '9:00-18:00', 'Activo', 9)," +
+                    "('Sofia', 'Ramirez', '01234567J', '555-1001', 'Calle 18 #101', 3100, '10:30-19:30', 'Activo', 10);";
 
                 SqlCommand cmdPersonal = new SqlCommand(queryPersonal, conexion.GetConexion());
                 cmdPersonal.ExecuteNonQuery();
 
                 // Insertar datos en la tabla General
                 string queryGeneral = "INSERT INTO General (Cedúla, Años_de_experiencia, Id_Personal) VALUES" +
-                    "('12345678', 5, 1)," +
-                    "('23456789', 3, 2)," +
-                    "('34567890', 4, 3)," +
-                    "('45678901', 6, 4)," +
-                    "('56789012', 2, 5);";
+                    "('12345678', 5, (SELECT Id_personal FROM Personal WHERE Dni = '12345678A'))," +
+                    "('23456789', 3, (SELECT Id_personal FROM Personal WHERE Dni = '23456789B'))," +
+                    "('34567890', 4, (SELECT Id_personal FROM Personal WHERE Dni = '34567890C'))," +
+                    "('45678901', 6, (SELECT Id_personal FROM Personal WHERE Dni = '45678901D'))," +
+                    "('56789012', 2, (SELECT Id_personal FROM Personal WHERE Dni = '56789012E'))," +
+                    "('67890123', 7, (SELECT Id_personal FROM Personal WHERE Dni = '67890123F'))," +
+                    "('78901234', 8, (SELECT Id_personal FROM Personal WHERE Dni = '78901234G'))," +
+                    "('89012345', 6, (SELECT Id_personal FROM Personal WHERE Dni = '89012345H'))," +
+                    "('90123456', 10, (SELECT Id_personal FROM Personal WHERE Dni = '90123456I'))," +
+                    "('01234567', 3, (SELECT Id_personal FROM Personal WHERE Dni = '01234567J'));";
 
                 SqlCommand cmdGeneral = new SqlCommand(queryGeneral, conexion.GetConexion());
                 cmdGeneral.ExecuteNonQuery();
 
                 // Insertar datos en la tabla Administrativo
                 string queryAdministrativo = "INSERT INTO Administrativo (Cargo, Equipo, Id_Personal) VALUES" +
-                    "('Proveedor', 'Pesas', 1)," +
-                    "('Intendente', 'Equipo de limpieza', 2)," +
-                    "('Tecnico', 'Equipo de computo', 3)," +
-                    "('Proveedor', 'Maquinas', 4)," +
-                    "('Intendente', 'Equipo de limpieza', 5);";
+                    "('Proveedor', 'Pesas', (SELECT Id_personal FROM Personal WHERE Dni = '12345678A'))," +
+                    "('Intendente', 'Equipo de limpieza', (SELECT Id_personal FROM Personal WHERE Dni = '23456789B'))," +
+                    "('Tecnico', 'Equipo de computo', (SELECT Id_personal FROM Personal WHERE Dni = '34567890C'))," +
+                    "('Proveedor', 'Maquinas', (SELECT Id_personal FROM Personal WHERE Dni = '45678901D'))," +
+                    "('Intendente', 'Equipo de limpieza', (SELECT Id_personal FROM Personal WHERE Dni = '56789012E'))," +
+                    "('Proveedor', 'Pesas', (SELECT Id_personal FROM Personal WHERE Dni = '67890123F'))," +
+                    "('Tecnico', 'Equipo de computo', (SELECT Id_personal FROM Personal WHERE Dni = '78901234G'))," +
+                    "('Intendente', 'Equipo de limpieza', (SELECT Id_personal FROM Personal WHERE Dni = '89012345H'))," +
+                    "('Proveedor', 'Maquinas', (SELECT Id_personal FROM Personal WHERE Dni = '90123456I'))," +
+                    "('Intendente', 'Equipo de limpieza', (SELECT Id_personal FROM Personal WHERE Dni = '01234567J'));";
 
                 SqlCommand cmdAdministrativo = new SqlCommand(queryAdministrativo, conexion.GetConexion());
                 cmdAdministrativo.ExecuteNonQuery();
 
                 // Insertar datos en la tabla Planes de Entrenamiento
-                string queryPlanesEntrenamiento = "INSERT INTO Planes_Entrenamiento (Id_plan, Nombre_plan, Clientes_inscritos, Descripcion, Costo) VALUES" +
-                    "(1, 'Plan Básico', 15, 'Plan para principiantes', 50)," +
-                    "(2, 'Plan Intermedio', 20, 'Plan para nivel intermedio', 75)," +
-                    "(3, 'Plan Avanzado', 25, 'Plan para nivel avanzado', 100)," +
-                    "(4, 'Plan Flex', 30, 'Plan flexible con horarios', 60)," +
-                    "(5, 'Plan Full', 10, 'Plan completo con todos los servicios', 120);";
+                string queryPlanesEntrenamiento = "INSERT INTO Planes_Entrenamiento (Nombre_plan, Clientes_inscritos, Descripcion, Costo) VALUES" +
+                    "('Plan Básico', 15, 'Plan para principiantes', 50)," +
+                    "('Plan Intermedio', 20, 'Plan para nivel intermedio', 75)," +
+                    "('Plan Avanzado', 25, 'Plan para nivel avanzado', 100)," +
+                    "('Plan Flex', 30, 'Plan flexible con horarios', 60)," +
+                    "('Plan Full', 10, 'Plan completo con todos los servicios', 120)," +
+                    "('Plan Elite', 50, 'Plan premium para todos los servicios', 200)," +
+                    "('Plan Salud', 40, 'Plan de bienestar y salud', 90)," +
+                    "('Plan Cardio', 35, 'Plan específico para ejercicios cardiovasculares', 80)," +
+                    "('Plan Fuerza', 60, 'Plan para entrenamiento de fuerza', 110)," +
+                    "('Plan Flex Plus', 20, 'Plan flexible con más beneficios', 150);";
 
                 SqlCommand cmdPlanesEntrenamiento = new SqlCommand(queryPlanesEntrenamiento, conexion.GetConexion());
                 cmdPlanesEntrenamiento.ExecuteNonQuery();
 
                 // Insertar datos en la tabla Clientes
-                string queryClientes = "INSERT INTO Clientes (Id_cliente, Nombre, Apellidos, Correo_electronico, Estado, Id_plan, Id_gimnasio) VALUES" +
-                    "(1, 'Sofia', 'Ramirez', 'sofia.ramirez@email.com', 'Activo', 1, 1)," +
-                    "(2, 'Pedro', 'Alvarez', 'pedro.alvarez@email.com', 'Inactivo', 2, 2)," +
-                    "(3, 'Lucia', 'Mendez', 'lucia.mendez@email.com', 'Activo', 3, 3)," +
-                    "(4, 'Carlos', 'Hernandez', 'carlos.hernandez@email.com', 'Activo', 4, 4)," +
-                    "(5, 'Ana', 'Lopez', 'ana.lopez@email.com', 'Inactivo', 5, 5);";
+                string queryClientes = "INSERT INTO Clientes (Nombre, Apellidos, Correo_electronico, Estado, Id_plan, Id_gimnasio) VALUES" +
+                    "('Sofia', 'Ramirez', 'sofia.ramirez@email.com', 'Activo', 1, 1)," +
+                    "('Pedro', 'Alvarez', 'pedro.alvarez@email.com', 'Inactivo', 2, 2)," +
+                    "('Lucia', 'Mendez', 'lucia.mendez@email.com', 'Activo', 3, 3)," +
+                    "('Carlos', 'Hernandez', 'carlos.hernandez@email.com', 'Activo', 4, 4)," +
+                    "('Ana', 'Lopez', 'ana.lopez@email.com', 'Inactivo', 5, 5)," +
+                    "('Javier', 'Sosa', 'javier.sosa@email.com', 'Activo', 6, 6)," +
+                    "('Bea', 'Morales', 'bea.morales@email.com', 'Activo', 7, 7)," +
+                    "('Luis', 'Ruiz', 'luis.ruiz@email.com', 'Activo', 8, 8)," +
+                    "('Raul', 'Fernandez', 'raul.fernandez@email.com', 'Inactivo', 9, 9)," +
+                    "('Laura', 'Jimenez', 'laura.jimenez@email.com', 'Activo', 10, 10);";
 
                 SqlCommand cmdClientes = new SqlCommand(queryClientes, conexion.GetConexion());
                 cmdClientes.ExecuteNonQuery();
 
                 // Insertar datos en la tabla Inventario
-                string queryInventario = "INSERT INTO Inventario (Id_inventario, Nombre_producto, Descripcion, Cantidad, Tipo, Id_Gimnasio) VALUES" +
-                    "(1, 'Pesas', 'Pesas de diferentes tamaños', 20, 'Equipamiento', 1)," +
-                    "(2, 'Máquinas de Cardio', 'Máquinas para ejercicios cardiovasculares', 15, 'Equipamiento', 2)," +
-                    "(3, 'Bicicletas Estáticas', 'Bicicletas para ejercicio', 10, 'Equipamiento', 3)," +
-                    "(4, 'Mancuernas', 'Mancuernas de diversos pesos', 25, 'Equipamiento', 4)," +
-                    "(5, 'Máquina de Fuerza', 'Máquina para entrenamiento de fuerza', 5, 'Equipamiento', 5);";
+                string queryInventario = "INSERT INTO Inventario (Nombre_producto, Descripcion, Cantidad, Tipo, Id_Gimnasio) VALUES" +
+                    "('Pesas', 'Pesas de diferentes tamaños', 100, 'Equipamiento', 1)," +
+                    "('Bicicletas', 'Bicicletas estáticas para ejercicios cardiovasculares', 50, 'Cardio', 2)," +
+                    "('Máquinas de cardio', 'Máquinas para ejercicio cardiovascular', 30, 'Cardio', 3)," +
+                    "('Máquinas de fuerza', 'Equipos para entrenamiento de fuerza', 20, 'Fuerza', 4)," +
+                    "('Kettlebells', 'Pesas rusas para entrenamiento funcional', 40, 'Funcional', 5)," +
+                    "('Colchonetas', 'Colchonetas para yoga y pilates', 60, 'Accesorios', 6)," +
+                    "('Barras de pesas', 'Barras para ejercicios de levantamiento', 25, 'Fuerza', 7)," +
+                    "('Mancuernas', 'Mancuernas para entrenamiento de fuerza', 80, 'Fuerza', 8)," +
+                    "('Balones medicinales', 'Balones para entrenamiento funcional', 35, 'Funcional', 9)," +
+                    "('Estación de pesas', 'Estación multifuncional para ejercicios de fuerza', 10, 'Fuerza', 10);";
 
                 SqlCommand cmdInventario = new SqlCommand(queryInventario, conexion.GetConexion());
                 cmdInventario.ExecuteNonQuery();
 
-                // Cerrar la conexión
+                MessageBox.Show("Datos insertados correctamente.");
                 conexion.CerrarConexion();
-
-                MessageBox.Show("Datos insertados correctamente");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al insertar datos: " + ex.Message);
+                MessageBox.Show("Error al insertar los datos: " + ex.Message);
             }
         }
 
