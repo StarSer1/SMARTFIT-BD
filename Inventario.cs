@@ -301,7 +301,7 @@ namespace SMARTFIT
                     if (reader.Read()) // Si hay resultados
                     {
                         txtNombre.Text = reader["Nombre_producto"].ToString();
-                        txtCantidad.Text = reader["Descripcion"].ToString();
+                        txtCantidad.Text = reader["Cantidad"].ToString();
                         cmbTipo.Text = reader["Tipo"].ToString();
                         txtIdGimnasio.Text = reader["Id_Gimnasio"].ToString();
                         txtDescripcion.Text = reader["Descripcion"].ToString();
@@ -319,6 +319,83 @@ namespace SMARTFIT
                 {
                     conexion.CerrarConexion();
                 }
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            
+            ConexionGeneral conexion = new ConexionGeneral();
+            conexion.AbrirConexion();
+            string queryUpdate = "UPDATE Inventario SET Nombre_producto = @NOM, Descripcion = @DES, Cantidad = @CAN, TIpo = @TIP WHERE Id_inventario = @ID";
+
+
+            using (SqlCommand cmdUpdate = new SqlCommand(queryUpdate, conexion.GetConexion()))
+            {
+
+                try
+                {
+                    int identificador = Convert.ToInt32(txtId.Text);
+                    string nombre = txtNombre.Text;
+                    string descripcion = txtDescripcion.Text;
+                    int cantidad = Convert.ToInt32(txtCantidad.Text);
+                    string tipo = cmbTipo.Text; 
+
+                    // Agregar parámetros a la consulta de actualización
+                    cmdUpdate.Parameters.AddWithValue("@NOM", nombre);
+                    cmdUpdate.Parameters.AddWithValue("@DES", descripcion);
+                    cmdUpdate.Parameters.AddWithValue("@CAN", cantidad);
+                    cmdUpdate.Parameters.AddWithValue("@TIP", tipo);
+                    cmdUpdate.Parameters.AddWithValue("@ID", identificador); // Este es el ID del registro a actualizar
+
+                    // Ejecutar la consulta de actualización
+                    int filasAfectadas = cmdUpdate.ExecuteNonQuery();
+                    if (filasAfectadas > 0)
+                    {
+                        MessageBox.Show("Registro actualizado correctamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró un registro con ese ID.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener los datos: " + ex.Message);
+                }
+                finally
+                {
+                    conexion.CerrarConexion();
+                }
+            }
+
+
+            try
+            {
+                ConexionGeneral conexion2 = new ConexionGeneral();
+                conexion2.AbrirConexion();
+
+                q = "SELECT * FROM Inventario";
+                comando = new SqlCommand(q, conexion2.GetConexion());
+                Lector = comando.ExecuteReader();
+
+                // Crear un DataTable para almacenar los datos
+                DataTable dt = new DataTable();
+                dt.Load(Lector);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+
+            }
+            catch (System.Exception ex)
+            {
+                mensaje = "Ocurrio un error al mostrar los datos " + ex.Message;
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+                
             }
         }
     }
