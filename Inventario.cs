@@ -285,5 +285,41 @@ namespace SMARTFIT
             }
         }
 
+        private void btnMostrar_Click(object sender, EventArgs e)
+        {
+            ConexionGeneral conexion = new ConexionGeneral();
+            conexion.AbrirConexion();
+            string query = "SELECT Nombre_producto, Descripcion, Cantidad, Tipo, Id_Gimnasio FROM Inventario WHERE Id_inventario = @ID";
+
+            using (SqlCommand cmd = new SqlCommand(query, conexion.GetConexion()))
+            {
+                cmd.Parameters.AddWithValue("@ID", txtId.Text);
+
+                try
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read()) // Si hay resultados
+                    {
+                        txtNombre.Text = reader["Nombre_producto"].ToString();
+                        txtCantidad.Text = reader["Descripcion"].ToString();
+                        cmbTipo.Text = reader["Tipo"].ToString();
+                        txtIdGimnasio.Text = reader["Id_Gimnasio"].ToString();
+                        txtDescripcion.Text = reader["Descripcion"].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron datos.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener los datos: " + ex.Message);
+                }
+                finally
+                {
+                    conexion.CerrarConexion();
+                }
+            }
+        }
     }
 }

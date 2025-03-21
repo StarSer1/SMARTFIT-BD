@@ -14,8 +14,10 @@ namespace SMARTFIT
         //ConexionGeneral conexion = new ConexionGeneral();
         //conexion.AbrirConexion();
 
+        //laptop brandon
+        public readonly string cadenaConexion = @"Data Source=BRANDONWROK\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;";
 
-        public readonly string cadenaConexion = @"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;";
+        //public readonly string cadenaConexion = @"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;";
         //public readonly string cadenaConexion = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;";
 
         private SqlConnection conexion;
