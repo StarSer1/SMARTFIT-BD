@@ -398,5 +398,40 @@ namespace SMARTFIT
                 
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConexionGeneral conexion = new ConexionGeneral();
+            conexion.AbrirConexion();
+            conexion.Eliminar(Convert.ToInt32(txtId.Text),"Inventario","Inventario");
+            try
+            {
+                ConexionGeneral conexion2 = new ConexionGeneral();
+                conexion2.AbrirConexion();
+
+                q = "SELECT * FROM Inventario";
+                comando = new SqlCommand(q, conexion2.GetConexion());
+                Lector = comando.ExecuteReader();
+
+                // Crear un DataTable para almacenar los datos
+                DataTable dt = new DataTable();
+                dt.Load(Lector);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+
+            }
+            catch (System.Exception ex)
+            {
+                mensaje = "Ocurrio un error al mostrar los datos " + ex.Message;
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+
+            }
+        }
+
     }
 }

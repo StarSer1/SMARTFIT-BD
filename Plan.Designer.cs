@@ -45,6 +45,10 @@
             this.cmbConsulta = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnVista = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnMostrar = new System.Windows.Forms.Button();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -207,7 +211,7 @@
             // 
             this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDescripcion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(24, 304);
+            this.txtDescripcion.Location = new System.Drawing.Point(30, 314);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(324, 93);
@@ -253,12 +257,75 @@
             this.btnVista.UseVisualStyleBackColor = false;
             this.btnVista.Click += new System.EventHandler(this.btnVista_Click);
             // 
+            // btnModificar
+            // 
+            this.btnModificar.BackColor = System.Drawing.Color.Gold;
+            this.btnModificar.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnModificar.FlatAppearance.BorderSize = 5;
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnModificar.Location = new System.Drawing.Point(650, 510);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(227, 37);
+            this.btnModificar.TabIndex = 138;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnMostrar
+            // 
+            this.btnMostrar.BackColor = System.Drawing.Color.Gold;
+            this.btnMostrar.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnMostrar.FlatAppearance.BorderSize = 5;
+            this.btnMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMostrar.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnMostrar.Location = new System.Drawing.Point(181, 510);
+            this.btnMostrar.Name = "btnMostrar";
+            this.btnMostrar.Size = new System.Drawing.Size(178, 37);
+            this.btnMostrar.TabIndex = 137;
+            this.btnMostrar.Text = "Mostrar";
+            this.btnMostrar.UseVisualStyleBackColor = false;
+            this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
+            // 
+            // txtId
+            // 
+            this.txtId.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtId.Location = new System.Drawing.Point(28, 510);
+            this.txtId.Multiline = true;
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(148, 38);
+            this.txtId.TabIndex = 136;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.BackColor = System.Drawing.Color.Gold;
+            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnEliminar.FlatAppearance.BorderSize = 5;
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnEliminar.Location = new System.Drawing.Point(393, 510);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(229, 37);
+            this.btnEliminar.TabIndex = 135;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // Plan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gold;
-            this.ClientSize = new System.Drawing.Size(884, 523);
+            this.ClientSize = new System.Drawing.Size(884, 559);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnMostrar);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnVista);
             this.Controls.Add(this.cmbConsulta);
             this.Controls.Add(this.label10);
@@ -303,5 +370,9 @@
         private System.Windows.Forms.ComboBox cmbConsulta;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnVista;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnMostrar;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

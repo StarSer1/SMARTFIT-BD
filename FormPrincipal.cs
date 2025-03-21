@@ -85,7 +85,7 @@ namespace SMARTFIT
             try
             {
                 //@"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;"
-                string cadenaConexion = "Server=LocalHost; User ID=sa; pwd=1347;Database=master";
+                string cadenaConexion = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;";
                 //string cadenaConexion = @"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;";
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
 
@@ -126,8 +126,8 @@ namespace SMARTFIT
             try
             {
                 //@"Data Source=DESKTOP-0434B1E;Initial Catalog=master;Integrated Security=True;"
-                string cadenaConexion = "Server=LocalHost; User ID=sa; pwd=1347;Database=master";
-                string cadenaConexion2 = "Server=LocalHost; User ID=sa; pwd=1347;Database=SMARTFITBD";
+                string cadenaConexion = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;";
+                string cadenaConexion2 = @"Data Source=DESKTOP-GQ6Q9HG\SQLEXPRESS;Initial Catalog=SMARTFITBD;Integrated Security=True;";
                 //string cadenaConexion2 = @"Data Source=DESKTOP-0434B1E;Initial Catalog=SMARTFITBD;Integrated Security=True;";
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
 

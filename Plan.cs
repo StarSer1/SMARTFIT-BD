@@ -237,5 +237,151 @@ namespace SMARTFIT
             }
         }
 
+        private void btnMostrar_Click(object sender, EventArgs e)
+        {
+            ConexionGeneral conexion = new ConexionGeneral();
+            conexion.AbrirConexion();
+            string query = "SELECT Nombre_plan, Clientes_inscritos, Descripcion, Costo FROM Planes_Entrenamiento WHERE Id_plan = @ID";
+
+            using (SqlCommand cmd = new SqlCommand(query, conexion.GetConexion()))
+            {
+                cmd.Parameters.AddWithValue("@ID", txtId.Text);
+
+                try
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read()) // Si hay resultados
+                    {
+                        cmbNombre.Text = reader["Nombre_plan"].ToString();
+                        txtClientesInscritos.Text = reader["Clientes_inscritos"].ToString();
+                        txtCosto.Text = reader["Costo"].ToString();
+                        txtDescripcion.Text = reader["Descripcion"].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron datos.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener los datos: " + ex.Message);
+                }
+                finally
+                {
+                    conexion.CerrarConexion();
+                }
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            ConexionGeneral conexion = new ConexionGeneral();
+            conexion.AbrirConexion();
+            string queryUpdate = "UPDATE Planes_Entrenamiento SET Nombre_plan = @NOM, Descripcion = @DES, Clientes_inscritos = @CAN, Costo = @COS WHERE Id_plan = @ID";
+
+
+            using (SqlCommand cmdUpdate = new SqlCommand(queryUpdate, conexion.GetConexion()))
+            {
+
+                try
+                {
+                    int identificador = Convert.ToInt32(txtId.Text);
+                    string nombre = cmbNombre.Text;
+                    string descripcion = txtDescripcion.Text;
+                    int clientesI = Convert.ToInt32(txtClientesInscritos.Text);
+                    int costo = Convert.ToInt32(txtCosto.Text);
+
+                    // Agregar parámetros a la consulta de actualización
+                    cmdUpdate.Parameters.AddWithValue("@NOM", nombre);
+                    cmdUpdate.Parameters.AddWithValue("@DES", descripcion);
+                    cmdUpdate.Parameters.AddWithValue("@CAN", clientesI);
+                    cmdUpdate.Parameters.AddWithValue("@COS", costo);
+                    cmdUpdate.Parameters.AddWithValue("@ID", identificador); // Este es el ID del registro a actualizar
+
+                    // Ejecutar la consulta de actualización
+                    int filasAfectadas = cmdUpdate.ExecuteNonQuery();
+                    if (filasAfectadas > 0)
+                    {
+                        MessageBox.Show("Registro actualizado correctamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró un registro con ese ID.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener los datos: " + ex.Message);
+                }
+                finally
+                {
+                    conexion.CerrarConexion();
+                }
+            }
+
+
+            try
+            {
+                ConexionGeneral conexion2 = new ConexionGeneral();
+                conexion2.AbrirConexion();
+
+                q = "SELECT * FROM Planes_Entrenamiento";
+                comando = new SqlCommand(q, conexion2.GetConexion());
+                Lector = comando.ExecuteReader();
+
+                // Crear un DataTable para almacenar los datos
+                DataTable dt = new DataTable();
+                dt.Load(Lector);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+
+            }
+            catch (System.Exception ex)
+            {
+                mensaje = "Ocurrio un error al mostrar los datos " + ex.Message;
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConexionGeneral conexion = new ConexionGeneral();
+            conexion.AbrirConexion();
+            conexion.EliminarP(Convert.ToInt32(txtId.Text), "Planes_Entrenamiento", "plan");
+
+            try
+            {
+                ConexionGeneral conexion2 = new ConexionGeneral();
+                conexion2.AbrirConexion();
+
+                q = "SELECT * FROM Planes_Entrenamiento";
+                comando = new SqlCommand(q, conexion2.GetConexion());
+                Lector = comando.ExecuteReader();
+
+                // Crear un DataTable para almacenar los datos
+                DataTable dt = new DataTable();
+                dt.Load(Lector);
+
+                // Asignar el DataTable al DataGridView
+                DG1.DataSource = dt;
+
+
+            }
+            catch (System.Exception ex)
+            {
+                mensaje = "Ocurrio un error al mostrar los datos " + ex.Message;
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+
+            }
+        }
     }
 }
